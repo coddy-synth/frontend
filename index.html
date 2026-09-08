@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GeoSR-AI — Design Showcase</title>
-  <meta name="description" content="GeoSR-AI Satellite Intelligence Dashboard — Interactive design showcase featuring two distinct UI concepts." />
+  <meta name="description" content="GeoSR-AI Satellite Intelligence Dashboard — Interactive design showcase featuring three distinct UI concepts." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -12,388 +12,406 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #07080f;
-      --surface:   #0f1120;
-      --card:      #141728;
-      --border:    rgba(255,255,255,0.07);
-      --border-h:  rgba(99,102,241,0.55);
-      --primary:   #6366f1;
-      --primary-d: #4f46e5;
-      --teal:      #14b8a6;
-      --text:      #e8eaf6;
-      --muted:     #8b8fa8;
-      --glow-1:    rgba(99,102,241,0.18);
-      --glow-2:    rgba(20,184,166,0.12);
+      --bg:       #07080f;
+      --card:     #141728;
+      --border:   rgba(255,255,255,0.07);
+      --border-h: rgba(99,102,241,0.5);
+      --text:     #e8eaf6;
+      --muted:    #8b8fa8;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
-      background: var(--bg);
-      color: var(--text);
+      background: var(--bg); color: var(--text);
       font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
+      min-height: 100vh; overflow-x: hidden;
     }
 
-    /* ---- Background grid + glow ---- */
+    /* Grid background */
     body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0;
+      content: ''; position: fixed; inset: 0; z-index: 0;
       background-image:
         linear-gradient(rgba(99,102,241,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(99,102,241,0.03) 1px, transparent 1px);
-      background-size: 48px 48px;
-      pointer-events: none;
-    }
-    .glow-blob {
-      position: fixed; border-radius: 50%; filter: blur(110px);
-      pointer-events: none; z-index: 0;
-    }
-    .glow-blob.a {
-      width: 520px; height: 520px;
-      background: var(--glow-1);
-      top: -120px; left: -80px;
-    }
-    .glow-blob.b {
-      width: 400px; height: 400px;
-      background: var(--glow-2);
-      bottom: -80px; right: -60px;
+      background-size: 48px 48px; pointer-events: none;
     }
 
-    /* ---- Layout ---- */
+    /* Glow blobs */
+    .blob { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; }
+    .blob-a { width: 500px; height: 500px; background: rgba(99,102,241,0.15); top: -100px; left: -80px; }
+    .blob-b { width: 380px; height: 380px; background: rgba(20,184,166,0.10); bottom: -60px; right: -60px; }
+    .blob-c { width: 300px; height: 300px; background: rgba(34,197,94,0.08); top: 40%; left: 40%; }
+
+    /* Layout */
     .page {
       position: relative; z-index: 1;
-      min-height: 100vh;
-      display: flex; flex-direction: column;
+      min-height: 100vh; display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      padding: 48px 24px;
+      padding: 60px 24px;
     }
 
-    /* ---- Header ---- */
+    /* Badge */
     .badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(99,102,241,0.1);
-      border: 1px solid rgba(99,102,241,0.3);
-      border-radius: 99px; padding: 5px 14px;
+      background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.28);
+      border-radius: 99px; padding: 5px 16px;
       font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; color: #a5b4fc;
-      margin-bottom: 24px;
+      text-transform: uppercase; color: #a5b4fc; margin-bottom: 24px;
     }
     .badge-dot {
       width: 6px; height: 6px; border-radius: 50%;
-      background: var(--teal);
-      box-shadow: 0 0 8px var(--teal);
-      animation: pulse 2s ease infinite;
+      background: #14b8a6; box-shadow: 0 0 8px #14b8a6;
+      animation: blink 2s ease infinite;
     }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
-    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.35} }
 
     h1 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(32px, 6vw, 58px);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.025em;
-      text-align: center;
-      margin-bottom: 16px;
+      font-size: clamp(30px, 5.5vw, 54px); font-weight: 800;
+      line-height: 1.1; letter-spacing: -0.025em; text-align: center;
+      margin-bottom: 14px;
       background: linear-gradient(135deg, #e8eaf6 0%, #a5b4fc 50%, #5eead4 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-
     .subtitle {
-      font-size: 16px; color: var(--muted);
-      text-align: center; max-width: 480px;
-      line-height: 1.65; margin-bottom: 64px;
+      font-size: 15px; color: var(--muted); text-align: center;
+      max-width: 500px; line-height: 1.65; margin-bottom: 56px;
     }
 
-    /* ---- Cards ---- */
+    /* Cards grid — 3 columns */
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 380px));
-      gap: 28px;
-      width: 100%; max-width: 820px;
-      justify-content: center;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
+      gap: 24px; width: 100%; max-width: 1080px; justify-content: center;
     }
 
     .card {
-      position: relative;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 0;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.3s cubic-bezier(.21,1.02,.73,1),
-                  border-color 0.3s ease,
-                  box-shadow 0.3s ease;
-      cursor: pointer;
-      display: flex; flex-direction: column;
+      position: relative; background: var(--card);
+      border: 1px solid var(--border); border-radius: 22px;
+      overflow: hidden; text-decoration: none; color: inherit;
+      transition: transform 0.3s cubic-bezier(.21,1.02,.73,1), border-color 0.3s, box-shadow 0.3s;
+      cursor: pointer; display: flex; flex-direction: column;
     }
     .card:hover {
-      transform: translateY(-8px) scale(1.015);
+      transform: translateY(-7px) scale(1.014);
       border-color: var(--border-h);
-      box-shadow:
-        0 0 0 1px rgba(99,102,241,0.2),
-        0 24px 60px rgba(0,0,0,0.45),
-        0 0 80px rgba(99,102,241,0.08);
+      box-shadow: 0 0 0 1px rgba(99,102,241,0.18), 0 20px 56px rgba(0,0,0,0.4), 0 0 60px rgba(99,102,241,0.07);
     }
 
-    /* Card accent bar */
-    .card::before {
-      content: '';
-      display: block; height: 3px; width: 100%;
-    }
-    .card.d1::before { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
-    .card.d2::before { background: linear-gradient(90deg, #14b8a6, #6366f1); }
+    /* Top accent line */
+    .card::before { content: ''; display: block; height: 3px; width: 100%; }
+    .d1::before { background: linear-gradient(90deg,#6366f1,#8b5cf6); }
+    .d2::before { background: linear-gradient(90deg,#14b8a6,#6366f1); }
+    .d3::before { background: linear-gradient(90deg,#22c55e,#14b8a6); }
+    .d4::before { background: linear-gradient(90deg,#f97316,#ea580c); }
+    .d5::before { background: linear-gradient(90deg,#ea580c,#c2410c); }
 
-    /* Preview thumbnail area */
-    .card-thumb {
-      height: 200px; width: 100%;
-      display: flex; align-items: center; justify-content: center;
+    /* Thumbnail */
+    .thumb {
+      height: 180px; width: 100%; display: flex;
+      align-items: center; justify-content: center;
       position: relative; overflow: hidden;
     }
-    .card.d1 .card-thumb {
-      background: linear-gradient(135deg, #0d0e1a 0%, #1a1040 40%, #0f172a 100%);
-    }
-    .card.d2 .card-thumb {
-      background: linear-gradient(135deg, #05140f 0%, #0f1a14 40%, #071830 100%);
-    }
+    .d1 .thumb { background: linear-gradient(135deg,#0d0e1a,#1a1040,#0f172a); }
+    .d2 .thumb { background: linear-gradient(135deg,#05140f,#0f1a14,#071830); }
+    .d3 .thumb { background: linear-gradient(135deg,#071510,#0d1a10,#051a0d); }
+    .d4 .thumb { background: linear-gradient(135deg,#1c0e08,#2d150b,#1a0904); }
+    .d5 .thumb { background: linear-gradient(135deg,#f8fafc,#e2e8f0,#cbd5e1); }
 
-    /* Mock UI inside thumbnail */
-    .mock-ui {
-      width: 88%; height: 80%;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 10px;
-      display: flex; flex-direction: column; gap: 6px;
-    }
-    .card.d1 .mock-ui { background: rgba(79,70,229,0.08); }
-    .card.d2 .mock-ui { background: rgba(20,184,166,0.06); }
+    /* Mock UI */
+    .mock { width: 88%; height: 80%; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.07); padding: 9px;
+      display: flex; flex-direction: column; gap: 5px; }
+    .d1 .mock { background: rgba(79,70,229,0.08); }
+    .d2 .mock { background: rgba(20,184,166,0.06); }
+    .d3 .mock { background: rgba(34,197,94,0.06); }
+    .d4 .mock { background: rgba(249,115,22,0.06); }
+    .d5 .mock { background: rgba(255,255,255,0.7); border: 1px solid rgba(0,0,0,0.08); }
 
-    .mock-bar {
-      height: 8px; border-radius: 4px; opacity: 0.5;
-    }
-    .card.d1 .mock-bar { background: linear-gradient(90deg,#6366f1,#8b5cf6); }
-    .card.d2 .mock-bar { background: linear-gradient(90deg,#14b8a6,#6366f1); }
+    .mock-bar { height: 7px; border-radius: 4px; opacity: 0.5; }
+    .d1 .mock-bar { background: linear-gradient(90deg,#6366f1,#8b5cf6); }
+    .d2 .mock-bar { background: linear-gradient(90deg,#14b8a6,#6366f1); }
+    .d3 .mock-bar { background: linear-gradient(90deg,#22c55e,#14b8a6); }
+    .d4 .mock-bar { background: linear-gradient(90deg,#f97316,#ea580c); }
+    .d5 .mock-bar { background: linear-gradient(90deg,#ea580c,#c2410c); }
 
-    .mock-row { display: flex; gap: 6px; }
-    .mock-block {
-      border-radius: 6px; opacity: 0.3;
-    }
-    .card.d1 .mock-block { background: #6366f1; }
-    .card.d2 .mock-block { background: #14b8a6; }
+    .mock-row { display: flex; gap: 5px; }
+    .mock-block { border-radius: 5px; opacity: 0.28; }
+    .d1 .mock-block { background: #6366f1; }
+    .d2 .mock-block { background: #14b8a6; }
+    .d3 .mock-block { background: #22c55e; }
+    .d4 .mock-block { background: #f97316; }
+    .d5 .mock-block { background: #ea580c; }
 
-    .mock-sidebar { width: 22%; background: rgba(255,255,255,0.04); border-radius: 5px; }
-    .mock-content { flex: 1; display: flex; flex-direction: column; gap: 5px; }
-    .mock-line { height: 6px; border-radius: 3px; background: rgba(255,255,255,0.08); }
+    .mock-line { height: 5px; border-radius: 3px; background: rgba(255,255,255,0.08); }
+    .mock-sidebar { width: 22%; border-radius: 4px; }
+    .mock-content { flex: 1; display: flex; flex-direction: column; gap: 4px; }
 
-    /* Design number watermark */
-    .card-num {
-      position: absolute; bottom: 16px; right: 20px;
+    /* Big number watermark */
+    .num {
+      position: absolute; bottom: 12px; right: 16px;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 56px; font-weight: 800; letter-spacing: -0.04em;
-      opacity: 0.06; line-height: 1;
-      pointer-events: none;
+      font-size: 52px; font-weight: 800; opacity: 0.06;
+      line-height: 1; pointer-events: none;
     }
-    .card.d1 .card-num { color: #6366f1; }
-    .card.d2 .card-num { color: #14b8a6; }
+    .d1 .num { color: #6366f1; }
+    .d2 .num { color: #14b8a6; }
+    .d3 .num { color: #22c55e; }
+    .d4 .num { color: #f97316; }
+    .d5 .num { color: #ea580c; }
 
     /* Card body */
-    .card-body { padding: 24px 28px 28px; flex: 1; display: flex; flex-direction: column; }
+    .body { padding: 22px 24px 24px; flex: 1; display: flex; flex-direction: column; }
 
-    .card-label {
+    .lbl {
       font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; margin-bottom: 10px;
+      text-transform: uppercase; margin-bottom: 8px;
     }
-    .card.d1 .card-label { color: #818cf8; }
-    .card.d2 .card-label { color: #2dd4bf; }
+    .d1 .lbl { color: #818cf8; }
+    .d2 .lbl { color: #2dd4bf; }
+    .d3 .lbl { color: #4ade80; }
+    .d4 .lbl { color: #f97316; }
+    .d5 .lbl { color: #ea580c; }
 
     .card-title {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 22px; font-weight: 700; margin-bottom: 10px;
+      font-size: 20px; font-weight: 700; margin-bottom: 9px;
       color: #e8eaf6; line-height: 1.2;
     }
     .card-desc {
-      font-size: 13px; color: var(--muted); line-height: 1.6;
-      margin-bottom: 24px; flex: 1;
+      font-size: 12px; color: var(--muted); line-height: 1.6;
+      margin-bottom: 20px; flex: 1;
     }
 
     /* Tags */
-    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 18px; }
     .tag {
-      font-size: 11px; font-weight: 600; padding: 3px 10px;
-      border-radius: 6px; border: 1px solid;
+      font-size: 10px; font-weight: 600; padding: 3px 9px;
+      border-radius: 5px; border: 1px solid;
     }
-    .card.d1 .tag { background: rgba(99,102,241,0.1); border-color: rgba(99,102,241,0.25); color: #a5b4fc; }
-    .card.d2 .tag { background: rgba(20,184,166,0.08); border-color: rgba(20,184,166,0.2); color: #5eead4; }
+    .d1 .tag { background: rgba(99,102,241,0.1); border-color: rgba(99,102,241,0.22); color: #a5b4fc; }
+    .d2 .tag { background: rgba(20,184,166,0.08); border-color: rgba(20,184,166,0.18); color: #5eead4; }
+    .d3 .tag { background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.18); color: #86efac; }
+    .d4 .tag { background: rgba(249,115,22,0.08); border-color: rgba(249,115,22,0.18); color: #fdba74; }
+    .d5 .tag { background: rgba(234,88,12,0.08); border-color: rgba(234,88,12,0.18); color: #ea580c; }
 
-    /* CTA button */
-    .card-cta {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%; padding: 13px;
-      border-radius: 12px; border: none;
-      font-size: 14px; font-weight: 700;
-      font-family: 'Inter', sans-serif;
+    /* CTA */
+    .cta {
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+      width: 100%; padding: 11px; border-radius: 10px; border: none;
+      font-size: 13px; font-weight: 700; font-family: 'Inter', sans-serif;
       cursor: pointer; text-decoration: none;
-      transition: filter 0.2s, transform 0.15s;
+      transition: filter 0.18s, transform 0.14s;
     }
-    .card.d1 .card-cta {
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-      color: #fff; box-shadow: 0 4px 24px rgba(99,102,241,0.35);
-    }
-    .card.d2 .card-cta {
-      background: linear-gradient(135deg, #14b8a6, #0f766e);
-      color: #fff; box-shadow: 0 4px 24px rgba(20,184,166,0.3);
-    }
-    .card-cta:hover { filter: brightness(1.12); transform: scale(1.02); }
-    .card-cta svg { width: 16px; height: 16px; }
+    .d1 .cta { background: linear-gradient(135deg,#6366f1,#4f46e5); color:#fff; box-shadow: 0 4px 20px rgba(99,102,241,0.32); }
+    .d2 .cta { background: linear-gradient(135deg,#14b8a6,#0f766e); color:#fff; box-shadow: 0 4px 20px rgba(20,184,166,0.28); }
+    .d3 .cta { background: linear-gradient(135deg,#22c55e,#15803d); color:#fff; box-shadow: 0 4px 20px rgba(34,197,94,0.28); }
+    .d4 .cta { background: linear-gradient(135deg,#f97316,#ea580c); color:#fff; box-shadow: 0 4px 20px rgba(249,115,22,0.28); }
+    .d5 .cta { background: linear-gradient(135deg,#ea580c,#c2410c); color:#fff; box-shadow: 0 4px 20px rgba(234,88,12,0.28); }
+    .cta:hover { filter: brightness(1.12); transform: scale(1.02); }
+    .cta svg { width: 15px; height: 15px; }
+    .card:hover .arr { transform: translateX(4px); }
+    .arr { transition: transform 0.2s; }
 
-    /* Arrow icon animation */
-    .card:hover .cta-arrow { transform: translateX(4px); transition: transform 0.2s; }
-    .cta-arrow { transition: transform 0.2s; }
-
-    /* ---- Footer ---- */
-    .footer {
-      margin-top: 72px; text-align: center;
-      font-size: 12px; color: #3d3f55;
-    }
-    .footer strong { color: #5c5f7a; }
-
-    /* ---- Screen count chip ---- */
-    .screens-chip {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 11px; font-weight: 600;
-      color: var(--muted); margin-bottom: 6px;
-    }
-    .screens-chip span {
-      display: inline-block; width: 18px; height: 18px;
-      border-radius: 5px; font-size: 10px; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .card.d1 .screens-chip span { background: rgba(99,102,241,0.15); color: #818cf8; }
-    .card.d2 .screens-chip span { background: rgba(20,184,166,0.12); color: #2dd4bf; }
+    /* Footer */
+    .footer { margin-top: 64px; text-align: center; font-size: 12px; color: #2e3050; }
+    .footer strong { color: #4a4e72; }
 
     /* Responsive */
-    @media (max-width: 480px) {
-      .cards { grid-template-columns: 1fr; max-width: 380px; }
-      h1 { font-size: 30px; }
+    @media (max-width: 520px) {
+      .cards { grid-template-columns: 1fr; max-width: 360px; }
+      h1 { font-size: 28px; }
     }
   </style>
 </head>
 <body>
-  <div class="glow-blob a"></div>
-  <div class="glow-blob b"></div>
+  <div class="blob blob-a"></div>
+  <div class="blob blob-b"></div>
+  <div class="blob blob-c"></div>
 
   <div class="page">
 
-    <!-- Header -->
-    <div class="badge">
-      <span class="badge-dot"></span>
-      GeoSR-AI · Design Showcase
-    </div>
+    <div class="badge"><span class="badge-dot"></span>GeoSR-AI · Design Showcase</div>
 
     <h1>Satellite Intelligence<br/>Dashboard</h1>
+    <p class="subtitle">Three complete, fully interactive UI prototypes for the GeoSR-AI Enterprise platform. Click any design to explore.</p>
 
-    <p class="subtitle">
-      Two complete UI designs for the GeoSR-AI Enterprise platform.
-      Click a design to explore the fully interactive prototype.
-    </p>
-
-    <!-- Cards -->
     <div class="cards">
 
       <!-- Design 1 -->
       <a class="card d1" href="./design 1/index.html">
-        <div class="card-thumb">
-          <div class="mock-ui">
-            <div class="mock-bar" style="width:45%"></div>
+        <div class="thumb">
+          <div class="mock">
+            <div class="mock-bar" style="width:42%"></div>
             <div class="mock-row" style="flex:1;margin-top:4px">
               <div class="mock-sidebar mock-block"></div>
               <div class="mock-content">
                 <div class="mock-line"></div>
-                <div class="mock-line" style="width:75%"></div>
-                <div class="mock-line" style="width:55%"></div>
-                <div class="mock-bar" style="width:100%;margin-top:4px;opacity:0.25"></div>
-                <div class="mock-bar" style="width:80%;opacity:0.2"></div>
+                <div class="mock-line" style="width:70%"></div>
+                <div class="mock-line" style="width:50%"></div>
+                <div class="mock-bar" style="width:100%;opacity:.22;margin-top:3px"></div>
+                <div class="mock-bar" style="width:75%;opacity:.15"></div>
               </div>
             </div>
             <div class="mock-row">
-              <div class="mock-block" style="height:22px;width:30%;opacity:0.35;border-radius:5px"></div>
-              <div class="mock-block" style="height:22px;width:25%;opacity:0.25;border-radius:5px"></div>
+              <div class="mock-block" style="height:18px;width:30%;border-radius:4px;opacity:.32"></div>
+              <div class="mock-block" style="height:18px;width:22%;border-radius:4px;opacity:.2"></div>
             </div>
           </div>
-          <div class="card-num">1</div>
+          <div class="num">1</div>
         </div>
-        <div class="card-body">
-          <div class="card-label">Design 01</div>
+        <div class="body">
+          <div class="lbl">Design 01</div>
           <h2 class="card-title">Classic Sidebar Layout</h2>
-          <p class="card-desc">
-            Dark-mode dashboard with a fixed left sidebar navigation, KPI cards,
-            data tables, and panel-based content — built for power users.
-          </p>
-          <div class="tag-row">
-            <span class="tag">Dark Theme</span>
-            <span class="tag">Sidebar Nav</span>
-            <span class="tag">6 Screens</span>
-            <span class="tag">Fully Interactive</span>
+          <p class="card-desc">Dark-mode dashboard with a fixed left sidebar, KPI cards, data tables, and panel-based content — built for power users.</p>
+          <div class="tags">
+            <span class="tag">Dark Theme</span><span class="tag">Sidebar Nav</span>
+            <span class="tag">6 Screens</span><span class="tag">Fully Interactive</span>
           </div>
-          <span class="card-cta">
-            Open Design 1
-            <svg class="cta-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
-            </svg>
+          <span class="cta">Open Design 1
+            <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
           </span>
         </div>
       </a>
 
       <!-- Design 2 -->
       <a class="card d2" href="./design 2/index.html">
-        <div class="card-thumb">
-          <div class="mock-ui">
-            <div class="mock-bar" style="width:100%;height:10px;border-radius:5px"></div>
-            <div style="flex:1;display:flex;flex-direction:column;gap:6px;margin-top:6px">
-              <div class="mock-row" style="gap:6px">
-                <div class="mock-block" style="flex:1;height:36px;border-radius:7px;opacity:0.3"></div>
-                <div class="mock-block" style="flex:1;height:36px;border-radius:7px;opacity:0.2"></div>
-                <div class="mock-block" style="flex:1;height:36px;border-radius:7px;opacity:0.15"></div>
+        <div class="thumb">
+          <div class="mock">
+            <div class="mock-bar" style="width:100%;height:9px;border-radius:4px"></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:5px;margin-top:5px">
+              <div class="mock-row" style="gap:5px">
+                <div class="mock-block" style="flex:1;height:32px;border-radius:6px;opacity:.28"></div>
+                <div class="mock-block" style="flex:1;height:32px;border-radius:6px;opacity:.18"></div>
+                <div class="mock-block" style="flex:1;height:32px;border-radius:6px;opacity:.12"></div>
               </div>
-              <div class="mock-line" style="width:90%"></div>
-              <div class="mock-line" style="width:60%"></div>
-              <div class="mock-bar" style="width:55%;opacity:0.3;margin-top:2px"></div>
+              <div class="mock-line" style="width:85%"></div>
+              <div class="mock-line" style="width:55%"></div>
+              <div class="mock-bar" style="width:50%;opacity:.25;margin-top:2px"></div>
             </div>
           </div>
-          <div class="card-num">2</div>
+          <div class="num">2</div>
         </div>
-        <div class="card-body">
-          <div class="card-label">Design 02</div>
+        <div class="body">
+          <div class="lbl">Design 02</div>
           <h2 class="card-title">Glassmorphism Top Nav</h2>
-          <p class="card-desc">
-            Light-mode glassmorphism aesthetic with a sticky top navigation bar,
-            frosted cards, and a clean enterprise SaaS feel.
-          </p>
-          <div class="tag-row">
-            <span class="tag">Light Theme</span>
-            <span class="tag">Top Nav</span>
-            <span class="tag">6 Screens</span>
-            <span class="tag">Glassmorphism</span>
+          <p class="card-desc">Light-mode glassmorphism aesthetic with a sticky top navigation bar, frosted cards, and a clean enterprise SaaS feel.</p>
+          <div class="tags">
+            <span class="tag">Light Theme</span><span class="tag">Top Nav</span>
+            <span class="tag">6 Screens</span><span class="tag">Glassmorphism</span>
           </div>
-          <span class="card-cta">
-            Open Design 2
-            <svg class="cta-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
-            </svg>
+          <span class="cta">Open Design 2
+            <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Design 3 -->
+      <a class="card d3" href="./design 3/index.html">
+        <div class="thumb">
+          <div class="mock">
+            <div class="mock-row" style="height:100%;gap:5px">
+              <div class="mock-sidebar mock-block" style="width:24%"></div>
+              <div class="mock-content">
+                <div class="mock-bar" style="width:100%;height:8px;opacity:.4"></div>
+                <div class="mock-line" style="width:90%;margin-top:3px"></div>
+                <div class="mock-line" style="width:65%"></div>
+                <div class="mock-row" style="gap:4px;margin-top:4px">
+                  <div class="mock-block" style="flex:1;height:24px;border-radius:4px;opacity:.25"></div>
+                  <div class="mock-block" style="flex:1;height:24px;border-radius:4px;opacity:.16"></div>
+                </div>
+                <div class="mock-bar" style="width:80%;opacity:.2;margin-top:3px"></div>
+              </div>
+            </div>
+          </div>
+          <div class="num">3</div>
+        </div>
+        <div class="body">
+          <div class="lbl">Design 03</div>
+          <h2 class="card-title">Technical Workstation</h2>
+          <p class="card-desc">Light-mode geospatial workstation UI with a compact left sidebar, terminal-style mono typography, and mission-focused workflow panels.</p>
+          <div class="tags">
+            <span class="tag">Light Theme</span><span class="tag">Sidebar Nav</span>
+            <span class="tag">4 Screens</span><span class="tag">Workstation UI</span>
+          </div>
+          <span class="cta">Open Design 3
+            <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Design 4 -->
+      <a class="card d4" href="./design 4/index.html">
+        <div class="thumb">
+          <div class="mock">
+            <div class="mock-bar" style="width:100%;height:8px;border-radius:4px;margin-bottom:4px"></div>
+            <div class="mock-row" style="height:100%;gap:6px">
+              <div class="mock-sidebar mock-block" style="width:25%"></div>
+              <div class="mock-content" style="gap:6px">
+                <div class="mock-row" style="gap:6px">
+                  <div class="mock-block" style="flex:1;height:36px;border-radius:6px;opacity:.2"></div>
+                  <div class="mock-block" style="flex:1;height:36px;border-radius:6px;opacity:.15"></div>
+                  <div class="mock-block" style="flex:1;height:36px;border-radius:6px;opacity:.1"></div>
+                </div>
+                <div class="mock-row" style="gap:6px;flex:1">
+                  <div class="mock-block" style="flex:2;border-radius:6px;opacity:.25"></div>
+                  <div class="mock-block" style="flex:1;border-radius:6px;opacity:.15"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="num">4</div>
+        </div>
+        <div class="body">
+          <div class="lbl">Design 04</div>
+          <h2 class="card-title">Enterprise App UI</h2>
+          <p class="card-desc">Vibrant white and orange BhuDRISTI UI built from scratch using screenshot references. Includes pixel inspector, split slider map, and dynamic sidebar.</p>
+          <div class="tags">
+            <span class="tag">Light Theme</span><span class="tag">Orange/White</span>
+            <span class="tag">4 Screens</span><span class="tag">Fully Interactive</span>
+          </div>
+          <span class="cta">Open Design 4
+            <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Design 5 -->
+      <a class="card d5" href="./design 5/index.html">
+        <div class="thumb">
+          <div class="mock">
+            <div class="mock-row" style="height:100%;gap:5px">
+              <div class="mock-sidebar mock-block" style="width:24%"></div>
+              <div class="mock-content">
+                <div class="mock-bar" style="width:100%;height:8px;opacity:.4"></div>
+                <div class="mock-line" style="width:90%;margin-top:3px;background:rgba(0,0,0,0.1)"></div>
+                <div class="mock-line" style="width:65%;background:rgba(0,0,0,0.1)"></div>
+                <div class="mock-row" style="gap:4px;margin-top:4px">
+                  <div class="mock-block" style="flex:1;height:24px;border-radius:4px;opacity:.25"></div>
+                  <div class="mock-block" style="flex:1;height:24px;border-radius:4px;opacity:.16"></div>
+                </div>
+                <div class="mock-bar" style="width:80%;opacity:.2;margin-top:3px"></div>
+              </div>
+            </div>
+          </div>
+          <div class="num">5</div>
+        </div>
+        <div class="body">
+          <div class="lbl">Design 05 (Final)</div>
+          <h2 class="card-title">BhuDRISTI Workstation</h2>
+          <p class="card-desc">The ultimate fusion: Combines the complex layout architecture of Design 3 with the vibrant orange & white brand identity of Design 4.</p>
+          <div class="tags">
+            <span class="tag">Light Theme</span><span class="tag">Brand Identity</span>
+            <span class="tag">Hybrid UI</span><span class="tag">Workstation</span>
+          </div>
+          <span class="cta">Open Design 5
+            <svg class="arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
           </span>
         </div>
       </a>
 
     </div>
 
-    <!-- Footer -->
     <div class="footer">
       <strong>GeoSR-AI Intelligence Suite v4.5</strong> · Defense & Orbital Reconnaissance Telemetry
     </div>
