@@ -1,0 +1,2313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BhuDRISTI Workstation — Design 5</title>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>BhuDRISTI Workstation — Design 5</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": {
+  "surface-dim": "#e2e8f0",
+  "outline-variant": "#e2e8f0",
+  "secondary-fixed": "#ffedd5",
+  "on-primary-container": "#ea580c",
+  "surface-variant": "#f1f5f9",
+  "surface-tint": "#ea580c",
+  "on-primary": "#ffffff",
+  "on-tertiary-container": "#1e293b",
+  "surface-container-low": "#f8fafc",
+  "inverse-surface": "#0f172a",
+  "inverse-on-surface": "#f8fafc",
+  "surface-container-high": "#e2e8f0",
+  "error-container": "#fee2e2",
+  "on-surface": "#1e293b",
+  "on-error-container": "#b91c1c",
+  "surface-container": "#f1f5f9",
+  "surface-bright": "#ffffff",
+  "on-surface-variant": "#475569",
+  "secondary": "#f97316",
+  "secondary-container": "#ffedd5",
+  "on-background": "#1e293b",
+  "tertiary-fixed-dim": "#cbd5e1",
+  "tertiary-container": "#e2e8f0",
+  "surface": "#ffffff",
+  "on-secondary-fixed": "#7c2d12",
+  "secondary-fixed-dim": "#fed7aa",
+  "tertiary-fixed": "#f1f5f9",
+  "primary-fixed": "#ffedd5",
+  "primary-fixed-dim": "#fed7aa",
+  "on-tertiary-fixed": "#0f172a",
+  "outline": "#94a3b8",
+  "background": "#ffffff",
+  "on-tertiary-fixed-variant": "#334155",
+  "tertiary": "#64748b",
+  "surface-container-highest": "#cbd5e1",
+  "on-error": "#ffffff",
+  "on-primary-fixed": "#7c2d12",
+  "surface-container-lowest": "#ffffff",
+  "on-secondary-fixed-variant": "#ea580c",
+  "primary": "#ea580c",
+  "on-tertiary": "#ffffff",
+  "on-secondary-container": "#c2410c",
+  "inverse-primary": "#fed7aa",
+  "on-secondary": "#ffffff",
+  "primary-container": "#fff7ed",
+  "error": "#ef4444",
+  "on-primary-fixed-variant": "#ea580c"
+}, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "panel-width-sm": "17.5rem", "space-xs": "0.25rem", "space-2xs": "0.125rem", "panel-width-md": "22.5rem", "space-xl": "1.5rem", "gutter": "0.5rem", "panel-width-lg": "27.5rem", "space-2xl": "2rem", "toolbar-height": "2.5rem", "space-md": "0.75rem", "space-lg": "1rem", "space-sm": "0.5rem" }, "fontFamily": { "headline-sm": [ "Geist" ], "label-mono-sm": [ "JetBrains Mono" ], "headline-md": [ "Geist" ], "label-mono-xs": [ "JetBrains Mono" ], "label-mono-md": [ "JetBrains Mono" ], "headline-lg": [ "Geist" ], "body-sm": [ "Geist" ], "body-md": [ "Geist" ] }, "fontSize": { "headline-sm": [ "15px", { "lineHeight": "20px", "letterSpacing": "-0.005em", "fontWeight": "600" } ], "label-mono-sm": [ "11px", { "lineHeight": "14px", "letterSpacing": "0em", "fontWeight": "500" } ], "headline-md": [ "18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-mono-xs": [ "10px", { "lineHeight": "12px", "letterSpacing": "0.02em", "fontWeight": "500" } ], "label-mono-md": [ "12px", { "lineHeight": "16px", "letterSpacing": "-0.01em", "fontWeight": "500" } ], "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "body-sm": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.005em", "fontWeight": "400" } ], "body-md": [ "13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" } ] } } } };</script>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased">
+
+<aside class="fixed top-0 left-0 bottom-0 w-[230px] bg-surface-container-lowest border-r border-outline-variant z-50 flex flex-col justify-between select-none"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-14 px-space-md flex items-center gap-space-sm border-b border-outline-variant"><img alt="GeoSR-AI Technical Emblem" class="h-8 w-auto object-contain" src="../design 4/logoBHUDRISTI.png"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight truncate">BhuDRISTI</span><span class="font-label-mono-xs text-label-mono-xs px-1 bg-surface-container-high text-on-surface-variant rounded">v1.2</span></div><span class="font-label-mono-xs text-label-mono-xs text-outline truncate">Super Resolution</span></div></div><div class="p-space-sm"><a class="w-full flex items-center justify-center gap-space-xs py-1.5 px-space-md bg-primary-container hover:bg-primary text-on-primary font-headline-sm text-headline-sm rounded transition-colors shadow-sm" data-path="new-enhancement" href="#"><span class="material-symbols-outlined text-[16px]">add_circle</span><span>New Job</span></a></div><div class="px-space-sm py-space-xs"><div class="px-space-xs py-1 text-[10px] font-headline-sm uppercase tracking-wider text-outline">Workspace</div><nav class="space-y-0.5" data-active-classes="bg-secondary-container text-on-secondary-container font-semibold"><a aria-current="page" class="flex items-center justify-between px-space-xs py-1.5 rounded transition-colors bg-secondary-container text-on-secondary-container font-semibold" data-path="overview" href="#"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px]">grid_view</span><span class="font-body-md text-body-md">Overview</span></div></a><a class="flex items-center justify-between px-space-xs py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="enhancement-workbench" href="#"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px]">layers</span><span class="font-body-md text-body-md">Enhance</span></div></a><a class="flex items-center justify-between px-space-xs py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="jobs-queue" href="#"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px]">view_list</span><span class="font-body-md text-body-md">Jobs</span></div><span class="font-label-mono-xs text-label-mono-xs px-1.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-semibold">3</span></a><a class="flex items-center justify-between px-space-xs py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="split-results-analysis" href="#"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px]">compare</span><span class="font-body-md text-body-md">Results</span></div></a></nav></div><div class="px-space-sm py-space-xs"><div class="px-space-xs py-1 text-[10px] font-headline-sm uppercase tracking-wider text-outline">Spectral Domains</div><nav class="space-y-0.5" data-active-classes="bg-secondary-container text-on-secondary-container font-semibold"><a class="flex items-center justify-between px-space-xs py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="agriculture-spectral-domain" href="#"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px]">eco</span><span class="font-body-md text-body-md">Agriculture</span></div><span class="font-label-mono-xs text-label-mono-xs px-1 rounded bg-surface-container-high text-on-surface-variant">NDVI</span></a><a class="flex items-center justify-between px-space-xs py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="urban-settlement-domain" href="#"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px]">apartment</span><span class="font-body-md text-body-md">Urban</span></div></a><a class="flex items-center justify-between px-space-xs py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="disaster-damage-assessment" href="#"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px]">warning</span><span class="font-body-md text-body-md">Disaster</span></div></a></nav></div><div class="px-space-sm py-space-xs"><div class="px-space-xs py-1 text-[10px] font-headline-sm uppercase tracking-wider text-outline">Infrastructure</div><nav class="space-y-0.5" data-active-classes="bg-secondary-container text-on-secondary-container font-semibold"><a class="flex items-center justify-between px-space-xs py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="model-registry" href="#"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px]">memory</span><span class="font-body-md text-body-md">Models</span></div></a><a class="flex items-center justify-between px-space-xs py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="system-telemetry-status" href="#"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px]">dns</span><span class="font-body-md text-body-md">Cluster</span></div></a></nav></div></div><div class="p-space-sm border-t border-outline-variant bg-surface-container-low/40"><div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant mb-1"><span>NTRO • SIH 2026</span><span class="font-semibold text-primary">PS 26142</span></div><div class="py-1 px-1.5 bg-surface-container-lowest border border-outline-variant rounded font-label-mono-xs text-label-mono-xs text-on-surface flex items-center justify-between"><span class="truncate">EPSG:32643 • 10m→&lt;4m</span><span class="text-primary-container font-semibold ml-1">18ms</span></div></div></aside>
+
+<div class="pl-[230px]">
+  <header class="fixed top-0 left-[230px] right-0 h-14 bg-surface-container-lowest border-b border-outline-variant z-40 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs font-label-mono-sm text-label-mono-sm text-outline"><span class="text-on-surface-variant font-medium">GEOSR</span><span>/</span><span class="text-on-surface font-semibold">MISSION WORKBENCH</span></div><div class="hidden xl:flex items-center gap-space-xs pl-space-md border-l border-outline-variant"><div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container font-label-mono-xs text-label-mono-xs text-on-surface"><span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span><span>Engine: GeoSR-Net v1.2</span></div><div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low font-label-mono-xs text-label-mono-xs text-secondary"><span class="w-1.5 h-1.5 rounded-full bg-surface-tint"></span><span>Sentinel-2 Pipeline Online</span></div></div></div><div class="flex items-center gap-space-md"><div class="relative hidden sm:block w-48 lg:w-60"><span class="material-symbols-outlined absolute left-2 top-2 text-outline text-[16px]">search</span><input class="w-full h-8 pl-7 pr-space-xs text-body-sm bg-surface-container-low border border-outline-variant rounded focus:border-primary-container focus:bg-surface-container-lowest outline-none text-on-surface placeholder:text-outline transition-colors" placeholder="Filter coordinates, tiles, jobs..." type="text"/></div><div class="flex items-center gap-space-sm"><a class="inline-flex items-center gap-1 px-2 py-1 bg-surface-container hover:bg-surface-container-high rounded text-on-surface font-label-mono-xs text-label-mono-xs transition-colors" data-path="jobs-queue" href="#"><span class="material-symbols-outlined text-[15px]">sync</span><span>Jobs</span><span class="ml-0.5 px-1 rounded bg-primary-container text-on-primary">3</span></a><div class="hidden md:inline-flex items-center gap-1.5 px-2 py-1 rounded border border-outline-variant bg-surface-container-lowest font-label-mono-xs text-label-mono-xs text-on-surface"><span class="w-2 h-2 rounded-full bg-surface-tint"></span><span>Operational</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrpGeUQSBhLUm2-D4ZY0pZaLKZ3XGSDhkz4OptigInDOoTP7Rf8TEVsQM2t9fsk7NC7H-4d6coAI8qa1pz-A1LNGXbOHA1sBnBdg53-9E2-WPjerfNt4BcP3K3dv2_9Ib7JAGXTtyPsgRUD-Se4L65fMUyGmXT_ZhwFzy2C5Y36gSYjlBbTb46F_8Kdvk-WscSQl8wxRl69FPRofJF-7rbYqJEZ7wUkfA9-oWIURBYJW2YgE_kFEia"/></div></div></header>
+
+  <main id="app-main" class="relative pt-14 w-full min-h-screen bg-surface">
+<div id="screen-overview" class="screen-panel" style="display:block;">
+<div class="flex flex-col w-full">
+<!-- Top Command & Action Bar -->
+<div class="px-space-xl py-space-lg bg-surface-container-lowest flex flex-col md:flex-row md:items-center justify-between gap-space-md shadow-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Overview</span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-semibold tracking-wide">OPERATIONAL</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">Geospatial Super-Resolution Workspace • Mission Node NTRO-26142</p>
+</div>
+<div class="flex items-center gap-space-sm self-start md:self-auto">
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-surface-tint animate-ping"></span>
+<span class="font-semibold text-on-surface">SR-Cluster 04</span>
+<span class="text-outline">•</span>
+<span>A100-SXM4</span>
+</div>
+<a class="inline-flex items-center gap-2 px-space-lg py-2 rounded bg-primary-container hover:bg-primary text-on-primary font-headline-sm text-headline-sm transition-all shadow-sm active:scale-95" data-path="enhancement-workbench" href="#">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>New Enhancement</span>
+</a>
+</div>
+</div>
+<div class="p-space-xl space-y-space-lg">
+<!-- Definition & Execution Flow Banner -->
+<div class="bg-surface-container-lowest p-space-lg rounded shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm pb-space-sm bg-surface-container-low/50 p-space-md rounded">
+<div class="flex items-center gap-space-sm">
+<div class="p-2 rounded bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">architecture</span>
+</div>
+<div>
+<span class="font-label-mono-xs text-label-mono-xs uppercase tracking-widest text-secondary font-semibold">Mission Objective</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Turn medium-resolution satellite imagery into a higher-resolution prediction with measurable confidence.</h2>
+</div>
+</div>
+<div class="flex items-center gap-space-xs font-label-mono-xs text-label-mono-xs text-outline self-end lg:self-auto">
+<span>PIPELINE SPEC:</span>
+<span class="font-semibold text-primary">S2-L2A → GSD &lt;4.0m</span>
+</div>
+</div>
+<!-- Linear Execution Flow Diagram -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-2 pt-1">
+<div class="bg-surface-container-low p-2.5 rounded flex flex-col justify-between relative group hover:bg-secondary-container transition-colors">
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-outline">
+<span>STAGE 01</span>
+<span class="material-symbols-outlined text-[14px]">satellite_alt</span>
+</div>
+<div class="my-1.5">
+<div class="font-headline-sm text-body-md text-on-surface font-semibold">Observed Data</div>
+<div class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Sentinel-2 MSI 10m</div>
+</div>
+<div class="text-[10px] font-label-mono-xs text-secondary truncate">T10SGG • Top-Of-Atm</div>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded flex flex-col justify-between relative group hover:bg-secondary-container transition-colors">
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-outline">
+<span>STAGE 02</span>
+<span class="material-symbols-outlined text-[14px]">tune</span>
+</div>
+<div class="my-1.5">
+<div class="font-headline-sm text-body-md text-on-surface font-semibold">Preprocessing</div>
+<div class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Ortho • B2-B4-B8</div>
+</div>
+<div class="text-[10px] font-label-mono-xs text-secondary truncate">Atmospheric Correction</div>
+</div>
+<div class="bg-surface-container-high p-2.5 rounded flex flex-col justify-between relative ring-1 ring-primary-container/20">
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-primary">
+<span class="font-semibold">STAGE 03 [ACTIVE]</span>
+<span class="material-symbols-outlined text-[14px] text-primary">psychology</span>
+</div>
+<div class="my-1.5">
+<div class="font-headline-sm text-body-md text-on-surface font-semibold">AI Super-Res</div>
+<div class="font-label-mono-xs text-label-mono-xs text-primary font-semibold">GeoSR-Net v1.2</div>
+</div>
+<div class="text-[10px] font-label-mono-xs text-on-surface-variant truncate">Residual Attention Block</div>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded flex flex-col justify-between hover:bg-secondary-container transition-colors">
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-outline">
+<span>STAGE 04</span>
+<span class="material-symbols-outlined text-[14px]">zoom_in</span>
+</div>
+<div class="my-1.5">
+<div class="font-headline-sm text-body-md text-on-surface font-semibold">Predicted Detail</div>
+<div class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">&lt;4.0m GSD Output</div>
+</div>
+<div class="text-[10px] font-label-mono-xs text-secondary truncate">Sub-pixel Convolution</div>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded flex flex-col justify-between hover:bg-secondary-container transition-colors">
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-outline">
+<span>STAGE 05</span>
+<span class="material-symbols-outlined text-[14px]">analytics</span>
+</div>
+<div class="my-1.5">
+<div class="font-headline-sm text-body-md text-on-surface font-semibold">Uncertainty Est.</div>
+<div class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Monte Carlo Dropout</div>
+</div>
+<div class="text-[10px] font-label-mono-xs text-secondary truncate">Epistemic ±0.042 Var</div>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded flex flex-col justify-between hover:bg-secondary-container transition-colors">
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-outline">
+<span>STAGE 06</span>
+<span class="material-symbols-outlined text-[14px]">verified</span>
+</div>
+<div class="my-1.5">
+<div class="font-headline-sm text-body-md text-on-surface font-semibold">Validation</div>
+<div class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">PSNR / SSIM / SAM</div>
+</div>
+<div class="text-[10px] font-label-mono-xs text-secondary truncate">Spectral Angle &lt; 2.8°</div>
+</div>
+</div>
+</div>
+<!-- Top 4 Metric Cards with Sparklines -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Total Jobs -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-xs text-label-mono-xs uppercase text-outline">Total Inference Jobs</span>
+<span class="material-symbols-outlined text-outline text-[18px]">folder_copy</span>
+</div>
+<div class="my-2 flex items-baseline justify-between">
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tight">128</span>
+<span class="font-label-mono-xs text-label-mono-xs px-1.5 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-semibold">+12 this week</span>
+</div>
+<div class="pt-2 flex items-center justify-between">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Cumulative throughput</span>
+<!-- Inline Sparkline 1 -->
+<svg class="w-20 h-5 text-primary-container overflow-visible" fill="none" viewbox="0 0 80 20">
+<path d="M0 16 L12 14 L24 18 L36 10 L48 12 L60 6 L72 8 L80 2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"></path>
+</svg>
+</div>
+</div>
+<!-- Completed -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-xs text-label-mono-xs uppercase text-outline">Completed Runs</span>
+<span class="material-symbols-outlined text-surface-tint text-[18px]">check_circle</span>
+</div>
+<div class="my-2 flex items-baseline justify-between">
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tight">96</span>
+<span class="font-label-mono-xs text-label-mono-xs px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container font-semibold">75% success</span>
+</div>
+<div class="pt-2 flex items-center justify-between">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Validated GeoTIFF tiles</span>
+<svg class="w-20 h-5 text-surface-tint overflow-visible" fill="none" viewbox="0 0 80 20">
+<path d="M0 18 L15 15 L30 11 L45 12 L60 5 L80 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"></path>
+</svg>
+</div>
+</div>
+<!-- Processing -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-xs text-label-mono-xs uppercase text-outline">Active Processing</span>
+<span class="material-symbols-outlined text-primary-container text-[18px] animate-spin">sync</span>
+</div>
+<div class="my-2 flex items-baseline justify-between">
+<span class="font-headline-lg text-headline-lg text-primary tracking-tight">3 <span class="text-body-sm font-normal text-on-surface-variant">active</span></span>
+<span class="font-label-mono-xs text-label-mono-xs px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface font-semibold">Tile 42/128</span>
+</div>
+<div class="pt-2 flex items-center justify-between">
+<div class="w-full bg-surface-container-high rounded h-1.5 overflow-hidden">
+<div class="bg-primary-container h-full rounded transition-all duration-500" style="width: 32.8%;"></div>
+</div>
+<span class="ml-2 font-label-mono-xs text-label-mono-xs text-outline">33%</span>
+</div>
+</div>
+<!-- Failed / Retried -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-xs text-label-mono-xs uppercase text-outline">Anomalies / Retries</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">report</span>
+</div>
+<div class="my-2 flex items-baseline justify-between">
+<span class="font-headline-lg text-headline-lg text-on-surface tracking-tight">3</span>
+<span class="font-label-mono-xs text-label-mono-xs px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-semibold">2.3% error rate</span>
+</div>
+<div class="pt-2 flex items-center justify-between">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Atmospheric haze flag</span>
+<span class="font-label-mono-xs text-label-mono-xs text-outline">Auto-rerun</span>
+</div>
+</div>
+</div>
+<!-- Main Operational Workspace Grid (60/40) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left Column: Recent Enhancements (60%) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest rounded shadow-sm p-space-md flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">layers</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Recent Enhancements</span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">4 Loaded</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">filter_list</span>
+<span>Filter Bands</span>
+</button>
+<a class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs transition-colors" data-path="split-results-analysis" href="#">
+              View All
+            </a>
+</div>
+</div>
+<!-- Satellite Enhancement Item 1: Delhi Urban Area -->
+<div class="bg-surface-container-lowest rounded shadow-sm p-space-md flex flex-col md:flex-row gap-space-md hover:bg-surface-container-low/40 transition-colors">
+<div class="w-full md:w-36 h-28 shrink-0 relative rounded overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="High angle aerial satellite view of Delhi NCR urban grid, dense arterial roadways, concrete rooftops, and Yamuna river bend, crisp 3.8m super resolution raster reconstruction with balanced contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4Rxce2QPc6vXYO0eXpL5SWyC50CCVuVnXF5n19iw99TrbFS5tq9JD_gGKUAMyuh4NKe8PMJhQPTtDyX3C7r4F8UEmQ-gpCE1Hd8KL1kz1RJnu3v09oqa2hFGD9IuiP3xwDAOOaZqKng2dK9lMkGNBr3cpCKHsD5FmdIAma9UQyAoYEyZLacfZuVT8hloG_xpxkeCiZXXjGts3UlrtF0zLHVxn5WB__HlZc3Kk0cBq9g7NjkTfn8_J"/>
+<div class="absolute bottom-1 left-1 bg-inverse-surface/80 text-inverse-on-surface font-label-mono-xs text-[9px] px-1 py-0.5 rounded backdrop-blur-sm">
+              10m → 3.8m
+            </div>
+<div class="absolute top-1 right-1 bg-surface-tint text-on-primary font-label-mono-xs text-[9px] px-1 rounded">
+              RGB
+            </div>
+</div>
+<div class="flex-1 flex flex-col justify-between min-w-0">
+<div>
+<div class="flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-2 truncate">
+<h3 class="font-headline-sm text-body-md text-on-surface font-semibold truncate">Delhi Urban Area</h3>
+<span class="font-label-mono-xs text-[10px] px-1.5 py-0.2 rounded bg-secondary-fixed text-on-secondary-fixed font-semibold">COMPLETED</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-outline shrink-0">24 mins ago</span>
+</div>
+<p class="font-label-mono-xs text-label-mono-xs text-on-surface-variant mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+<span>Tile: 43RGM</span>
+<span>•</span>
+<span>Size: 12.8 GB GeoTIFF</span>
+<span>•</span>
+<span class="text-primary font-semibold">PSNR: 32.48 dB</span>
+<span>•</span>
+<span>SSIM: 0.912</span>
+</p>
+</div>
+<div class="pt-3 flex flex-wrap items-center gap-2">
+<a class="px-2 py-1 rounded bg-secondary-container hover:bg-secondary-fixed text-on-secondary-container font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1" data-path="split-results-analysis" href="#">
+<span class="material-symbols-outlined text-[13px]">compare</span>
+<span>View Results</span>
+</a>
+<button class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">download</span>
+<span>Download GeoTIFF</span>
+</button>
+<button class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">query_stats</span>
+<span>Metrics</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Satellite Enhancement Item 2: Punjab Agriculture -->
+<div class="bg-surface-container-lowest rounded shadow-sm p-space-md flex flex-col md:flex-row gap-space-md hover:bg-surface-container-low/40 transition-colors">
+<div class="w-full md:w-36 h-28 shrink-0 relative rounded overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Multispectral satellite overhead showing segmented agrarian patchwork in Punjab, lush green chlorophyll absorption channels, infrared crop boundary lines in crisp sharp 3.2m pixel geometry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4e3TBAX1FrA75ywTjYGMzRIzGAL12jSwSn2LGbwWRHftc8cTRUwsc1iAVUrXcsW9ueJL2OWU3sqZbWA3_Xqj2_SDQBlvwl5ZAux60LFnBkuNR1Iu7ESL2H0zRpmPmJbTnrYWpFr6w9v4L-QzwJtDgxwOLKI53pvQESy88cICKyD5Xu92sajiYBdJCR4-D8IzDxYXFxf9K5g6On6PNwLRjQF1jba-mA9ocfjvMPVo_1s4enM0RDIiK"/>
+<div class="absolute bottom-1 left-1 bg-inverse-surface/80 text-inverse-on-surface font-label-mono-xs text-[9px] px-1 py-0.5 rounded backdrop-blur-sm">
+              10m → 3.2m
+            </div>
+<div class="absolute top-1 right-1 bg-primary-container text-on-primary font-label-mono-xs text-[9px] px-1 rounded">
+              NDVI/NIR
+            </div>
+</div>
+<div class="flex-1 flex flex-col justify-between min-w-0">
+<div>
+<div class="flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-2 truncate">
+<h3 class="font-headline-sm text-body-md text-on-surface font-semibold truncate">Punjab Agriculture</h3>
+<span class="font-label-mono-xs text-[10px] px-1.5 py-0.2 rounded bg-secondary-fixed text-on-secondary-fixed font-semibold">COMPLETED</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-outline shrink-0">2 hours ago</span>
+</div>
+<p class="font-label-mono-xs text-label-mono-xs text-on-surface-variant mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+<span>Tile: 43RFN</span>
+<span>•</span>
+<span>Size: 8.4 GB GeoTIFF</span>
+<span>•</span>
+<span class="text-primary font-semibold">NDVI Consistency: 0.94</span>
+<span>•</span>
+<span>SAM: 2.14°</span>
+</p>
+</div>
+<div class="pt-3 flex flex-wrap items-center gap-2">
+<a class="px-2 py-1 rounded bg-secondary-container hover:bg-secondary-fixed text-on-secondary-container font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1" data-path="split-results-analysis" href="#">
+<span class="material-symbols-outlined text-[13px]">compare</span>
+<span>View Results</span>
+</a>
+<button class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">download</span>
+<span>Download GeoTIFF</span>
+</button>
+<button class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">query_stats</span>
+<span>Metrics</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Satellite Enhancement Item 3: Flood Area - Assam -->
+<div class="bg-surface-container-lowest rounded shadow-sm p-space-md flex flex-col md:flex-row gap-space-md hover:bg-surface-container-low/40 transition-colors">
+<div class="w-full md:w-36 h-28 shrink-0 relative rounded overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Satellite radar and optical hybrid view of the Brahmaputra River Basin flooded plains in Assam, turbid braided sediment channels and submerged floodplain demarcations, sharp high-resolution textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_Zc_e76qlGAKHXhAXSTKscrRNXTBV3Ag0f9fEdhnNakYXP477Od1ip2YKJQ7oWkhWvXIVwwfg-EqHUo6VKEewcFumlgCbjE9C3Kgo7U27G0T0ZyqGuh2aMTmDQXWwPojssjQ9BX1oYtWbHlL_rXe-eojGIB2lM2LX9DUdeKvA8_haFraiJPAIjErlKcnWw1ITQXzzpvuqNJd8UrZ6cbLZaqkRciEG0cSpRNPR-VsZiW038Jm9h8Vi"/>
+<div class="absolute bottom-1 left-1 bg-inverse-surface/80 text-inverse-on-surface font-label-mono-xs text-[9px] px-1 py-0.5 rounded backdrop-blur-sm">
+              10m → 3.6m
+            </div>
+<div class="absolute top-1 right-1 bg-surface-container-highest text-on-surface font-label-mono-xs text-[9px] px-1 rounded">
+              SWIR+B8
+            </div>
+</div>
+<div class="flex-1 flex flex-col justify-between min-w-0">
+<div>
+<div class="flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-2 truncate">
+<h3 class="font-headline-sm text-body-md text-on-surface font-semibold truncate">Flood Area — Assam (Brahmaputra Basin)</h3>
+<span class="font-label-mono-xs text-[10px] px-1.5 py-0.2 rounded bg-secondary-fixed text-on-secondary-fixed font-semibold">COMPLETED</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-outline shrink-0">5 hours ago</span>
+</div>
+<p class="font-label-mono-xs text-label-mono-xs text-on-surface-variant mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+<span>Tile: 46RCN</span>
+<span>•</span>
+<span>Size: 14.1 GB GeoTIFF</span>
+<span>•</span>
+<span class="text-primary font-semibold">Stability: High</span>
+<span>•</span>
+<span>Epistemic Var: ±0.038</span>
+</p>
+</div>
+<div class="pt-3 flex flex-wrap items-center gap-2">
+<a class="px-2 py-1 rounded bg-secondary-container hover:bg-secondary-fixed text-on-secondary-container font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1" data-path="split-results-analysis" href="#">
+<span class="material-symbols-outlined text-[13px]">compare</span>
+<span>View Results</span>
+</a>
+<button class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">download</span>
+<span>Download GeoTIFF</span>
+</button>
+<button class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">query_stats</span>
+<span>Metrics</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Satellite Enhancement Item 4: Coastal Region - Visakhapatnam -->
+<div class="bg-surface-container-lowest rounded shadow-sm p-space-md flex flex-col md:flex-row gap-space-md hover:bg-surface-container-low/40 transition-colors">
+<div class="w-full md:w-36 h-28 shrink-0 relative rounded overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Coastal satellite imagery of Visakhapatnam port and coastline, breakwaters, coastal ships, docks, and coastal mountains in detailed sub-4-meter super-resolved clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeSOp28D3c0LJTGFg0TW7vfg0_keq9yE57tU-ihI4-Pe35kiaJqyD4ZA_qyQolB8oGmYRA2OeCLRWGN9itYQXi_Cyoq13Xk0BF5JFQGIBTWI13lbkHNgyjOoJwFMGwP4BDhG6WB339aHMs3gWQt7VPigJL3Ase6f96yeB1Fnz4JLRYGPP5202Zt5ereb9MTjiMRP4GkOXAZDLCptfBARH1UAWUFu4P6UCRfqwTyuf01BcP29bmOcBC"/>
+<div class="absolute bottom-1 left-1 bg-inverse-surface/80 text-inverse-on-surface font-label-mono-xs text-[9px] px-1 py-0.5 rounded backdrop-blur-sm">
+              10m → 3.5m
+            </div>
+<div class="absolute top-1 right-1 bg-surface-tint text-on-primary font-label-mono-xs text-[9px] px-1 rounded">
+              RGB
+            </div>
+</div>
+<div class="flex-1 flex flex-col justify-between min-w-0">
+<div>
+<div class="flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-2 truncate">
+<h3 class="font-headline-sm text-body-md text-on-surface font-semibold truncate">Coastal Region — Visakhapatnam</h3>
+<span class="font-label-mono-xs text-[10px] px-1.5 py-0.2 rounded bg-secondary-fixed text-on-secondary-fixed font-semibold">COMPLETED</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-outline shrink-0">1 day ago</span>
+</div>
+<p class="font-label-mono-xs text-label-mono-xs text-on-surface-variant mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+<span>Tile: 44QKD</span>
+<span>•</span>
+<span>Size: 9.2 GB GeoTIFF</span>
+<span>•</span>
+<span class="text-primary font-semibold">PSNR: 31.90 dB</span>
+<span>•</span>
+<span>SSIM: 0.899</span>
+</p>
+</div>
+<div class="pt-3 flex flex-wrap items-center gap-2">
+<a class="px-2 py-1 rounded bg-secondary-container hover:bg-secondary-fixed text-on-secondary-container font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1" data-path="split-results-analysis" href="#">
+<span class="material-symbols-outlined text-[13px]">compare</span>
+<span>View Results</span>
+</a>
+<button class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">download</span>
+<span>Download GeoTIFF</span>
+</button>
+<button class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-mono-xs text-label-mono-xs transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">query_stats</span>
+<span>Metrics</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Pipeline Architecture & System Status (40%) -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- System Pipeline Architecture Card -->
+<div class="bg-surface-container-lowest rounded shadow-sm p-space-md flex flex-col">
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">hub</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">System Pipeline Architecture</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-outline">DAG: GeoSR-Main</span>
+</div>
+<div class="space-y-space-sm">
+<!-- Node 1 -->
+<div class="p-space-sm bg-surface-container-low rounded flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-outline text-[16px]">file_download</span>
+<div>
+<div class="font-headline-sm text-body-sm text-on-surface">Input Ingestion</div>
+<div class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">GeoTIFF / JP2 Cloud Optimized</div>
+</div>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-semibold">Ready</span>
+</div>
+<!-- Node 2 (Active) -->
+<div class="p-space-sm bg-secondary-container/50 rounded flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[16px]">memory</span>
+<div>
+<div class="font-headline-sm text-body-sm text-on-surface font-semibold">Super-Resolution Engine</div>
+<div class="font-label-mono-xs text-label-mono-xs text-secondary font-medium">PyTorch TensorRT on A100 GPU</div>
+</div>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-tint text-on-primary font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                Active • 62%
+              </span>
+</div>
+<!-- Node 3 -->
+<div class="p-space-sm bg-surface-container-low rounded flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-outline text-[16px]">rule</span>
+<div>
+<div class="font-headline-sm text-body-sm text-on-surface">Validation &amp; Metrics Engine</div>
+<div class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">PSNR, SSIM, SAM, ERGAS Matrix</div>
+</div>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">Standby</span>
+</div>
+<!-- Node 4 -->
+<div class="p-space-sm bg-surface-container-low rounded flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-outline text-[16px]">heat_pump</span>
+<div>
+<div class="font-headline-sm text-body-sm text-on-surface">Uncertainty Heatmap Generator</div>
+<div class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Epistemic Variance Estimator</div>
+</div>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">Standby</span>
+</div>
+<!-- Node 5 -->
+<div class="p-space-sm bg-surface-container-low rounded flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-outline text-[16px]">ios_share</span>
+<div>
+<div class="font-headline-sm text-body-sm text-on-surface">Export &amp; Downstream Sink</div>
+<div class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Agri, Urban, Disaster Routing</div>
+</div>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-semibold">Available</span>
+</div>
+</div>
+</div>
+<!-- Infrastructure Status Panel -->
+<div class="bg-surface-container-lowest rounded shadow-sm p-space-md flex flex-col">
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">dns</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Infrastructure Status</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs px-1.5 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-semibold">All Systems Nominal</span>
+</div>
+<div class="space-y-2.5">
+<!-- Model Server -->
+<div class="flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-surface-tint"></span>
+<span class="text-on-surface">Model Server (Triton)</span>
+</div>
+<div class="font-label-mono-xs text-label-mono-xs text-on-surface font-semibold bg-surface-container px-1.5 py-0.5 rounded">
+                Online • 18ms
+              </div>
+</div>
+<!-- GPU Cluster -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-surface-tint"></span>
+<span class="text-on-surface">GPU Cluster (4x A100 80GB)</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface font-semibold">62% Allocated</span>
+</div>
+<div class="w-full bg-surface-container-high rounded h-1.5 overflow-hidden">
+<div class="bg-primary-container h-full rounded" style="width: 62%;"></div>
+</div>
+</div>
+<!-- Tiling Storage -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-surface-tint"></span>
+<span class="text-on-surface">Tiling Cache (NVMe Pool)</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface font-semibold">14.2 / 30 TB</span>
+</div>
+<div class="w-full bg-surface-container-high rounded h-1.5 overflow-hidden">
+<div class="bg-secondary h-full rounded" style="width: 47.3%;"></div>
+</div>
+</div>
+<!-- Epistemic Variance Service -->
+<div class="flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-surface-tint"></span>
+<span class="text-on-surface">Epistemic Variance Worker</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-surface-tint font-semibold">Healthy</span>
+</div>
+<!-- EPSG Reference DB -->
+<div class="flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-surface-tint"></span>
+<span class="text-on-surface">Spatial Ref Database</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-outline">EPSG Registry v10.082 Sync</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-low p-2.5 rounded flex items-center justify-between text-[11px] font-label-mono-xs text-on-surface-variant">
+<span>Uptime: 99.98% (42d 16h)</span>
+<a class="text-primary font-semibold hover:underline flex items-center gap-0.5" data-path="system-telemetry-status" href="#">
+<span>Full Telemetry</span>
+<span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="screen-enhancement-workbench" class="screen-panel" style="display:none;">
+<div class="flex flex-col w-full">
+<div class="p-space-lg max-w-[1720px] mx-auto w-full space-y-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm bg-surface-container-lowest p-space-md rounded-xl shadow-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs mb-1">
+<span class="font-label-mono-xs text-label-mono-xs uppercase px-1.5 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-semibold tracking-wide">Mission Ingest</span>
+<span class="font-label-mono-xs text-label-mono-xs text-outline">/</span>
+<span class="font-label-mono-xs text-label-mono-xs text-secondary font-medium">NTRO PS 26142 Protocol</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">New Enhancement</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Upload satellite imagery and configure super-resolution pipeline with sensor-specific point spread functions.</p>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="inline-flex items-center gap-1.5 px-space-md py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-body-md text-body-md transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span>Load Preset</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-space-md py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-body-md text-body-md transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+<span>CLI Spec</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<div class="lg:col-span-7 space-y-space-md">
+<div class="relative group cursor-pointer bg-surface-container-lowest rounded-xl p-space-xl shadow-sm transition-all duration-200 overflow-hidden bg-gradient-to-b from-surface-container-lowest to-surface-container-low/30" id="dropzone">
+<div class="absolute -right-8 -top-8 w-44 h-44 rounded-full bg-primary-fixed/20 blur-2xl pointer-events-none"></div>
+<div class="flex flex-col items-center text-center max-w-xl mx-auto relative z-10 py-space-sm">
+<div class="relative w-16 h-16 rounded-xl bg-surface-container flex items-center justify-center text-primary-container group-hover:scale-105 transition-transform shadow-sm mb-space-md">
+<svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" stroke-width="1.75" viewbox="0 0 24 24">
+<path d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" stroke-linecap="round" stroke-linejoin="round"></path>
+<circle cx="12" cy="12" r="3" stroke-width="1.5"></circle>
+</svg>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px]">arrow_upward</span>
+</div>
+</div>
+<div class="space-y-1">
+<h2 class="font-headline-md text-headline-md text-on-surface">Upload Satellite Image</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Drag and drop your GeoTIFF or Sentinel-2 SAFE package here, or 
+                <button class="text-primary hover:underline font-medium" type="button">Browse Files</button>
+</p>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-1.5 mt-space-md">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-mono-xs text-label-mono-xs">.TIF</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-mono-xs text-label-mono-xs">.TIFF</span>
+<span class="px-2 py-0.5 rounded bg-primary-fixed/60 text-on-primary-fixed font-label-mono-xs text-label-mono-xs font-semibold">Cloud Optimized GeoTIFF (COG)</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-mono-xs text-label-mono-xs">JP2</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-mono-xs text-label-mono-xs">HDF5</span>
+</div>
+<div class="mt-space-md inline-flex items-center gap-2 px-space-sm py-1 rounded-full bg-surface-container-low text-secondary font-label-mono-xs text-label-mono-xs">
+<span class="material-symbols-outlined text-[14px]">grid_goldenratio</span>
+<span>Max single scene: 32 GB • Automatic hardware-accelerated tiling enabled</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Staged Image Dataset</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="inline-flex items-center gap-1 px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-mono-xs text-label-mono-xs transition-colors" type="button">
+<span class="material-symbols-outlined text-[14px]">swap_horiz</span>
+<span>Replace</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2 py-1 rounded bg-error-container/60 hover:bg-error-container text-on-error-container font-label-mono-xs text-label-mono-xs transition-colors" type="button">
+<span class="material-symbols-outlined text-[14px]">delete</span>
+<span>Remove</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-space-md p-space-sm rounded-lg bg-surface-container-low/70">
+<div class="relative w-full sm:w-44 h-36 rounded-lg overflow-hidden shrink-0 shadow-sm">
+<img class="w-full h-full object-cover" data-alt="High altitude multispectral satellite image of New Delhi urban sprawl showing road networks, dense urban grid layout, green lung parks, with realistic Earth observation raster artifacts and calibration reticle overlay in muted natural earth tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDF8NagBmAI6jd7ezl-55hkrEgT6Th3ER3aBzhjTIt8Prm2UGotUrQewvPr3iamVPjzlG5dd81YT9tr7KuyZJJY8AraPp4EBn9a-rzkPBlwi_KEIg7YPRRHqkAjtqkwcmML-m9t-uvRMZGtmEvJbZ264xfWrv1xXIRkdkZYPIrOGfajTalXyH4IbJDmGiE2tAqJPlu0y0HM9dAKyh2SlxWfx5uaafIzqWmJvcpUu7q1Six5cP5lihmt"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent flex items-end p-2">
+<span class="px-1.5 py-0.5 rounded bg-inverse-surface/90 text-inverse-on-surface font-label-mono-xs text-[9px] uppercase tracking-wider">True Color (RGB)</span>
+</div>
+<div class="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-label-mono-xs text-[9px] text-on-surface font-semibold shadow-xs">
+                10m GSD
+              </div>
+</div>
+<div class="flex flex-col justify-between flex-1 min-w-0 space-y-2">
+<div>
+<div class="flex items-center justify-between gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate font-semibold">delhi_urban_sentinel2_l2a_20260315.tif</span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed shrink-0 font-medium">Stage Ready</span>
+</div>
+<div class="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span>12.8 GB</span>
+<span>•</span>
+<span>GeoTIFF COG</span>
+<span>•</span>
+<span class="font-semibold text-on-surface">EPSG:32643 (UTM 43N)</span>
+<span>•</span>
+<span>10.0 m GSD</span>
+</div>
+<div class="mt-2 flex flex-wrap items-center gap-1 font-label-mono-xs text-label-mono-xs">
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface">B02 (Blue 490nm)</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface">B03 (Green 560nm)</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface">B04 (Red 665nm)</span>
+<span class="px-1.5 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-semibold">B08 (NIR 842nm)</span>
+</div>
+</div>
+<div class="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span class="font-label-mono-xs text-label-mono-xs font-semibold">SHA-256 Validated • No NoData void pixels</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-outline">Tile Grid: 10,980 × 10,980 px</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[18px]">science</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Sample Verified Datasets</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-outline">1-Click Test Workflows</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm pt-1">
+<div class="group cursor-pointer rounded-lg p-space-sm bg-surface-container-low hover:bg-surface-container transition-colors relative flex flex-col justify-between h-full">
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="px-1.5 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-label-mono-xs text-[10px] font-semibold">Agriculture</span>
+<span class="font-label-mono-xs text-[10px] text-outline">10m</span>
+</div>
+<div class="font-body-md text-body-md font-semibold text-on-surface line-clamp-1">Punjab Wheat Fields</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Ludhiana basin parcel boundaries with vegetative spectral signatures.</p>
+</div>
+<div class="pt-3 mt-2 flex items-center justify-between">
+<span class="font-label-mono-xs text-[10px] text-primary font-medium">Sentinel-2 MSI</span>
+<span class="material-symbols-outlined text-[16px] text-primary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</div>
+</div>
+<div class="group cursor-pointer rounded-lg p-space-sm bg-primary-fixed/20 hover:bg-primary-fixed/35 transition-colors relative flex flex-col justify-between h-full">
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="px-1.5 py-0.5 rounded bg-primary-container text-on-primary font-label-mono-xs text-[10px] font-semibold">Active Urban</span>
+<span class="font-label-mono-xs text-[10px] text-on-surface-variant font-medium">10m</span>
+</div>
+<div class="font-body-md text-body-md font-semibold text-on-surface line-clamp-1">Delhi Connaught Place</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Radial arterial corridors, ring road junction, dense builtup zones.</p>
+</div>
+<div class="pt-3 mt-2 flex items-center justify-between">
+<span class="font-label-mono-xs text-[10px] text-primary font-medium">Sentinel-2 MSI</span>
+<span class="inline-flex items-center gap-1 font-label-mono-xs text-[10px] text-primary font-semibold">
+<span>Selected</span>
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+</div>
+</div>
+<div class="group cursor-pointer rounded-lg p-space-sm bg-surface-container-low hover:bg-surface-container transition-colors relative flex flex-col justify-between h-full">
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="px-1.5 py-0.5 rounded bg-error-container text-on-error-container font-label-mono-xs text-[10px] font-semibold">Disaster</span>
+<span class="font-label-mono-xs text-[10px] text-outline">10m</span>
+</div>
+<div class="font-body-md text-body-md font-semibold text-on-surface line-clamp-1">Assam Brahmaputra</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Monsoonal inundation floodplains and sandbar morphological shifts.</p>
+</div>
+<div class="pt-3 mt-2 flex items-center justify-between">
+<span class="font-label-mono-xs text-[10px] text-primary font-medium">Sentinel-2 MSI</span>
+<span class="material-symbols-outlined text-[16px] text-primary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 space-y-space-md">
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between pb-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">tune</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Pipeline Configuration</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container font-semibold text-on-surface">Profile: Custom SR</span>
+</div>
+<div class="space-y-space-sm">
+<label class="block font-label-mono-xs text-label-mono-xs uppercase text-on-surface-variant font-medium">Sensor Platform &amp; Processing Level</label>
+<div class="relative">
+<select class="w-full h-9 pl-3 pr-8 rounded-lg bg-surface-container-low text-body-md font-body-md text-on-surface appearance-none focus:outline-none focus:bg-surface-container-lowest">
+<option selected="">Sentinel-2 MSI (Level-2A Bottom of Atmosphere BOA)</option>
+<option>Sentinel-2 MSI (Level-1C Top of Atmosphere TOA)</option>
+<option>Landsat-8/9 OLI (Collection 2 Level-2)</option>
+<option>PlanetScope SuperDove (3m to Sub-meter Experimental)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2 text-outline pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="p-space-sm rounded-lg bg-surface-container-low space-y-1">
+<div class="font-label-mono-xs text-label-mono-xs text-outline">Input GSD</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">10.0 m</div>
+<div class="font-label-mono-xs text-[10px] text-on-surface-variant">Multi-Spectral Raw</div>
+</div>
+<div class="p-space-sm rounded-lg bg-primary-fixed/30 space-y-1">
+<div class="font-label-mono-xs text-label-mono-xs text-primary font-semibold">Target Output GSD</div>
+<div class="font-headline-sm text-headline-sm text-primary font-bold">&lt; 4.0 m</div>
+<div class="font-label-mono-xs text-[10px] text-primary">2.5× Super-Resolution</div>
+</div>
+</div>
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-mono-xs text-label-mono-xs uppercase text-on-surface-variant font-medium">Area of Interest (AOI)</label>
+<div class="inline-flex rounded-md p-0.5 bg-surface-container">
+<button class="px-2 py-0.5 text-label-mono-xs font-label-mono-xs rounded bg-surface-container-lowest text-on-surface shadow-xs font-semibold" type="button">Full Scene</button>
+<button class="px-2 py-0.5 text-label-mono-xs font-label-mono-xs rounded text-on-surface-variant hover:text-on-surface" type="button">Draw Polygon</button>
+</div>
+</div>
+<div class="relative rounded-lg overflow-hidden h-36 bg-surface-container shadow-xs">
+<div class="w-full h-full bg-cover bg-center" data-location="Connaught Place, New Delhi, India" style=""></div>
+<div class="absolute inset-0 bg-inverse-surface/30 pointer-events-none flex items-center justify-center">
+<div class="w-28 h-20 bg-primary/20 rounded relative">
+<div class="absolute -top-1.5 -left-1.5 w-3 h-3 bg-primary rounded-full"></div>
+<div class="absolute -top-1.5 -right-1.5 w-3 h-3 bg-primary rounded-full"></div>
+<div class="absolute -bottom-1.5 -left-1.5 w-3 h-3 bg-primary rounded-full"></div>
+<div class="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-primary rounded-full"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="px-1.5 py-0.5 rounded bg-inverse-surface/90 text-inverse-on-surface font-label-mono-xs text-[9px]">128 TILE CHUNKS</span>
+</div>
+</div>
+</div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between px-2 py-1 rounded bg-surface-container-lowest/90 backdrop-blur font-label-mono-xs text-[10px] text-on-surface shadow-xs">
+<span>[28.5800° N, 77.1600° E]</span>
+<span class="text-outline">→</span>
+<span>[28.6600° N, 77.2600° E]</span>
+</div>
+</div>
+</div>
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<label class="block font-label-mono-xs text-label-mono-xs uppercase text-on-surface-variant font-medium">Inference Architecture</label>
+<span class="px-1.5 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-label-mono-xs text-[9px] font-bold">RECOMMENDED</span>
+</div>
+<div class="relative">
+<select class="w-full h-9 pl-3 pr-8 rounded-lg bg-surface-container-low text-body-md font-body-md text-on-surface appearance-none focus:outline-none focus:bg-surface-container-lowest">
+<option selected="">GeoSR-Net v1.2 (Residual Dense Attention Network)</option>
+<option>GeoSR-Diff v0.9 (Conditional Latent Diffusion)</option>
+<option>ESRGAN-Satellite Enhanced (Perceptual GAN)</option>
+<option>Bicubic Baseline Interpolator (Reference Only)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2 text-outline pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+<div class="space-y-space-sm">
+<label class="block font-label-mono-xs text-label-mono-xs uppercase text-on-surface-variant font-medium">Compute Engine Precision</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="p-2 rounded-lg bg-surface-container text-left text-on-surface transition-colors flex items-center justify-between" type="button">
+<div>
+<div class="font-headline-sm text-body-md font-semibold">FP16 TensorRT</div>
+<div class="font-label-mono-xs text-[10px] text-on-surface-variant">Accelerated • 1.8x Speed</div>
+</div>
+<span class="material-symbols-outlined text-primary text-[18px]">radio_button_checked</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container-low text-left text-on-surface-variant hover:bg-surface-container transition-colors flex items-center justify-between" type="button">
+<div>
+<div class="font-headline-sm text-body-md font-semibold">FP32 Full Precision</div>
+<div class="font-label-mono-xs text-[10px] text-outline">Reference Lab Grade</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]">radio_button_unchecked</span>
+</button>
+</div>
+</div>
+<div class="pt-2 space-y-3">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low">
+<div class="space-y-0.5 max-w-[80%]">
+<div class="font-headline-sm text-body-md text-on-surface">Uncertainty Estimation</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Generate Epistemic Variance Heatmap (10 Monte Carlo passes)</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low">
+<div class="space-y-0.5 max-w-[80%]">
+<div class="font-headline-sm text-body-md text-on-surface">Spectral &amp; Spatial Benchmarks</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Calculate PSNR, SSIM, and Spectral Angle Mapper (SAM)</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container space-y-2">
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs">
+<div class="flex items-center gap-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary">speed</span>
+<span class="font-semibold">Estimated Runtime:</span>
+<span>~1 min 24 sec</span>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface">128 tiles • 1x A100 SXM4</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-2/5 rounded-full"></div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-space-xs pt-1">
+<button class="flex-1 py-2.5 px-space-md rounded-lg bg-primary-container hover:bg-primary text-on-primary font-headline-sm text-headline-sm flex items-center justify-center gap-2 shadow-sm transition-colors" type="button">
+<span>Start Enhancement Job</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="py-2.5 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-body-md text-body-md transition-colors shadow-sm flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">bookmark_border</span>
+<span>Save Preset</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="screen-jobs-queue" class="screen-panel" style="display:none;">
+<div class="flex flex-col w-full text-on-surface">
+<div class="w-full px-space-xl py-space-lg flex flex-col gap-space-lg">
+<!-- Header Summary Block -->
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
+<div class="flex flex-col gap-space-2xs">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-semibold">JOB ID #GS-2048-0008</span>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-mono-xs text-label-mono-xs font-semibold">
+<span class="w-2 h-2 rounded-full bg-surface-tint animate-pulse"></span>
+<span>PROCESSING</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-outline">EPSG:32643 • UTM Zone 43N</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Job GS-2048-0008: Delhi Urban Area</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Super-Resolution Inference Pipeline in Progress • Target Ground Resolution 10m → 2.5m Ground Sampling Distance (GSD)</p>
+</div>
+<div class="flex items-center gap-space-md flex-wrap">
+<div class="flex flex-col px-space-md py-1.5 rounded bg-surface-container-low">
+<span class="font-label-mono-xs text-label-mono-xs text-outline uppercase">Sensor Array</span>
+<span class="font-label-mono-md text-label-mono-md text-on-surface font-semibold">Sentinel-2A • B02, B03, B04, B08</span>
+</div>
+<div class="flex flex-col px-space-md py-1.5 rounded bg-surface-container-low">
+<span class="font-label-mono-xs text-label-mono-xs text-outline uppercase">Cluster Node</span>
+<span class="font-label-mono-md text-label-mono-md text-primary font-semibold">DGX-A100-NODE-04</span>
+</div>
+<div class="flex flex-col px-space-md py-1.5 rounded bg-surface-container-low">
+<span class="font-label-mono-xs text-label-mono-xs text-outline uppercase">Model Core</span>
+<span class="font-label-mono-md text-label-mono-md text-on-surface font-semibold">GeoSR-Net v1.2 (Residual)</span>
+</div>
+</div>
+</div>
+<!-- Section 1: Horizontal Stepper Pipeline -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
+<div class="flex items-center justify-between pb-space-md mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary-container">alt_route</span>
+<span class="font-label-mono-sm text-label-mono-sm uppercase tracking-wider text-outline font-semibold">Deep Ingestion &amp; Reconstruction Pipeline</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Stage 3 of 6 in Execution</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-space-sm">
+<!-- Step 1 (Completed) -->
+<div class="flex flex-col p-space-md rounded bg-surface-container-low relative">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant font-semibold">01 / CALIBRATION</span>
+<span class="material-symbols-outlined text-[16px] text-surface-tint" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface leading-snug">Input Ingestion &amp; Radiometric Calibration</span>
+<span class="font-label-mono-xs text-label-mono-xs text-outline mt-2">Completed (12.4s)</span>
+</div>
+<!-- Step 2 (Completed) -->
+<div class="flex flex-col p-space-md rounded bg-surface-container-low relative">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant font-semibold">02 / TILING MATRIX</span>
+<span class="material-symbols-outlined text-[16px] text-surface-tint" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface leading-snug">Spatial Tiling &amp; Overlap Matrix (128 tiles)</span>
+<span class="font-label-mono-xs text-label-mono-xs text-outline mt-2">Completed (18.1s)</span>
+</div>
+<!-- Step 3 (Active) -->
+<div class="flex flex-col p-space-md rounded bg-primary-container text-on-primary shadow-sm relative overflow-hidden">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-mono-xs text-label-mono-xs text-on-primary-container font-semibold">03 / INFERENCE (ACTIVE)</span>
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-primary-fixed animate-ping"></span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-primary leading-snug">Super-Resolution Inference (GeoSR-Net)</span>
+<div class="flex items-center justify-between mt-2">
+<span class="font-label-mono-xs text-label-mono-xs text-on-primary-container">67% Done</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-primary">Tile 42 / 128</span>
+</div>
+</div>
+<!-- Step 4 (Pending) -->
+<div class="flex flex-col p-space-md rounded bg-surface-container-highest/50 opacity-75">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-mono-xs text-label-mono-xs text-outline font-semibold">04 / UNCERTAINTY</span>
+<span class="material-symbols-outlined text-[16px] text-outline">radio_button_unchecked</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface leading-snug">Epistemic Uncertainty (Monte Carlo)</span>
+<span class="font-label-mono-xs text-label-mono-xs text-outline mt-2">Queued</span>
+</div>
+<!-- Step 5 (Pending) -->
+<div class="flex flex-col p-space-md rounded bg-surface-container-highest/50 opacity-75">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-mono-xs text-label-mono-xs text-outline font-semibold">05 / VALIDATION</span>
+<span class="material-symbols-outlined text-[16px] text-outline">radio_button_unchecked</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface leading-snug">Spectral &amp; Structural Validation</span>
+<span class="font-label-mono-xs text-label-mono-xs text-outline mt-2">Queued</span>
+</div>
+<!-- Step 6 (Pending) -->
+<div class="flex flex-col p-space-md rounded bg-surface-container-highest/50 opacity-75">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-mono-xs text-label-mono-xs text-outline font-semibold">06 / STITCHING</span>
+<span class="material-symbols-outlined text-[16px] text-outline">radio_button_unchecked</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface leading-snug">GeoTIFF Assembly &amp; Header Stitching</span>
+<span class="font-label-mono-xs text-label-mono-xs text-outline mt-2">Queued</span>
+</div>
+</div>
+</div>
+<!-- Main Dynamic Workspace: Two Column Telemetry + Grid Visualizer -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Section 2: Progress Telemetry Box (Left 5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- Large Numerical Gauge Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-sm text-label-mono-sm uppercase tracking-wider text-outline">Inference Progress</span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-semibold">TILE 42 OF 128</span>
+</div>
+<div class="my-space-md flex items-baseline gap-space-md">
+<span class="text-6xl lg:text-7xl font-headline-lg font-bold text-primary tracking-tight" id="main-percentage">67%</span>
+<div class="flex flex-col">
+<span class="font-label-mono-md text-label-mono-md font-semibold text-on-surface">Deep Residual Pass 4x</span>
+<span class="font-label-mono-xs text-label-mono-xs text-outline">Processing tile 42 of 128</span>
+</div>
+</div>
+<!-- Animated Progress Bar with Emerald Striped Flow -->
+<div class="w-full flex flex-col gap-1.5">
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden relative">
+<div class="h-full bg-primary-container rounded-full relative overflow-hidden transition-all duration-300" style="width: 67%;">
+<div class="absolute inset-0 opacity-40 bg-[linear-gradient(45deg,rgba(255,255,255,0.3)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.3)_50%,rgba(255,255,255,0.3)_75%,transparent_75%,transparent)] bg-[length:16px_16px] animate-[progress-flow_1s_linear_infinite]"></div>
+</div>
+</div>
+<div class="flex justify-between font-label-mono-xs text-label-mono-xs text-outline">
+<span>0 tiles</span>
+<span>42 processing</span>
+<span>128 target</span>
+</div>
+</div>
+<!-- Real-Time Metric Telemetry Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-space-sm mt-space-lg pt-space-md bg-surface-container-low/60 p-space-md rounded">
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-outline">Elapsed Time</span>
+<span class="font-label-mono-md text-label-mono-md font-semibold text-on-surface" id="stat-elapsed">00:01:24</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-outline">Est. Remaining</span>
+<span class="font-label-mono-md text-label-mono-md font-semibold text-primary" id="stat-remaining">00:00:30</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-outline">Throughput</span>
+<span class="font-label-mono-md text-label-mono-md font-semibold text-on-surface">1.45 tiles/sec</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-outline">Peak VRAM</span>
+<span class="font-label-mono-md text-label-mono-md font-semibold text-on-surface">18.4 GB / 40 GB</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-outline">CUDA Occupancy</span>
+<span class="font-label-mono-md text-label-mono-md font-semibold text-surface-tint">94.2%</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-outline">Mean PSNR</span>
+<span class="font-label-mono-md text-label-mono-md font-semibold text-on-surface">32.61 dB</span>
+</div>
+</div>
+</div>
+<!-- Target Tile Geo Coordinates Telemetry Preview -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px] text-primary">my_location</span>
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-outline">Active Tile Center Point</span>
+<span class="font-label-mono-sm text-label-mono-sm font-semibold text-on-surface">Lat: 28.6142° N • Lon: 77.2091° E</span>
+</div>
+</div>
+<div class="px-2 py-1 rounded bg-secondary-container text-on-secondary-container font-label-mono-xs text-label-mono-xs font-semibold">
+            Tile Overlap: 32px
+          </div>
+</div>
+<!-- Live Band Ingestion Channels -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-xs">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-outline uppercase">Active Spectral Processing Weights</span>
+<span class="font-label-mono-xs text-label-mono-xs text-surface-tint">Calibrated</span>
+</div>
+<div class="grid grid-cols-4 gap-2">
+<div class="p-2 rounded bg-surface-container-low text-center">
+<span class="block font-label-mono-xs text-label-mono-xs text-outline">B02 Blue</span>
+<span class="font-label-mono-sm text-label-mono-sm font-semibold text-on-surface">490nm</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low text-center">
+<span class="block font-label-mono-xs text-label-mono-xs text-outline">B03 Green</span>
+<span class="font-label-mono-sm text-label-mono-sm font-semibold text-on-surface">560nm</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low text-center">
+<span class="block font-label-mono-xs text-label-mono-xs text-outline">B04 Red</span>
+<span class="font-label-mono-sm text-label-mono-sm font-semibold text-on-surface">665nm</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low text-center">
+<span class="block font-label-mono-xs text-label-mono-xs text-outline">B08 NIR</span>
+<span class="font-label-mono-sm text-label-mono-sm font-semibold text-primary">842nm</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3 & Satellite Backdrop: 16x8 Tile Matrix Visualizer (Right 7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col h-full">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pb-space-md mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-primary-container">grid_on</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Scene Spatial Tiling Matrix (16 × 8)</h3>
+<span class="font-label-mono-xs text-label-mono-xs text-outline">128 Tiles @ 512 × 512 px • Area Coverage: 480 km²</span>
+</div>
+</div>
+<!-- Legend -->
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-sm bg-primary-container"></span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Completed (41)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-sm bg-primary-fixed animate-pulse"></span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Active (1)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-sm bg-surface-container-high"></span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Queued (86)</span>
+</div>
+</div>
+</div>
+<!-- Visualizer Map Canvas / GIS Container -->
+<div class="relative w-full aspect-[16/9] min-h-[300px] rounded-lg overflow-hidden bg-surface-container-highest p-space-sm flex flex-col justify-center items-center shadow-inner">
+<!-- Atmospheric Satellite Reference Map Layer -->
+<div class="absolute inset-0 w-full h-full opacity-35 bg-cover bg-center grayscale contrast-125 mix-blend-multiply" data-location="Delhi, India" style=""></div>
+<!-- Coordinate HUD Overlay -->
+<div class="absolute top-2 left-2 z-10 px-2 py-1 rounded bg-surface-container-lowest/90 backdrop-blur font-label-mono-xs text-label-mono-xs text-on-surface shadow-sm">
+              NORTH BOUND: 28.8841° N | WEST BOUND: 76.8412° E
+            </div>
+<div class="absolute bottom-2 right-2 z-10 px-2 py-1 rounded bg-surface-container-lowest/90 backdrop-blur font-label-mono-xs text-label-mono-xs text-on-surface shadow-sm">
+              SOUTH BOUND: 28.4091° N | EAST BOUND: 77.4103° E
+            </div>
+<!-- 16 x 8 Grid -->
+<div class="relative z-10 w-full h-full grid grid-cols-16 grid-rows-8 gap-1 p-2" id="tile-matrix-grid">
+<!-- Script will hydrate tiles 1..128, with 1..41 completed, 42 active, 43..128 queued -->
+<!-- Fallback static rendering for standard 128 tile elements in pure HTML -->
+</div>
+</div>
+<!-- Active Tile Inspector Floating Panel -->
+<div class="mt-space-md p-space-sm rounded bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary flex items-center justify-center font-label-mono-sm text-label-mono-sm font-bold">
+                42
+              </div>
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface font-semibold">Active Tile Matrix Coord: [Row 03, Col 10]</span>
+<span class="font-label-mono-xs text-label-mono-xs text-outline">Target File: S2A_TILE_R03_C10_SR_2X.tif</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs font-label-mono-xs text-label-mono-xs text-primary font-semibold">
+<span class="material-symbols-outlined text-[15px] animate-spin">autorenew</span>
+<span>Running TensorRT FP16 pass...</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 4: Technical Execution Logs (Terminal/Console) -->
+<div class="bg-inverse-surface text-inverse-on-surface p-space-lg rounded-xl shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed-dim"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-primary-fixed"></span>
+</div>
+<span class="font-label-mono-sm text-label-mono-sm font-semibold tracking-wide text-inverse-on-surface">INFERENCE RUNTIME TELEMETRY LOG [STDERR / STDOUT]</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-mono-xs text-label-mono-xs text-outline-variant">GPU-04 • NVLink 600GB/s</span>
+<button class="px-2 py-0.5 rounded bg-tertiary-container hover:bg-tertiary text-on-tertiary text-label-mono-xs font-label-mono-xs transition-colors" onclick="document.getElementById('console-log-body').scrollTop = 0;">Top</button>
+<button class="px-2 py-0.5 rounded bg-tertiary-container hover:bg-tertiary text-on-tertiary text-label-mono-xs font-label-mono-xs transition-colors" onclick="const b=document.getElementById('console-log-body'); b.scrollTop=b.scrollHeight;">Tail -f</button>
+</div>
+</div>
+<div class="font-label-mono-xs text-label-mono-xs leading-5 h-44 overflow-y-auto space-y-1 pr-2 select-text bg-tertiary/40 p-space-md rounded" id="console-log-body">
+<div class="flex items-start gap-2">
+<span class="text-outline-variant font-mono">[14:02:11]</span>
+<span class="text-primary-fixed font-semibold">[INFO]</span>
+<span>S2A_MSIL2A ingestion verified. EPSG:32643 UTM Zone 43N. Hash: <span class="text-surface-dim">e43b17d8902bca4</span></span>
+</div>
+<div class="flex items-start gap-2">
+<span class="text-outline-variant font-mono">[14:02:18]</span>
+<span class="text-primary-fixed font-semibold">[INFO]</span>
+<span>Radiometric surface reflectance normalized [0.0 - 1.0]. TOA calibration active.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="text-outline-variant font-mono">[14:02:29]</span>
+<span class="text-primary-fixed font-semibold">[INFO]</span>
+<span>Dynamic tile grid created: 128 tiles @ 512x512 with 32px overlap margin. Boundary padding: reflect.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="text-outline-variant font-mono">[14:02:35]</span>
+<span class="text-primary-fixed font-semibold">[INFO]</span>
+<span>Loaded GeoSR-Net v1.2 weights into GPU memory (48.2M params). TensorRT execution engine cached.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="text-outline-variant font-mono">[14:02:44]</span>
+<span class="text-primary-fixed font-semibold">[INFO]</span>
+<span>Batch #1 (tiles 01-08) completed in 4.92s. CUDA peak allocation: 16.2 GB.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="text-outline-variant font-mono">[14:02:51]</span>
+<span class="text-primary-fixed font-semibold">[INFO]</span>
+<span>Batch #2 (tiles 09-16) completed in 4.88s. Overlap stitching cache synced.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="text-outline-variant font-mono">[14:02:57]</span>
+<span class="text-primary-fixed font-semibold">[INFO]</span>
+<span>Batch #3 (tiles 17-24) completed. SSIM structural index preview: 0.941.</span>
+</div>
+<div class="flex items-start gap-2">
+<span class="text-outline-variant font-mono">[14:03:02]</span>
+<span class="text-primary-fixed font-semibold">[INFO]</span>
+<span>Batch #5 (tiles 33-40) completed. Average PSNR preview: 32.61 dB.</span>
+</div>
+<div class="flex items-start gap-2 text-primary-fixed animate-pulse">
+<span class="text-outline-variant font-mono">[14:03:19]</span>
+<span class="text-primary-fixed font-semibold">[PROCESS]</span>
+<span>Inferring Tile 42/128: Lat 28.6142, Lon 77.2091... [GSD target: 2.5m/px]</span>
+</div>
+</div>
+</div>
+<!-- Section 5: Bottom Action Bar -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-md">
+<!-- Auto-navigate toggle -->
+<label class="flex items-center gap-space-sm cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary-container accent-primary-container" id="auto-navigate-toggle" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface font-medium">Auto-navigate to Results upon completion</span>
+</label>
+<!-- Control Buttons -->
+<div class="flex items-center gap-space-md w-full md:w-auto justify-end">
+<button class="flex-1 md:flex-initial inline-flex items-center justify-center gap-1.5 px-space-md py-2 rounded bg-surface-container-low hover:bg-surface-container-high text-on-surface font-headline-sm text-headline-sm transition-colors shadow-sm" id="pause-btn">
+<span class="material-symbols-outlined text-[18px]">pause</span>
+<span>Pause Processing</span>
+</button>
+<button class="flex-1 md:flex-initial inline-flex items-center justify-center gap-1.5 px-space-md py-2 rounded bg-error-container hover:bg-error text-error hover:text-on-error font-headline-sm text-headline-sm transition-colors shadow-sm" id="cancel-btn">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span>Cancel Job</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function initTileGrid() {
+    const gridContainer = document.getElementById('tile-matrix-grid');
+    if (!gridContainer) return;
+
+    // Build 128 tile elements (16 columns by 8 rows)
+    const totalTiles = 128;
+    const completedTiles = 41;
+    const activeTile = 42;
+
+    for (let i = 1; i <= totalTiles; i++) {
+      const tile = document.createElement('div');
+      tile.className = 'w-full h-full rounded-[2px] transition-all flex items-center justify-center';
+
+      if (i <= completedTiles) {
+        // Completed: Solid emerald
+        tile.className += ' bg-primary-container shadow-xs';
+        tile.title = 'Tile ' + i + ': Completed (PSNR: 32.8 dB)';
+      } else if (i === activeTile) {
+        // Active: Pulsating green border / glowing box
+        tile.className += ' bg-primary-fixed ring-2 ring-primary animate-pulse';
+        tile.title = 'Tile ' + i + ': Currently Inferring';
+      } else {
+        // Queued: Crisp light gray outline
+        tile.className += ' bg-surface-container-lowest/80 border border-outline-variant/60 hover:bg-surface-container';
+        tile.title = 'Tile ' + i + ': Queued';
+      }
+
+      gridContainer.appendChild(tile);
+    }
+
+    // Interactive button hooks
+    const pauseBtn = document.getElementById('pause-btn');
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', function() {
+        const isPaused = this.dataset.paused === 'true';
+        if (!isPaused) {
+          this.dataset.paused = 'true';
+          this.innerHTML = '<span class="material-symbols-outlined text-[18px]">play_arrow</span><span>Resume Processing</span>';
+          this.className = this.className.replace('bg-surface-container-low', 'bg-primary-container text-on-primary');
+        } else {
+          this.dataset.paused = 'false';
+          this.innerHTML = '<span class="material-symbols-outlined text-[18px]">pause</span><span>Pause Processing</span>';
+          this.className = this.className.replace('bg-primary-container text-on-primary', 'bg-surface-container-low text-on-surface');
+        }
+      });
+    }
+
+    const cancelBtn = document.getElementById('cancel-btn');
+    if (cancelBtn) {
+      cancelBtn.addEventListener('click', function() {
+        if (confirm('Are you sure you want to terminate Super-Resolution Inference Job GS-2048-0008?')) {
+          alert('Job termination signal sent to cluster manager.');
+        }
+      });
+    }
+  })();
+</script>
+</div>
+
+<div id="screen-split-results-analysis" class="screen-panel" style="display:none;">
+<div class="flex flex-col w-full">
+<!-- Top Command Context Bar -->
+<div class="px-space-lg py-space-md bg-surface-container-lowest shadow-sm flex flex-col xl:flex-row xl:items-center justify-between gap-space-md select-none">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-mono-xs text-label-mono-xs px-1.5 py-0.5 rounded bg-primary-container text-on-primary">JOB GS-2048</span>
+<span class="font-label-mono-xs text-label-mono-xs px-1.5 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed">MISSION: PS-26142</span>
+<span class="font-label-mono-xs text-label-mono-xs px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant">L2A BOTTOM-OF-ATMOSPHERE</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold ml-1">Results — Delhi Urban Area</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+        Geospatial Super-Resolution Comparison and Quantitative Overview • Target Ground Sample Distance: 10m → 3.8m GSD
+      </p>
+</div>
+<!-- Action Bar -->
+<div class="flex items-center gap-space-xs flex-wrap">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container-low hover:bg-surface-container text-on-surface font-headline-sm text-headline-sm shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">share</span>
+<span>Share Analysis</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container-low hover:bg-surface-container text-on-surface font-headline-sm text-headline-sm shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">description</span>
+<span>Download Report</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-primary-container hover:bg-primary text-on-primary font-headline-sm text-headline-sm shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+<span>Export GeoTIFF</span>
+</button>
+</div>
+</div>
+<!-- Navigation Stage Tabs -->
+<div class="px-space-lg bg-surface-container-low shadow-sm flex items-center justify-between overflow-x-auto">
+<div class="flex items-center gap-space-xs py-1">
+<button class="px-3 py-2 rounded font-headline-sm text-headline-sm bg-surface-container-lowest text-primary shadow-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">compare</span>
+<span>Comparison</span>
+<span class="w-1.5 h-1.5 rounded-full bg-surface-tint"></span>
+</button>
+<button class="px-3 py-2 rounded font-headline-sm text-headline-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">blur_on</span>
+<span>Uncertainty</span>
+<span class="font-label-mono-xs text-label-mono-xs px-1 rounded bg-surface-container-highest text-outline">MC-Drop</span>
+</button>
+<button class="px-3 py-2 rounded font-headline-sm text-headline-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">analytics</span>
+<span>Metrics</span>
+</button>
+<button class="px-3 py-2 rounded font-headline-sm text-headline-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">info</span>
+<span>Details / Metadata</span>
+</button>
+</div>
+<!-- Live Status Flag -->
+<div class="hidden lg:flex items-center gap-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span class="inline-block w-2 h-2 rounded-full bg-surface-tint"></span>
+<span>Model Engine: GeoSR-DeepResidual-v1.2 (PyTorch 2.3 + TensorRT)</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface">CUDA: 12.4</span>
+</div>
+</div>
+<!-- Main Hero GIS Image Comparison Viewer (65vh equivalent) -->
+<div class="p-space-md lg:p-space-lg flex flex-col gap-space-md">
+<div class="relative w-full h-[634px] min-h-[500px] rounded-xl overflow-hidden bg-inverse-surface shadow-xl select-none group" id="gis-viewer-container">
+<!-- Top Left Floating Badges -->
+<div class="absolute top-3 left-3 z-30 flex flex-col sm:flex-row items-start sm:items-center gap-2">
+<div class="px-2.5 py-1 rounded bg-surface-container-lowest/90 backdrop-blur text-on-surface shadow-sm font-label-mono-sm text-label-mono-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-error">radar</span>
+<span class="font-semibold text-on-surface">Original Input: Sentinel-2</span>
+<span class="px-1 py-0.2 rounded bg-surface-container-high text-outline">10m GSD</span>
+</div>
+</div>
+<!-- Top Right Floating Badges -->
+<div class="absolute top-3 right-3 z-30 flex flex-col sm:flex-row items-end sm:items-center gap-2">
+<div class="px-2.5 py-1 rounded bg-primary text-on-primary shadow-sm font-label-mono-sm text-label-mono-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-on-primary-container">auto_awesome</span>
+<span class="font-semibold">AI Super-Resolved</span>
+<span class="px-1 py-0.2 rounded bg-surface-tint text-on-primary">&lt;3.8m GSD</span>
+</div>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest/95 backdrop-blur text-on-surface hover:bg-surface-container shadow-sm font-label-mono-xs text-label-mono-xs flex items-center gap-1 transition-colors" id="ref-toggle-btn">
+<span class="material-symbols-outlined text-[14px] text-surface-tint">check_box_outline_blank</span>
+<span>Ground Truth Ref (WorldView-3 0.5m)</span>
+</button>
+</div>
+<!-- Left Image Layer (10m GSD - Pixelated / Blurry Sentinel-2) -->
+<div class="absolute inset-0 w-full h-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center filter blur-[1.5px] scale-[1.01]" data-alt="Overhead satellite view of dense urban Delhi layout showing low resolution ten meter ground sample distance pixelated street grids circular roundabouts and blurred commercial structures with atmospheric haze and earthy tones under bright daylight" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDj_VptHASrl1cSb4RpnlviA-DZBSeEcv5gfMqpd_c3R6r5TZ5HzI_5D5o4zGLh-978a3hyitlJ8A1WRIb-bn1yzu3Zwyw8eoRc9H2IIUuhSZamhu8eQ6VR1mCYD_arlqQepKglqwDgy9BTb4ILQg63i4JJk6RL0MEuPFjHj6xW33aBk52ly8Mv9myzeYqV6ye83bEkHKgqoY6MQKC_Z2aDVDoHc5WbCBk8PfRSxd_Q-PsKjdOmXu9o')">
+</div>
+<div class="absolute inset-0 bg-primary/10 mix-blend-multiply pointer-events-none"></div>
+<!-- Pixelation Simulation Overlay -->
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-size: 16px 16px; background-image: linear-gradient(to right, rgba(0,0,0,0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.3) 1px, transparent 1px);"></div>
+</div>
+<!-- Right Image Layer (Clipped Super-Resolved <4m GSD) -->
+<div class="absolute inset-0 w-full h-full overflow-hidden" id="sr-clipped-layer" style="clip-path: polygon(52% 0, 100% 0, 100% 100%, 52% 100%);">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="High fidelity super resolved satellite view of dense Delhi urban sectors with razor sharp building footprints defined four lane avenues individual tree clusters parking bays and intricate architectural rooftop structures in vivid natural light" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAf_MItdb0uPP0lCoqYlBnuJcn9B3LoOHCbAvn0XC-vjYXyZYHUTI3uQf4JZ9B1CULkSY44RkMDRy_bFT700q8HNGyMWMA1ayBREubm1tBmpqOdLjfbLzsBp8HPK0X_7bEI70fNIuXpzaDH6DV_yhciqPrP29iVbyYcAvFCzKnPju5TirSouFnuevT9KyFzdS-fEUwhSfeBwmEU3EcJS5nvw1VSS1NJLwTazusxuRi_J3d5S0Xem-rb')">
+</div>
+<!-- High Frequency Fine Grid Accent -->
+<div class="absolute inset-0 opacity-15 pointer-events-none" style="background-size: 4px 4px; background-image: radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px);"></div>
+</div>
+<!-- Split Slider Divider and Drag Handle -->
+<div class="absolute top-0 bottom-0 z-30 cursor-ew-resize select-none" id="slider-handle" style="left: 52%; transform: translateX(-50%);">
+<!-- Vertical Hairline -->
+<div class="w-0.5 h-full bg-primary shadow-lg mx-auto relative">
+<!-- Top Label Pill Left -->
+<div class="absolute -top-0 -left-28 -translate-x-full px-2 py-0.5 rounded bg-inverse-surface/85 backdrop-blur text-inverse-on-surface font-label-mono-xs text-label-mono-xs whitespace-nowrap pointer-events-none">
+            ← 10m Input
+          </div>
+<!-- Top Label Pill Right -->
+<div class="absolute -top-0 -right-28 translate-x-full px-2 py-0.5 rounded bg-primary-container text-on-primary font-label-mono-xs text-label-mono-xs whitespace-nowrap pointer-events-none">
+            AI Super-Resolved &lt;4m →
+          </div>
+</div>
+<!-- Center Circular Grab Handle -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-surface-container-lowest text-primary shadow-xl flex items-center justify-center transition-transform hover:scale-110 active:scale-95">
+<span class="material-symbols-outlined text-[18px]">drag_indicator</span>
+</div>
+</div>
+<!-- Floating GIS Internal Toolbar -->
+<div class="absolute top-14 left-3 z-30 flex flex-col gap-1.5 p-1 rounded-lg bg-surface-container-lowest/90 backdrop-blur shadow-md">
+<button class="w-7 h-7 rounded hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors" title="Zoom In (+)">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+<button class="w-7 h-7 rounded hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors" title="Zoom Out (-)">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<button class="w-7 h-7 rounded hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors" title="Reset Extents">
+<span class="material-symbols-outlined text-[18px]">center_focus_strong</span>
+</button>
+<div class="w-full h-px bg-surface-variant my-0.5"></div>
+<button class="w-7 h-7 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center transition-colors" id="toggle-grid-btn" title="Toggle Coordinate Grid">
+<span class="material-symbols-outlined text-[17px]">grid_3x3</span>
+</button>
+<button class="w-7 h-7 rounded hover:bg-surface-container flex items-center justify-center text-on-surface transition-colors" title="Full Viewport Fullscreen">
+<span class="material-symbols-outlined text-[18px]">fullscreen</span>
+</button>
+</div>
+<!-- Spectral Band Switcher & Pill Floating at Bottom Left -->
+<div class="absolute bottom-3 left-3 z-30 flex flex-wrap items-center gap-2">
+<div class="flex items-center bg-surface-container-lowest/95 backdrop-blur p-1 rounded-lg shadow-md font-label-mono-xs text-label-mono-xs text-on-surface">
+<button class="px-2 py-1 rounded bg-primary text-on-primary font-semibold">RGB Natural</button>
+<button class="px-2 py-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors">NIR (B8-B4-B3)</button>
+<button class="px-2 py-1 rounded hover:bg-surface-container text-on-surface-variant transition-colors">NDVI Veg</button>
+</div>
+</div>
+<!-- Monospace Coordinate Display Pill at Bottom Right -->
+<div class="absolute bottom-3 right-3 z-30 px-3 py-1.5 rounded-lg bg-surface-container-lowest/95 backdrop-blur shadow-md font-label-mono-xs text-label-mono-xs text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-surface-tint animate-ping"></span>
+<span class="font-semibold text-primary">28.6139° N, 77.2090° E</span>
+<span class="text-outline">•</span>
+<span>Zoom 16.2</span>
+<span class="text-outline">•</span>
+<span class="bg-surface-container-high px-1 py-0.5 rounded text-on-surface-variant">EPSG:32643 (UTM 43N)</span>
+<span class="text-outline">•</span>
+<span class="text-secondary font-semibold">10m → 3.8m</span>
+</div>
+</div>
+<!-- Quantitative Quick Metrics Bar (5 Scientific Cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-sm">
+<!-- Card 1: PSNR -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-outline uppercase tracking-wider">Metric 01</span>
+<span class="material-symbols-outlined text-[16px] text-surface-tint">signal_cellular_alt</span>
+</div>
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">32.48</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant font-semibold">dB</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">PSNR</span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-semibold">+6.2 dB vs Bicubic</span>
+</div>
+</div>
+<!-- Card 2: SSIM -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-outline uppercase tracking-wider">Metric 02</span>
+<span class="material-symbols-outlined text-[16px] text-primary">grain</span>
+</div>
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">0.912</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant font-semibold">/ 1.0</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">SSIM</span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-semibold">+0.14 Structural</span>
+</div>
+</div>
+<!-- Card 3: RMSE -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-outline uppercase tracking-wider">Metric 03</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">straighten</span>
+</div>
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">4.21</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant font-semibold">DN</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">RMSE</span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-semibold">Low Pixel Error</span>
+</div>
+</div>
+<!-- Card 4: ERGAS -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-outline uppercase tracking-wider">Metric 04</span>
+<span class="material-symbols-outlined text-[16px] text-surface-tint">filter_tilt_shift</span>
+</div>
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">1.87</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant font-semibold">rel</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">ERGAS</span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-semibold">Optimal (&lt; 3.0)</span>
+</div>
+</div>
+<!-- Card 5: SAM -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-outline uppercase tracking-wider">Metric 05</span>
+<span class="material-symbols-outlined text-[16px] text-primary-container">change_history</span>
+</div>
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">2.31°</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant font-semibold">angle</span>
+</div>
+<div class="mt-2 flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">SAM Angle</span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-semibold">High Fidelity</span>
+</div>
+</div>
+</div>
+<!-- Bottom Detail Columns -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Left Column: Spatial Enhancement Breakdown -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-primary">polyline</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Spatial Enhancement Breakdown</h2>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">Validated: NTRO PS 26142</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+            The Deep Residual architecture reconstructed high spatial frequencies while strictly preserving the radiant energy distribution of multi-spectral Sentinel-2 bands.
+          </p>
+<!-- Diagnostic Check Items -->
+<div class="space-y-space-sm">
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-start gap-space-sm">
+<div class="p-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed mt-0.5">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Roads &amp; Transport Corridors</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary font-semibold">Edge Gradient: +84%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Linear continuity maintained across ring roads and secondary alleys without blurring across median boundaries.
+                </p>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-start gap-space-sm">
+<div class="p-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed mt-0.5">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Building Footprint Separation</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary font-semibold">Polygon IoU: 0.89</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  High-density residential clusters separated from contiguous pixel blobs into discrete orthogonal structures.
+                </p>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-start gap-space-sm">
+<div class="p-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed mt-0.5">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Zero Hallucination Artifacts</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary font-semibold">Deviation: &lt; 0.04%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  No synthetic textural patterns or ghost geometries discovered during radiometric cross-entropy validation.
+                </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Inline Spectral Histogram SVG Visualizer -->
+<div class="mt-space-md p-space-sm rounded-lg bg-surface-container-high/40">
+<div class="flex items-center justify-between text-[10px] font-label-mono-xs text-on-surface-variant mb-1">
+<span>Spectral Variance Profile (Band 2 Blue / Band 3 Green / Band 4 Red / Band 8 NIR)</span>
+<span class="text-primary font-semibold">Residual ±0.018</span>
+</div>
+<svg class="w-full h-10 text-primary-container" fill="none" preserveaspectratio="none" viewbox="0 0 400 40">
+<path d="M0,35 Q30,10 60,25 T120,15 T180,28 T240,8 T300,22 T360,12 T400,28 L400,40 L0,40 Z" fill="currentColor" fill-opacity="0.15"></path>
+<path d="M0,35 Q30,10 60,25 T120,15 T180,28 T240,8 T300,22 T360,12 T400,28" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+<path d="M0,38 Q30,22 60,30 T120,24 T180,32 T240,19 T300,28 T360,20 T400,32" stroke="currentColor" stroke-dasharray="3 3" stroke-opacity="0.6" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+<!-- Right Column: Direct Downstream Navigation -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="material-symbols-outlined text-[20px] text-surface-tint">alt_route</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Downstream Analysis</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-md">
+            Directly route enhanced high-resolution tensors into specialized analytical modules or uncertainty audits.
+          </p>
+<!-- Direct Navigation Button Links -->
+<div class="flex flex-col gap-space-sm">
+<a class="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-center justify-between shadow-sm" data-path="uncertainty-map" href="#">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[20px]">blur_on</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
+                    Inspect Prediction Uncertainty
+                  </span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+                    Epistemic &amp; Aleatoric variance heatmaps
+                  </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+</a>
+<a class="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-center justify-between shadow-sm" data-path="metrics-deep-dive" href="#">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container-highest flex items-center justify-center text-on-surface group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
+                    Full Quantitative Evaluation
+                  </span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+                    Bicubic, EDSR, ESRGAN baselines comparison
+                  </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+</a>
+<a class="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex items-center justify-between shadow-sm" data-path="urban-settlement-domain" href="#">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-primary-fixed flex items-center justify-center text-on-primary-fixed group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[20px]">apartment</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
+                    Open Urban Domain Analysis
+                  </span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+                    Automated building footprint vector extraction
+                  </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- System Pipeline Signature -->
+<div class="mt-space-md pt-space-sm flex items-center justify-between font-label-mono-xs text-label-mono-xs text-outline">
+<span>RUN TILE ID: T43RGV_20260324</span>
+<span class="text-primary font-semibold">TENSOR_CHECK: VALID</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive JavaScript for Split-Curtain Slider -->
+<script>
+    (function() {
+      const container = document.getElementById('gis-viewer-container');
+      const handle = document.getElementById('slider-handle');
+      const clipped = document.getElementById('sr-clipped-layer');
+      const refBtn = document.getElementById('ref-toggle-btn');
+      let isDragging = false;
+      let isRefActive = false;
+
+      function updateSlider(xPos) {
+        if (!container) return;
+        const rect = container.getBoundingClientRect();
+        let clampedX = Math.max(0, Math.min(xPos - rect.left, rect.width));
+        let percentage = (clampedX / rect.width) * 100;
+        
+        handle.style.left = percentage + '%';
+        clipped.style.clipPath = `polygon(${percentage}% 0, 100% 0, 100% 100%, ${percentage}% 100%)`;
+      }
+
+      if (container && handle && clipped) {
+        container.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          updateSlider(e.clientX);
+        });
+
+        window.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          updateSlider(e.clientX);
+        });
+
+        window.addEventListener('mouseup', () => {
+          isDragging = false;
+        });
+
+        // Touch support for tablet/mobile workstations
+        container.addEventListener('touchstart', (e) => {
+          if (e.touches.length > 0) {
+            isDragging = true;
+            updateSlider(e.touches[0].clientX);
+          }
+        });
+
+        window.addEventListener('touchmove', (e) => {
+          if (isDragging && e.touches.length > 0) {
+            updateSlider(e.touches[0].clientX);
+          }
+        });
+
+        window.addEventListener('touchend', () => {
+          isDragging = false;
+        });
+      }
+
+      // Ground Truth Ref Checkbox Toggle Simulation
+      if (refBtn) {
+        refBtn.addEventListener('click', () => {
+          isRefActive = !isRefActive;
+          const icon = refBtn.querySelector('.material-symbols-outlined');
+          if (icon) {
+            icon.textContent = isRefActive ? 'check_box' : 'check_box_outline_blank';
+            refBtn.classList.toggle('bg-primary-container', isRefActive);
+            refBtn.classList.toggle('text-on-primary', isRefActive);
+          }
+        });
+      }
+    })();
+  </script>
+</div>
+</div>
+  </main>
+</div>
+
+
+<!-- ══════════ GeoSR-AI D3 Shell ══════════ -->
+<div id="g3-toasts"></div>
+<div id="g3-overlay"><div id="g3-modal"><button id="g3-close" onclick="g3Close()">✕</button><div id="g3-body"></div></div></div>
+
+<style>
+/* ── Sidebar nav active state ── */
+.g3-active {
+  background: #cee5d6 !important;
+  color: #151d19 !important;
+  font-weight: 600 !important;
+}
+/* ── Toast ── */
+#g3-toasts {
+  position: fixed; bottom: 22px; right: 22px; z-index: 99999;
+  display: flex; flex-direction: column; gap: 8px; pointer-events: none;
+}
+.g3-toast {
+  display: flex; align-items: center; gap: 10px;
+  background: #1a2e22; color: #d1e8d8;
+  border-left: 3px solid #296a46;
+  padding: 10px 16px; border-radius: 6px;
+  font-size: 12px; font-family: 'JetBrains Mono', monospace;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  animation: g3In .25s ease forwards;
+  max-width: 320px; pointer-events: auto;
+}
+.g3-toast.warn { background:#2a1e06; border-color:#b45309; color:#fef3c7; }
+.g3-toast.err  { background:#200a0a; border-color:#ba1a1a; color:#ffdad6; }
+@keyframes g3In  { from{transform:translateX(110%);opacity:0} to{transform:translateX(0);opacity:1} }
+@keyframes g3Out { from{opacity:1} to{opacity:0;transform:translateX(80%)} }
+
+/* ── Modal overlay ── */
+#g3-overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.5); backdrop-filter:blur(4px);
+  z-index:9999; align-items:center; justify-content:center;
+}
+#g3-modal {
+  background:#fff; border-radius:10px;
+  padding:28px 24px 22px; max-width:500px; width:92%;
+  box-shadow:0 20px 48px rgba(0,0,0,0.25);
+  position:relative; animation:g3MIn .2s ease;
+  max-height:85vh; overflow-y:auto;
+  border:1px solid #bfc9bf;
+}
+@keyframes g3MIn { from{transform:scale(.94) translateY(14px);opacity:0} to{transform:scale(1) translateY(0);opacity:1} }
+#g3-close {
+  position:absolute; top:12px; right:12px;
+  background:#e7f0e9; border:1px solid #bfc9bf; border-radius:5px;
+  width:26px; height:26px; cursor:pointer; font-size:13px;
+  color:#404942; display:flex; align-items:center; justify-content:center;
+}
+#g3-close:hover{background:#cee5d6;}
+
+/* ── Modal form helpers ── */
+.gm{font-family:'Geist','Inter',sans-serif;}
+.gm h2{font-size:16px;font-weight:700;margin:0 0 4px;color:#151d19;}
+.gm .sub{font-size:12px;color:#707971;margin:0 0 14px;}
+.gm label{font-size:10px;font-weight:700;color:#404942;display:block;margin-bottom:3px;text-transform:uppercase;letter-spacing:.05em;font-family:'JetBrains Mono',monospace;}
+.gm input,.gm select,.gm textarea{
+  width:100%;border:1px solid #bfc9bf;border-radius:5px;
+  padding:7px 10px;font-size:12px;font-family:'JetBrains Mono',monospace;
+  color:#151d19;margin-bottom:10px;box-sizing:border-box;
+  background:#f3fcf5;outline:none;transition:border .15s;
+}
+.gm input:focus,.gm select:focus{border-color:#296a46;}
+.gb{width:100%;background:#1b5e3b;color:#fff;border:none;border-radius:5px;
+  padding:9px;font-size:12px;font-weight:700;cursor:pointer;
+  font-family:'Geist',sans-serif;transition:background .15s;margin-top:3px;}
+.gb:hover{background:#004527;}
+.gb.s{background:#e7f0e9;color:#151d19;border:1px solid #bfc9bf;margin-top:6px;}
+.gb.s:hover{background:#cee5d6;}
+.g3-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.g3-stat{background:#edf6ef;border-radius:5px;padding:9px;border:1px solid #bfc9bf;}
+.g3-stat .l{font-size:10px;color:#707971;font-family:'JetBrains Mono',monospace;text-transform:uppercase;}
+.g3-stat .v{font-size:14px;font-weight:700;color:#151d19;font-family:'JetBrains Mono',monospace;margin-top:1px;}
+.g3-log{font-family:'JetBrains Mono',monospace;font-size:10px;
+  background:#0d1a10;color:#92d5a9;border-radius:5px;
+  padding:10px;max-height:160px;overflow-y:auto;margin-bottom:10px;line-height:1.6;}
+.g3-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;}
+.g3-chip{background:#cee5d6;color:#004527;border-radius:4px;
+  padding:2px 9px;font-size:11px;font-weight:600;
+  cursor:pointer;border:none;font-family:'JetBrains Mono',monospace;}
+.g3-chip:hover{background:#aef2c4;}
+.g3-upload{border:2px dashed #bfc9bf;border-radius:7px;padding:22px;
+  text-align:center;cursor:pointer;transition:all .2s;margin-bottom:10px;}
+.g3-upload:hover{border-color:#296a46;background:#edf6ef;}
+.g3-hr{border:none;border-top:1px solid #dce5de;margin:10px 0;}
+.g3-tag{display:inline-flex;align-items:center;gap:3px;
+  padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;
+  font-family:'JetBrains Mono',monospace;}
+.g3-tag.ok{background:#d1e8d8;color:#004527;}
+.g3-tag.run{background:#aef2c4;color:#002110;}
+.g3-tag.q{background:#dce5de;color:#404942;}
+.g3-tag.err{background:#ffdad6;color:#93000a;}
+</style>
+
+<script>
+(function(){
+'use strict';
+
+/* ── TOAST ── */
+window.g3Toast=function(msg,type){
+  type=type||'ok';
+  var c=document.getElementById('g3-toasts');
+  var t=document.createElement('div');
+  t.className='g3-toast '+(type==='warn'?'warn':type==='err'?'err':'');
+  var ico=type==='warn'?'⚠':type==='err'?'✕':'✓';
+  t.innerHTML='<span style="font-size:13px;flex-shrink:0">'+ico+'</span><span>'+msg+'</span>';
+  c.appendChild(t);
+  setTimeout(function(){
+    t.style.animation='g3Out .3s ease forwards';
+    setTimeout(function(){t.remove();},300);
+  },3000);
+};
+
+/* ── MODAL ── */
+window.g3Open=function(html){
+  document.getElementById('g3-body').innerHTML=html;
+  document.getElementById('g3-overlay').style.display='flex';
+};
+window.g3Close=function(){
+  document.getElementById('g3-overlay').style.display='none';
+};
+document.getElementById('g3-overlay').addEventListener('click',function(e){
+  if(e.target===this)g3Close();
+});
+
+/* ── MODAL TEMPLATES ── */
+var M={
+  newJob:'<div class="gm"><h2>⚡ New Enhancement Job</h2><p class="sub">Queue a new super-resolution inference task on GeoSR-Net v1.2.</p>'+
+    '<label>Job Name</label><input id="g3jn" value="GS-2049"/>'+
+    '<label>Input Scene</label><select><option>Sentinel-2 L2A — T43PBN</option><option>Landsat-9 OLI-2</option><option>PlanetScope 3m</option><option>Custom GeoTIFF</option></select>'+
+    '<label>Scale Factor</label><select><option>2× (20m→10m)</option><option selected>4× (10m→2.5m)</option><option>8× (10m→1.25m)</option></select>'+
+    '<label>Output CRS</label><select><option selected>EPSG:32643 (UTM 43N)</option><option>EPSG:4326</option><option>EPSG:3857</option></select>'+
+    '<label>Priority</label><select><option>Normal</option><option selected>High</option><option>Critical</option></select>'+
+    '<button class="gb" onclick="g3Close();g3Toast(\'Job \'+(document.getElementById(\'g3jn\')||{value:\'GS-2049\'}).value+\' queued on SR-Cluster 04.\')">Queue Job</button>'+
+    '<button class="gb s" onclick="g3Close()">Cancel</button></div>',
+
+  upload:'<div class="gm"><h2>📂 Upload Input Scene</h2><p class="sub">Supports GeoTIFF/COG, Sentinel-2 .SAFE, Landsat Level-2 up to 12.8 GB.</p>'+
+    '<div class="g3-chips"><span class="g3-chip">GeoTIFF/COG</span><span class="g3-chip">Sentinel-2 .SAFE</span><span class="g3-chip">Landsat L2</span><span class="g3-chip">SAR</span></div>'+
+    '<div class="g3-upload" onclick="g3Toast(\'File selected: tile_T43PBN.tif\')"><div style="font-size:26px;margin-bottom:5px">☁</div>'+
+    '<p style="font-size:12px;color:#404942;margin:0">Drag & drop or click to browse</p>'+
+    '<p style="font-size:10px;color:#707971;margin:4px 0 0">Max 12.8 GB · EPSG:4326 preferred</p></div>'+
+    '<label>Remote URL / S3 URI</label><input placeholder="s3://geosr-cache/tile_T43PBN.tif"/>'+
+    '<button class="gb" onclick="g3Close();g3Toast(\'Upload started — tile_T43PBN.tif queued.\')">Upload & Queue</button></div>',
+
+  jobDetails:'<div class="gm"><h2>📋 Job GS-2048 — Details</h2><p class="sub">Sentinel-2 Tile T43PBN · 4× Super-Resolution</p>'+
+    '<div class="g3-grid">'+
+    '<div class="g3-stat"><div class="l">Status</div><div class="v" style="color:#004527">▶ Running</div></div>'+
+    '<div class="g3-stat"><div class="l">Progress</div><div class="v">68%</div></div>'+
+    '<div class="g3-stat"><div class="l">Scale</div><div class="v">4× SR</div></div>'+
+    '<div class="g3-stat"><div class="l">ETA</div><div class="v">~4 min</div></div>'+
+    '</div>'+
+    '<div class="g3-log">[15:04:12] Tile T43PBN loaded — 10980×10980px<br>[15:04:14] Radiometric normalization OK<br>[15:04:15] Patch extraction 512→2048px<br>[15:04:20] SR batch 1/8 — PSNR: 34.1 dB<br>[15:04:31] SR batch 4/8 — PSNR: 35.8 dB<br>[15:04:38] Processing...</div>'+
+    '<button class="gb" onclick="g3Close();g3Toast(\'Monitoring GS-2048...\')">Monitor</button>'+
+    '<button class="gb s" onclick="g3Close();g3Toast(\'Job GS-2048 cancelled.\',\'warn\')">Cancel Job</button></div>',
+
+  results:'<div class="gm"><h2>🔍 Results — Before / After</h2><p class="sub">GS-2048 · Sentinel-2 T43PBN · 4× SR</p>'+
+    '<div style="display:flex;gap:4px;border-radius:7px;overflow:hidden;height:120px;margin-bottom:12px;">'+
+    '<div style="flex:1;background:linear-gradient(135deg,#bfc9bf,#707971);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;">'+
+    '<span style="font-size:10px;font-weight:700;font-family:monospace">ORIGINAL</span><span style="font-size:9px;opacity:.8">10m GSD</span></div>'+
+    '<div style="width:3px;background:#296a46"></div>'+
+    '<div style="flex:1;background:linear-gradient(135deg,#1b5e3b,#004527);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#aef2c4;">'+
+    '<span style="font-size:10px;font-weight:700;font-family:monospace">SR OUTPUT</span><span style="font-size:9px;opacity:.8">2.5m GSD</span></div></div>'+
+    '<div class="g3-grid">'+
+    '<div class="g3-stat"><div class="l">PSNR</div><div class="v">36.4 dB</div></div>'+
+    '<div class="g3-stat"><div class="l">SSIM</div><div class="v">0.961</div></div>'+
+    '<div class="g3-stat"><div class="l">Tiles</div><div class="v">512</div></div>'+
+    '<div class="g3-stat"><div class="l">Time</div><div class="v">4m 12s</div></div>'+
+    '</div>'+
+    '<button class="gb" onclick="g3Close();g3Toast(\'Results exported as COG GeoTIFF.\')">Export COG</button>'+
+    '<button class="gb s" onclick="g3Close()">Close</button></div>',
+
+  modelConfig:'<div class="gm"><h2>⚙ Model Configuration</h2><p class="sub">GeoSR-Net v1.2 · Active Engine Settings</p>'+
+    '<label>Model Variant</label><select><option selected>GeoSR-Net v1.2 (RRDB)</option><option>GeoSR-Lite v0.9</option><option>Diffusion SR v2.0</option></select>'+
+    '<label>Scale Factor</label><select><option>2×</option><option>4×</option><option selected>8×</option></select>'+
+    '<label>Patch Size (px)</label><input type="number" value="512"/>'+
+    '<label>Overlap (px)</label><input type="number" value="64"/>'+
+    '<label>Precision</label><select><option selected>FP16</option><option>FP32</option><option>INT8</option></select>'+
+    '<button class="gb" onclick="g3Close();g3Toast(\'Model configuration saved.\')">Save</button>'+
+    '<button class="gb s" onclick="g3Close()">Cancel</button></div>',
+
+  export:'<div class="gm"><h2>📦 Export Results</h2><p class="sub">Package SR outputs for download.</p>'+
+    '<label>Format</label><select><option selected>COG GeoTIFF</option><option>GeoTIFF + TFW</option><option>JPEG2000</option><option>PNG</option></select>'+
+    '<label>CRS</label><select><option selected>EPSG:32643</option><option>EPSG:4326</option><option>EPSG:3857</option></select>'+
+    '<label>Metadata</label><select><option selected>ISO 19115 bundle</option><option>None</option></select>'+
+    '<button class="gb" onclick="g3Close();g3Toast(\'Export queued — download ready shortly.\')">Export</button>'+
+    '<button class="gb s" onclick="g3Close()">Cancel</button></div>',
+
+  filter:'<div class="gm"><h2>🔍 Filter Jobs</h2>'+
+    '<label>Status</label><select><option>All</option><option>Running</option><option>Queued</option><option>Completed</option><option>Failed</option></select>'+
+    '<label>Scale</label><select><option>All</option><option>2×</option><option>4×</option><option>8×</option></select>'+
+    '<label>Model</label><select><option>All</option><option>GeoSR-Net v1.2</option><option>GeoSR-Lite</option></select>'+
+    '<label>Date From</label><input type="date"/>'+
+    '<button class="gb" onclick="g3Close();g3Toast(\'Filters applied.\')">Apply</button>'+
+    '<button class="gb s" onclick="g3Close()">Reset</button></div>',
+
+  clusterStatus:'<div class="gm"><h2>🖥 SR-Cluster 04 — Status</h2><p class="sub">A100-SXM4 · Mission Node NTRO-26142</p>'+
+    '<div class="g3-grid">'+
+    '<div class="g3-stat"><div class="l">GPU Util</div><div class="v">74%</div></div>'+
+    '<div class="g3-stat"><div class="l">VRAM</div><div class="v">58/80 GB</div></div>'+
+    '<div class="g3-stat"><div class="l">Active Jobs</div><div class="v">3</div></div>'+
+    '<div class="g3-stat"><div class="l">Uptime</div><div class="v">142 h</div></div>'+
+    '</div>'+
+    '<div class="g3-log">[15:04:38] A100-SXM4 CUDA 12.4 OK<br>[15:04:35] GS-2048: batch 4/8 ✓<br>[15:04:30] GS-2047: completed ✓<br>[15:04:20] Sentinel-2 pipeline: online<br>[15:04:00] EPSG:32643 engine: ready</div>'+
+    '<button class="gb s" onclick="g3Close()">Close</button></div>',
+
+  benchmark:'<div class="gm"><h2>📊 Benchmark</h2><p class="sub">GeoSR-Net v1.2 vs baselines</p>'+
+    '<div style="overflow-x:auto"><table style="width:100%;font-size:11px;font-family:monospace;border-collapse:collapse">'+
+    '<thead><tr style="background:#e7f0e9"><th style="padding:6px;text-align:left">Model</th><th style="padding:6px">PSNR</th><th style="padding:6px">SSIM</th><th style="padding:6px">Time</th></tr></thead>'+
+    '<tbody>'+
+    '<tr style="border-top:1px solid #dce5de"><td style="padding:6px"><b>GeoSR-Net v1.2</b></td><td style="padding:6px;text-align:center;color:#004527;font-weight:700">36.4</td><td style="padding:6px;text-align:center">0.961</td><td style="padding:6px;text-align:center">3.1s</td></tr>'+
+    '<tr style="border-top:1px solid #dce5de;background:#f3fcf5"><td style="padding:6px">GeoSR-Lite v0.9</td><td style="padding:6px;text-align:center">33.2</td><td style="padding:6px;text-align:center">0.918</td><td style="padding:6px;text-align:center">1.4s</td></tr>'+
+    '<tr style="border-top:1px solid #dce5de"><td style="padding:6px">Bicubic</td><td style="padding:6px;text-align:center;color:#ba1a1a;font-weight:700">27.8</td><td style="padding:6px;text-align:center">0.831</td><td style="padding:6px;text-align:center">0.1s</td></tr>'+
+    '</tbody></table></div>'+
+    '<button class="gb s" onclick="g3Close()">Close</button></div>',
+
+  profile:'<div class="gm"><h2>👤 Profile</h2>'+
+    '<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">'+
+    '<div style="width:44px;height:44px;background:#1b5e3b;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#aef2c4;font-size:18px;flex-shrink:0">👤</div>'+
+    '<div><p style="font-size:14px;font-weight:700;margin:0;color:#151d19">Mission Analyst</p>'+
+    '<p style="font-size:11px;color:#707971;margin:2px 0 0;font-family:monospace">NTRO • SIH 2026 • PS 26142</p></div></div>'+
+    '<label>CRS Preference</label><select><option selected>EPSG:32643</option><option>EPSG:4326</option></select>'+
+    '<label>Default Scale</label><select><option>2×</option><option selected>4×</option><option>8×</option></select>'+
+    '<button class="gb s" onclick="g3Close();g3Toast(\'Signed out.\',\'warn\')">Sign Out</button></div>',
+};
+
+/* ── NAVIGATION ── */
+var SCREEN_IDS=['overview','enhancement-workbench','jobs-queue','split-results-analysis'];
+
+function showScreen(id){
+  if(!SCREEN_IDS.includes(id)) id='overview';
+  SCREEN_IDS.forEach(function(s){
+    var el=document.getElementById('screen-'+s);
+    if(el) el.style.display=(s===id)?'block':'none';
+  });
+  // Update all [data-path] links
+  document.querySelectorAll('[data-path]').forEach(function(a){
+    var p=a.getAttribute('data-path');
+    a.classList.toggle('g3-active', p===id);
+  });
+  window.scrollTo(0,0);
+  attachHandlers();
+}
+
+function handleHash(){
+  var h=(window.location.hash||'#overview').replace('#','');
+  showScreen(h||'overview');
+}
+
+window.addEventListener('hashchange', handleHash);
+
+// Intercept all [data-path] anchor clicks globally
+document.addEventListener('click', function(e){
+  var a=e.target.closest('[data-path]');
+  if(!a) return;
+  var p=a.getAttribute('data-path');
+  if(SCREEN_IDS.includes(p)){
+    e.preventDefault();
+    window.location.hash=p;
+  } else if(p){
+    // Spectral domain / infrastructure links — show toast
+    e.preventDefault();
+    var label=a.querySelector('span:not(.material-symbols-outlined)');
+    g3Toast((label?label.textContent.trim():p)+' domain selected.');
+  }
+});
+
+/* ── BUTTON HANDLER ENGINE ── */
+function attachHandlers(){
+  document.querySelectorAll('button, [role="button"]').forEach(function(btn){
+    if(btn._g3) return;
+    btn._g3=true;
+    btn.addEventListener('click', function(){
+      var text=(btn.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();
+      var icon=btn.querySelector('.material-symbols-outlined');
+      var ic=icon?icon.textContent.trim():'';
+
+      // New Job / Enhancement
+      if(/new job|new enhancement|add_circle/.test(text+ic)) return g3Open(M.newJob);
+      // Upload
+      if(/upload|browse|import|folder_open|cloud_upload/.test(text+ic)) return g3Open(M.upload);
+      // Results / Compare / Split
+      if(/result|compare|before.*after|split/.test(text+ic)||ic==='compare') return g3Open(M.results);
+      // Export / Download
+      if(/export|download/.test(text)||ic==='download'||ic==='save_alt') return g3Open(M.export);
+      // Filter / Sort
+      if(/filter|sort/.test(text)||ic==='filter_list'||ic==='tune') return g3Open(M.filter);
+      // Model / Engine config
+      if(/model|engine|config|settings/.test(text)||ic==='settings'||ic==='memory') return g3Open(M.modelConfig);
+      // Cluster / Telemetry / Status
+      if(/cluster|telemetry|dns|operational|node/.test(text+ic)) return g3Open(M.clusterStatus);
+      // Benchmark / Metrics
+      if(/benchmark|psnr|ssim|metrics|compare.*model/.test(text+ic)) return g3Open(M.benchmark);
+      // Job details / view
+      if(/job.*detail|view.*job|gs-20|open.*job|view.*result/.test(text)||ic==='open_in_new') return g3Open(M.jobDetails);
+      // Profile / Avatar
+      if(ic==='person'||ic==='account_circle'||/profile|sign out|account/.test(text)) return g3Open(M.profile);
+      // Refresh
+      if(ic==='refresh'||ic==='sync'||/refresh/.test(text)) return g3Toast('Feed refreshed.');
+      // Search
+      if(ic==='search') return g3Toast('Searching tiles and jobs...');
+      // Cancel / Stop
+      if(/cancel|stop|abort/.test(text)||ic==='stop') return g3Toast('Job cancelled.','warn');
+      // Delete
+      if(/delete|remove|clear/.test(text)||ic==='delete') return g3Toast('Item removed.','warn');
+      // Save / Apply / Update
+      if(/save|apply|update|confirm|submit/.test(text)) return g3Toast('Changes saved.');
+      // Start / Run / Queue / Process
+      if(/start|run|queue|process|execute|schedule|launch|begin/.test(text)){
+        return g3Toast('"'+btn.textContent.replace(/\s+/g,' ').trim().slice(0,38)+'" queued.');
+      }
+      // Help / Docs
+      if(ic==='help_outline'||ic==='help'||/help|doc/.test(text)) return g3Toast('Opening documentation...');
+      // Any button with readable text
+      var label=btn.textContent.replace(/\s+/g,' ').trim();
+      if(label.length>0&&label.length<80){
+        g3Toast('"'+label.slice(0,44)+'" executed.');
+      }
+    });
+  });
+}
+
+/* ── INIT ── */
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',function(){ handleHash(); attachHandlers(); });
+} else {
+  handleHash(); attachHandlers();
+}
+
+})();
+</script>
+
+
+<div id="toast-container" class="fixed bottom-space-lg right-space-lg z-50 flex flex-col gap-space-sm pointer-events-none"></div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ---- 1. ROUTING & NAVIGATION ----
+  const screens = {
+    'overview': document.getElementById('screen-overview'),
+    'new-enhancement': document.getElementById('screen-enhancement-workbench'),
+    'enhancement-workbench': document.getElementById('screen-enhancement-workbench'), // alias
+    'jobs-queue': document.getElementById('screen-jobs-queue'),
+    'split-results-analysis': document.getElementById('screen-split-results') || document.getElementById('screen-split-results-analysis')
+  };
+
+  const navLinks = document.querySelectorAll('a[data-path]');
+  
+  // Find the exact ID of the split results screen since it varies
+  const splitScreen = document.querySelector('.screen-panel:last-child');
+  if(splitScreen && !screens['split-results-analysis']) {
+      screens['split-results-analysis'] = splitScreen;
+  }
+
+  function handleRoute() {
+    let hash = window.location.hash.replace('#', '');
+    if (!hash || !screens[hash]) {
+      hash = 'overview';
+      window.location.hash = hash;
+      return;
+    }
+
+    // Hide all screens
+    document.querySelectorAll('.screen-panel').forEach(s => {
+      if(s) s.style.display = 'none';
+    });
+
+    // Show target
+    if (screens[hash]) {
+      screens[hash].style.display = 'block';
+    }
+
+    // Update nav classes
+    navLinks.forEach(link => {
+      const activeClasses = (link.closest('nav')?.dataset.activeClasses || 'bg-secondary-container text-on-secondary-container font-semibold').split(' ');
+      const defaultClasses = 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface'.split(' ');
+      
+      if (link.dataset.path === hash || (hash === 'new-enhancement' && link.dataset.path === 'enhancement-workbench')) {
+        link.classList.remove(...defaultClasses);
+        link.classList.add(...activeClasses);
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.classList.remove(...activeClasses);
+        link.classList.add(...defaultClasses);
+        link.removeAttribute('aria-current');
+      }
+    });
+    window.scrollTo(0, 0);
+  }
+
+  window.addEventListener('hashchange', handleRoute);
+  
+  // Intercept data-path clicks
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.hash = link.dataset.path;
+    });
+  });
+
+  handleRoute(); // initial
+
+
+  // ---- 2. TOAST SYSTEM ----
+  const toastContainer = document.getElementById('toast-container');
+  function showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = `px-space-md py-space-sm rounded shadow-lg font-body-sm text-body-sm flex items-center gap-space-sm transform translate-y-4 opacity-0 transition-all duration-300 pointer-events-auto`;
+    
+    if(type === 'success') toast.classList.add('bg-primary-container', 'text-on-primary-container', 'border', 'border-primary/20');
+    else if(type === 'error') toast.classList.add('bg-error-container', 'text-on-error-container', 'border', 'border-error/20');
+    else toast.classList.add('bg-surface-container-highest', 'text-on-surface', 'border', 'border-outline-variant');
+
+    let icon = 'info';
+    if(type === 'success') icon = 'check_circle';
+    if(type === 'error') icon = 'error';
+
+    toast.innerHTML = `<span class="material-symbols-outlined text-[18px]">${icon}</span><span>${message}</span>`;
+    
+    toastContainer.appendChild(toast);
+    
+    // Animate in
+    requestAnimationFrame(() => {
+      toast.classList.remove('translate-y-4', 'opacity-0');
+    });
+
+    // Remove after 3s
+    setTimeout(() => {
+      toast.classList.add('opacity-0');
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
+
+  window.showToast = showToast; // Export globally
+
+  // Mock click handlers for buttons
+  document.querySelectorAll('button').forEach(btn => {
+    if(!btn.onclick && !btn.hasAttribute('data-no-toast')) {
+      btn.addEventListener('click', (e) => {
+        // Find text content
+        const text = btn.innerText.trim();
+        if(text) {
+           showToast(`Action triggered: ${text}`);
+        } else {
+           showToast(`Action triggered`);
+        }
+      });
+    }
+  });
+
+
+  // ---- 3. SPLIT COMPARISON SLIDER ----
+  // Look for the before/after container
+  const imgContainers = document.querySelectorAll('.group.relative.overflow-hidden');
+  imgContainers.forEach(container => {
+     // Usually there are two images
+     const imgs = container.querySelectorAll('img');
+     if(imgs.length >= 2) {
+         const topImg = imgs[1]; // The one with absolute inset-0
+         if(topImg.classList.contains('absolute')) {
+             const sliderOverlay = document.createElement('div');
+             sliderOverlay.className = "absolute inset-y-0 w-1 bg-surface-tint cursor-ew-resize z-10 shadow-lg transform -translate-x-1/2 flex items-center justify-center";
+             sliderOverlay.style.left = "50%";
+             sliderOverlay.innerHTML = `<div class="w-6 h-6 bg-surface-tint rounded-full flex items-center justify-center text-on-primary shadow"><span class="material-symbols-outlined text-[14px]">swap_horiz</span></div>`;
+             
+             container.appendChild(sliderOverlay);
+             
+             // Initial clip path
+             topImg.style.clipPath = `inset(0 50% 0 0)`;
+             
+             let isDragging = false;
+             sliderOverlay.addEventListener('mousedown', () => isDragging = true);
+             window.addEventListener('mouseup', () => isDragging = false);
+             window.addEventListener('mousemove', (e) => {
+                 if(!isDragging) return;
+                 const rect = container.getBoundingClientRect();
+                 let x = e.clientX - rect.left;
+                 let pct = Math.max(0, Math.min(100, (x / rect.width) * 100));
+                 sliderOverlay.style.left = `${pct}%`;
+                 topImg.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+             });
+         }
+     }
+  });
+
+
+  // ---- 4. NEW ENHANCEMENT MOCKS ----
+  const rangeInputs = document.querySelectorAll('input[type="range"]');
+  rangeInputs.forEach(range => {
+      // Find a span that might contain the value next to it
+      const parent = range.parentElement;
+      const valueDisplay = parent.querySelector('span.font-semibold') || parent.parentElement.querySelector('span.text-primary');
+      if(valueDisplay) {
+          range.addEventListener('input', (e) => {
+              if(valueDisplay.innerText.includes('x')) {
+                 valueDisplay.innerText = `${e.target.value}x`;
+              } else if(valueDisplay.innerText.includes('m')) {
+                 valueDisplay.innerText = `${e.target.value}m`;
+              } else {
+                 valueDisplay.innerText = e.target.value;
+              }
+          });
+      }
+  });
+  
+  // Model selection cards
+  const modelCards = document.querySelectorAll('.ring-1.ring-outline-variant');
+  modelCards.forEach(card => {
+      if(card.querySelector('.material-symbols-outlined')) {
+          card.style.cursor = 'pointer';
+          card.addEventListener('click', () => {
+              // Deselect all
+              modelCards.forEach(c => {
+                  c.classList.remove('ring-primary-container', 'bg-surface-container-low');
+                  c.classList.add('ring-outline-variant');
+                  const check = c.querySelector('input[type="radio"], input[type="checkbox"]');
+                  if(check) check.checked = false;
+              });
+              // Select this
+              card.classList.add('ring-primary-container', 'bg-surface-container-low');
+              card.classList.remove('ring-outline-variant');
+              const check = card.querySelector('input[type="radio"], input[type="checkbox"]');
+              if(check) check.checked = true;
+          });
+      }
+  });
+
+});
+</script>
+</body>
+</html>

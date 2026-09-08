@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BhuDRISTI AI Super-Resolution</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: { 50: '#fff7ed', 100: '#ffedd5', 500: '#f97316', 600: '#ea580c', 900: '#7c2d12' },
+            slate: { 50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 700: '#334155', 800: '#1e293b', 900: '#0f172a' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #f8fafc; color: #1e293b; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    
+    .nav-item { transition: all 0.2s; }
+    .nav-item.active { background-color: #fff7ed; color: #ea580c; font-weight: 600; border-left: 3px solid #ea580c; }
+    .nav-item:not(.active) { color: #475569; border-left: 3px solid transparent; }
+    .nav-item:not(.active):hover { background-color: #f1f5f9; color: #1e293b; }
+    
+    .screen { display: none; animation: fadeIn 0.3s ease; }
+    .screen.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Custom inputs */
+    .g-input { width: 100%; padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 14px; outline: none; transition: border 0.2s; }
+    .g-input:focus { border-color: #ea580c; box-shadow: 0 0 0 2px #fff7ed; }
+    
+    .g-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+    .g-btn-primary { background: #ea580c; color: white; border: 1px solid #ea580c; box-shadow: 0 1px 2px rgba(234, 88, 12, 0.1); }
+    .g-btn-primary:hover { background: #c2410c; }
+    .g-btn-outline { background: white; color: #334155; border: 1px solid #e2e8f0; }
+    .g-btn-outline:hover { background: #f8fafc; border-color: #cbd5e1; }
+
+    /* Toast */
+    #toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 50; display: flex; flex-direction: column; gap: 8px; }
+    .toast { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: white; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1); border-left: 4px solid #ea580c; font-size: 14px; font-weight: 500; animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; max-width: 320px; }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes fadeOut { to { transform: translateX(100%); opacity: 0; } }
+  </style>
+</head>
+
+<body>
+  
+<!-- SIDEBAR -->
+<aside class="fixed top-0 left-0 bottom-0 w-64 bg-white border-r border-slate-200 z-40 flex flex-col">
+  <!-- Logo -->
+  <div class="h-16 flex items-center px-6 border-b border-slate-200">
+    <div class="flex items-center gap-2">
+      <img src="./logoBHUDRISTI.png" alt="BhuDRISTI Logo" class="h-8 w-auto object-contain" onerror="this.src='https://via.placeholder.com/120x40?text=BhuDRISTI'"/>
+      <div class="flex flex-col">
+        <span class="font-bold text-slate-800 leading-tight text-lg"><span style="color:#ea580c">भू</span> DRISTI</span>
+        <span class="text-[9px] text-slate-500 uppercase tracking-wide">AI Super-Resolution Platform</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Nav -->
+  <nav class="flex-1 py-4 flex flex-col gap-1 overflow-y-auto" id="main-nav">
+    <a href="#dashboard" class="nav-item active flex items-center gap-3 px-6 py-2.5 mx-2 rounded-md" data-target="dashboard">
+      <span class="material-symbols-rounded text-[20px]">grid_view</span>
+      <span class="text-sm">Dashboard</span>
+    </a>
+    <a href="#new-job" class="nav-item flex items-center gap-3 px-6 py-2.5 mx-2 rounded-md" data-target="new-job">
+      <span class="material-symbols-rounded text-[20px]">add_box</span>
+      <span class="text-sm">New Enhancement Job</span>
+    </a>
+    <a href="#processing-queue" class="nav-item flex items-center gap-3 px-6 py-2.5 mx-2 rounded-md" data-target="processing-queue">
+      <span class="material-symbols-rounded text-[20px]">format_list_bulleted</span>
+      <span class="text-sm">Processing Queue</span>
+    </a>
+    <a href="#comparison-viewer" class="nav-item flex items-center gap-3 px-6 py-2.5 mx-2 rounded-md" data-target="comparison-viewer">
+      <span class="material-symbols-rounded text-[20px]">compare</span>
+      <span class="text-sm">Comparison Viewer</span>
+    </a>
+    <a href="#validation-reports" class="nav-item flex items-center gap-3 px-6 py-2.5 mx-2 rounded-md" data-target="validation-reports" onclick="showToast('Validation Reports opened')">
+      <span class="material-symbols-rounded text-[20px]">fact_check</span>
+      <span class="text-sm">Validation Reports</span>
+    </a>
+    <a href="#project-history" class="nav-item flex items-center gap-3 px-6 py-2.5 mx-2 rounded-md" data-target="project-history" onclick="showToast('Project History opened')">
+      <span class="material-symbols-rounded text-[20px]">history</span>
+      <span class="text-sm">Project History</span>
+    </a>
+    <a href="#settings" class="nav-item flex items-center gap-3 px-6 py-2.5 mx-2 rounded-md" data-target="settings" onclick="showToast('Settings opened')">
+      <span class="material-symbols-rounded text-[20px]">settings</span>
+      <span class="text-sm">Settings</span>
+    </a>
+  </nav>
+
+  <!-- User Profile -->
+  <div class="p-4 border-t border-slate-200">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-full bg-brand-600 text-white flex items-center justify-center font-semibold text-sm shadow-sm relative">
+        AP
+        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-sm font-semibold text-slate-800">Arjun Pratap</span>
+        <span class="text-[11px] text-slate-500">NTRO Analyst</span>
+      </div>
+    </div>
+    <div class="mt-4 flex items-center justify-between text-[10px] text-slate-400">
+      <span>भू DRISTI v2.1.0</span>
+      <span class="flex items-center gap-1 text-teal-600"><span class="material-symbols-rounded text-[12px]">lock</span> Secure Session</span>
+    </div>
+  </div>
+</aside>
+
+  
+<!-- HEADER -->
+<header class="fixed top-0 left-64 right-0 h-16 bg-white border-b border-slate-200 z-30 flex items-center justify-between px-6">
+  
+  <!-- Breadcrumbs -->
+  <div class="flex items-center gap-2 text-sm">
+    <span class="material-symbols-rounded text-slate-400 text-[18px]">home</span>
+    <span class="text-slate-500">Projects</span>
+    <span class="text-slate-300">/</span>
+    <span class="text-slate-700 font-medium">Ladakh Border Infrastructure</span>
+    <span class="text-slate-300">/</span>
+    <span class="text-brand-600 font-semibold" id="header-title">Dashboard</span>
+  </div>
+
+  <!-- Right Actions -->
+  <div class="flex items-center gap-5">
+    <div class="flex items-center gap-2">
+      <span class="text-xs text-slate-500">Project:</span>
+      <select class="text-sm border border-slate-200 rounded px-2 py-1 outline-none focus:border-brand-500 text-slate-700 bg-slate-50 font-medium">
+        <option>Ladakh Border Infrastructure</option>
+        <option>Arunachal Outposts</option>
+      </select>
+    </div>
+    
+    <button class="relative text-slate-500 hover:text-slate-800 transition-colors" onclick="showToast('No new notifications')">
+      <span class="material-symbols-rounded text-[22px]">notifications</span>
+      <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[9px] font-bold flex items-center justify-center rounded-full border-2 border-white">3</span>
+    </button>
+    
+    <button class="flex items-center gap-2 text-slate-700 hover:bg-slate-50 px-2 py-1 rounded" onclick="showToast('Profile menu opened')">
+      <div class="w-8 h-8 rounded-full bg-brand-600 text-white flex items-center justify-center font-semibold text-xs shadow-sm">AP</div>
+      <div class="hidden md:flex flex-col text-left">
+        <span class="text-xs font-semibold leading-tight">Arjun Pratap</span>
+        <span class="text-[10px] text-slate-500 leading-tight">NTRO Analyst</span>
+      </div>
+      <span class="material-symbols-rounded text-[18px] text-slate-400">expand_more</span>
+    </button>
+  </div>
+</header>
+
+
+  <!-- MAIN CONTENT -->
+  <main class="ml-64 pt-16 h-screen overflow-y-auto bg-slate-50" id="main-content">
+    
+<div id="screen-dashboard" class="screen active p-6 space-y-6">
+  
+  <!-- Stats Row -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <!-- Stat 1 -->
+    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-start justify-between">
+      <div>
+        <h3 class="text-xs font-medium text-slate-500 uppercase tracking-wide">Total Projects</h3>
+        <div class="mt-2 text-3xl font-bold text-slate-800">12</div>
+        <div class="mt-1 text-xs text-brand-600 font-medium">3 active</div>
+      </div>
+      <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center text-brand-500">
+        <span class="material-symbols-rounded">layers</span>
+      </div>
+    </div>
+    <!-- Stat 2 -->
+    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-start justify-between">
+      <div>
+        <h3 class="text-xs font-medium text-slate-500 uppercase tracking-wide">Total Jobs</h3>
+        <div class="mt-2 text-3xl font-bold text-slate-800">48</div>
+        <div class="mt-1 text-xs text-brand-600 font-medium">28 completed</div>
+      </div>
+      <div class="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center text-teal-600">
+        <span class="material-symbols-rounded">work</span>
+      </div>
+    </div>
+    <!-- Stat 3 -->
+    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-start justify-between">
+      <div>
+        <h3 class="text-xs font-medium text-slate-500 uppercase tracking-wide">Processing</h3>
+        <div class="mt-2 text-3xl font-bold text-slate-800">6</div>
+        <div class="mt-1 text-xs text-brand-600 font-medium">In queue / running</div>
+      </div>
+      <div class="w-10 h-10 flex items-center justify-center">
+        <!-- circular progress mock -->
+        <div class="w-10 h-10 rounded-full border-4 border-slate-100 border-t-teal-500 relative transform rotate-45"></div>
+      </div>
+    </div>
+    <!-- Stat 4 -->
+    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+      <div class="flex items-start justify-between">
+        <div>
+          <h3 class="text-xs font-medium text-slate-500 uppercase tracking-wide">Storage Used</h3>
+          <div class="mt-2 text-2xl font-bold text-slate-800">2.41 TB</div>
+          <div class="mt-1 text-xs text-slate-500">of 10 TB</div>
+        </div>
+        <div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600">
+          <span class="material-symbols-rounded">database</span>
+        </div>
+      </div>
+      <div class="mt-4 w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+        <div class="h-full bg-brand-500 rounded-full" style="width: 24%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Main Left Column -->
+    <div class="lg:col-span-2 space-y-6">
+      
+      <!-- Recent Job Card -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <h2 class="font-semibold text-slate-800">Recent Job: SR_v2_20240520_1030</h2>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-green-50 text-green-700 border border-green-100 flex items-center gap-1"><span class="material-symbols-rounded text-[12px]">check_circle</span> Completed</span>
+          </div>
+          <button class="text-xs text-brand-600 font-medium hover:underline flex items-center" onclick="document.querySelector('[data-target=\'comparison-viewer\']').click()">View in Comparison Viewer <span class="material-symbols-rounded text-[14px]">arrow_forward</span></button>
+        </div>
+        
+        <div class="p-5">
+          <!-- Image preview mock -->
+          <div class="grid grid-cols-3 gap-2 h-48 mb-4">
+            <div class="relative bg-slate-200 rounded-lg overflow-hidden flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center before:absolute before:inset-0 before:bg-slate-900/40">
+              <span class="absolute top-2 left-0 right-0 text-center text-xs font-semibold text-white z-10 drop-shadow-md">Low Resolution (Sentinel-2)</span>
+              <span class="absolute bottom-2 left-2 bg-black/60 text-white text-[9px] px-2 py-1 rounded font-mono">10 m / pixel</span>
+            </div>
+            <div class="relative bg-slate-300 rounded-lg overflow-hidden flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center before:absolute before:inset-0 before:bg-slate-900/10">
+              <span class="absolute top-2 left-0 right-0 text-center text-xs font-semibold text-white z-10 drop-shadow-md">Super-Resolved (भू DRISTI)</span>
+              <span class="absolute bottom-2 left-2 bg-black/60 text-white text-[9px] px-2 py-1 rounded font-mono">2.5 m / pixel</span>
+              <!-- slider arrows -->
+              <div class="absolute top-1/2 -left-3 w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center shadow z-20 transform -translate-y-1/2"><span class="material-symbols-rounded text-[14px]">chevron_right</span></div>
+            </div>
+            <div class="relative bg-slate-800 rounded-lg overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-900 via-orange-500 to-yellow-300">
+              <span class="absolute top-2 left-0 right-0 text-center text-xs font-semibold text-white z-10 drop-shadow-md">Uncertainty Map</span>
+              <span class="absolute bottom-2 left-2 right-2 bg-gradient-to-r from-blue-600 via-orange-500 to-yellow-400 h-2 rounded text-[8px] text-white flex items-center px-1">Uncertainty (High)</span>
+              <!-- slider arrows -->
+              <div class="absolute top-1/2 -left-3 w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center shadow z-20 transform -translate-y-1/2"><span class="material-symbols-rounded text-[14px]">chevron_right</span></div>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-4 gap-4 pt-4 border-t border-slate-100">
+            <div>
+              <div class="text-[10px] text-slate-500 flex items-center gap-1"><span class="material-symbols-rounded text-[12px]">aspect_ratio</span> Area</div>
+              <div class="text-xs font-semibold text-slate-800 mt-1">12.6 km²</div>
+            </div>
+            <div>
+              <div class="text-[10px] text-slate-500 flex items-center gap-1"><span class="material-symbols-rounded text-[12px]">location_on</span> Location</div>
+              <div class="text-xs font-semibold text-slate-800 mt-1">34.2345° N, 77.5612° E</div>
+            </div>
+            <div>
+              <div class="text-[10px] text-slate-500 flex items-center gap-1"><span class="material-symbols-rounded text-[12px]">calendar_today</span> Acquisition</div>
+              <div class="text-xs font-semibold text-slate-800 mt-1">18 May 2024</div>
+            </div>
+            <div>
+              <div class="text-[10px] text-slate-500 flex items-center gap-1"><span class="material-symbols-rounded text-[12px]">trending_up</span> Resolution Gain</div>
+              <div class="text-xs font-semibold text-slate-800 mt-1">4x (10m → 2.5m)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Project Activity Map (Mock) -->
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col h-[320px]">
+        <h2 class="font-semibold text-slate-800 mb-4">Project Activity</h2>
+        <div class="flex-1 bg-slate-100 rounded-lg overflow-hidden relative bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center border border-slate-200">
+          <div class="absolute inset-0 bg-slate-900/20"></div>
+          
+          <!-- Mock Polygons -->
+          <div class="absolute top-1/4 left-1/4 w-32 h-24 border-2 border-teal-400 bg-teal-400/20 transform rotate-12"></div>
+          <div class="absolute bottom-1/4 right-1/3 w-40 h-20 border-2 border-teal-400 bg-teal-400/20 transform -rotate-6"></div>
+          
+          <!-- Map Controls -->
+          <div class="absolute top-4 right-4 flex flex-col gap-2">
+            <button class="w-8 h-8 bg-white rounded shadow text-slate-600 flex items-center justify-center hover:bg-slate-50"><span class="material-symbols-rounded text-[18px]">add</span></button>
+            <button class="w-8 h-8 bg-white rounded shadow text-slate-600 flex items-center justify-center hover:bg-slate-50"><span class="material-symbols-rounded text-[18px]">remove</span></button>
+            <button class="w-8 h-8 bg-white rounded shadow text-slate-600 flex items-center justify-center hover:bg-slate-50 mt-2"><span class="material-symbols-rounded text-[18px]">my_location</span></button>
+            <button class="w-8 h-8 bg-white rounded shadow text-slate-600 flex items-center justify-center hover:bg-slate-50"><span class="material-symbols-rounded text-[18px]">layers</span></button>
+          </div>
+          
+          <!-- Legend -->
+          <div class="absolute top-4 left-4 bg-white/95 backdrop-blur rounded shadow p-3 text-xs">
+            <div class="flex items-center gap-2 mb-2"><span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span><span class="text-slate-700">Completed</span></div>
+            <div class="flex items-center gap-2 mb-2"><span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span><span class="text-slate-700">Processing</span></div>
+            <div class="flex items-center gap-2 mb-2"><span class="w-2.5 h-2.5 rounded-full bg-red-500"></span><span class="text-slate-700">Failed</span></div>
+            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span><span class="text-slate-700">Queued</span></div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="space-y-6">
+      
+      <!-- System Status -->
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+        <h2 class="font-semibold text-slate-800 mb-4">System Status</h2>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="p-3 border border-slate-100 rounded-lg bg-slate-50">
+            <div class="text-[10px] text-slate-500 font-medium">GPU Cluster</div>
+            <div class="text-xs font-semibold text-teal-600 mt-1 flex items-center gap-1"><span class="material-symbols-rounded text-[14px]">check_circle</span> Healthy</div>
+            <!-- mock line chart -->
+            <svg class="w-full h-8 mt-2" viewBox="0 0 100 30" fill="none" stroke="#0d9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 20 L20 10 L40 25 L60 5 L80 15 L100 10"/></svg>
+          </div>
+          <div class="p-3 border border-slate-100 rounded-lg bg-slate-50">
+            <div class="text-[10px] text-slate-500 font-medium">Storage</div>
+            <div class="text-xs font-semibold text-slate-700 mt-1">24% used</div>
+            <!-- mock line chart -->
+            <svg class="w-full h-8 mt-2" viewBox="0 0 100 30" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 15 L20 20 L40 10 L60 25 L80 15 L100 5"/></svg>
+          </div>
+          <div class="p-3 border border-slate-100 rounded-lg bg-slate-50 flex items-center justify-between">
+            <div>
+              <div class="text-[10px] text-slate-500 font-medium">API Services</div>
+              <div class="text-xs font-semibold text-teal-600 mt-1">Operational</div>
+            </div>
+            <span class="material-symbols-rounded text-[16px] text-teal-500">check_circle</span>
+          </div>
+          <div class="p-3 border border-slate-100 rounded-lg bg-slate-50 flex items-center justify-between">
+            <div>
+              <div class="text-[10px] text-slate-500 font-medium">Data Ingestion</div>
+              <div class="text-xs font-semibold text-teal-600 mt-1">Active</div>
+            </div>
+            <span class="material-symbols-rounded text-[16px] text-teal-500">check_circle</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+        <h2 class="font-semibold text-slate-800 mb-4">Quick Actions</h2>
+        <div class="flex flex-col gap-3">
+          <button class="g-btn g-btn-primary w-full shadow-md" onclick="document.querySelector('[data-target=\'new-job\']').click()">
+            <span class="material-symbols-rounded text-[18px]">add</span> New Enhancement Job
+          </button>
+          <div class="grid grid-cols-2 gap-3">
+            <button class="g-btn g-btn-outline w-full text-xs py-2 shadow-sm" onclick="showToast('Upload dialog opened')">
+              <span class="material-symbols-rounded text-[16px]">cloud_upload</span> Upload AOI
+            </button>
+            <button class="g-btn g-btn-outline w-full text-xs py-2 shadow-sm" onclick="showToast('Create project dialog opened')">
+              <span class="material-symbols-rounded text-[16px]">create_new_folder</span> New Project
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Jobs List -->
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="font-semibold text-slate-800">Recent Jobs</h2>
+          <button class="text-[11px] text-brand-600 font-semibold hover:underline" onclick="document.querySelector('[data-target=\'processing-queue\']').click()">View All →</button>
+        </div>
+        <div class="space-y-4">
+          <!-- Item 1 -->
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div>
+              <div class="text-xs font-semibold text-slate-800">SR_v2_20240520_1030</div>
+              <div class="text-[10px] text-slate-500 mt-0.5">Ladakh Border Infra • 20 May 2024</div>
+            </div>
+            <div class="text-right">
+              <span class="text-[10px] text-teal-600 font-bold bg-teal-50 px-1.5 py-0.5 rounded">Completed</span>
+              <div class="text-[10px] text-slate-500 mt-1 font-mono">4x Gain</div>
+            </div>
+          </div>
+          <!-- Item 2 -->
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div>
+              <div class="text-xs font-semibold text-slate-800">SR_v2_20240520_0915</div>
+              <div class="text-[10px] text-slate-500 mt-0.5">Ladakh Border Infra • 20 May 2024</div>
+            </div>
+            <div class="text-right">
+              <span class="text-[10px] text-teal-600 font-bold bg-teal-50 px-1.5 py-0.5 rounded">Completed</span>
+              <div class="text-[10px] text-slate-500 mt-1 font-mono">4x Gain</div>
+            </div>
+          </div>
+          <!-- Item 3 -->
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-xs font-semibold text-slate-800">SR_v2_20240519_1545</div>
+              <div class="text-[10px] text-slate-500 mt-0.5">Arunachal Outposts • 19 May 2024</div>
+            </div>
+            <div class="text-right">
+              <span class="text-[10px] text-brand-600 font-bold bg-brand-50 px-1.5 py-0.5 rounded">Processing</span>
+              <div class="text-[10px] text-slate-500 mt-1 font-mono">68%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+    
+<div id="screen-new-job" class="screen p-6 space-y-6">
+  
+  <!-- Stepper -->
+  <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between px-10">
+    <div class="flex items-center gap-3">
+      <div class="w-7 h-7 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center text-sm">1</div>
+      <span class="text-sm font-bold text-brand-600">1. Select AOI</span>
+    </div>
+    <div class="flex-1 h-px bg-slate-200 mx-6"></div>
+    <div class="flex items-center gap-3 opacity-50">
+      <div class="w-7 h-7 rounded-full bg-slate-200 text-slate-600 font-bold flex items-center justify-center text-sm">2</div>
+      <span class="text-sm font-semibold text-slate-500">2. Upload/Select Imagery</span>
+    </div>
+    <div class="flex-1 h-px bg-slate-200 mx-6"></div>
+    <div class="flex items-center gap-3 opacity-50">
+      <div class="w-7 h-7 rounded-full bg-slate-200 text-slate-600 font-bold flex items-center justify-center text-sm">3</div>
+      <span class="text-sm font-semibold text-slate-500">3. Configure Model</span>
+    </div>
+    <div class="flex-1 h-px bg-slate-200 mx-6"></div>
+    <div class="flex items-center gap-3 opacity-50">
+      <div class="w-7 h-7 rounded-full bg-slate-200 text-slate-600 font-bold flex items-center justify-center text-sm">4</div>
+      <span class="text-sm font-semibold text-slate-500">4. Review & Submit</span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Left Map Area -->
+    <div class="lg:col-span-2 space-y-6">
+      
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="font-semibold text-slate-800 flex items-center gap-2">Area of Interest (AOI) <span class="material-symbols-rounded text-[16px] text-slate-400">info</span></h2>
+          <button class="g-btn g-btn-outline py-1 px-3 text-xs"><span class="material-symbols-rounded text-[16px]">crop_free</span> AOI Details</button>
+        </div>
+        
+        <!-- Map Container -->
+        <div class="w-full h-[450px] bg-slate-200 rounded-lg relative overflow-hidden bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center">
+          <!-- Polygon Mock -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <svg class="w-3/4 h-3/4" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <polygon points="20,50 30,30 60,20 90,40 80,70 40,80" fill="rgba(234, 88, 12, 0.3)" stroke="#ea580c" stroke-width="2"/>
+              <!-- Nodes -->
+              <circle cx="20" cy="50" r="2.5" fill="white" stroke="#ea580c" stroke-width="1.5"/>
+              <circle cx="30" cy="30" r="2.5" fill="white" stroke="#ea580c" stroke-width="1.5"/>
+              <circle cx="60" cy="20" r="2.5" fill="white" stroke="#ea580c" stroke-width="1.5"/>
+              <circle cx="90" cy="40" r="2.5" fill="white" stroke="#ea580c" stroke-width="1.5"/>
+              <circle cx="80" cy="70" r="2.5" fill="white" stroke="#ea580c" stroke-width="1.5"/>
+              <circle cx="40" cy="80" r="2.5" fill="white" stroke="#ea580c" stroke-width="1.5"/>
+            </svg>
+          </div>
+          
+          <!-- Controls Left -->
+          <div class="absolute top-4 left-4 flex flex-col gap-2">
+            <button class="w-8 h-8 bg-white rounded shadow text-slate-700 flex items-center justify-center hover:bg-slate-50"><span class="material-symbols-rounded text-[18px]">pan_tool</span></button>
+            <button class="w-8 h-8 bg-white rounded shadow text-slate-700 flex items-center justify-center hover:bg-slate-50"><span class="material-symbols-rounded text-[18px]">draw_polygon</span></button>
+            <button class="w-8 h-8 bg-white rounded shadow text-slate-700 flex items-center justify-center hover:bg-slate-50"><span class="material-symbols-rounded text-[18px]">upload_file</span></button>
+          </div>
+          
+          <!-- Controls Right -->
+          <div class="absolute top-4 right-4 flex flex-col gap-2">
+            <button class="w-8 h-8 bg-white rounded shadow text-slate-700 flex items-center justify-center hover:bg-slate-50"><span class="material-symbols-rounded text-[18px]">add</span></button>
+            <button class="w-8 h-8 bg-white rounded shadow text-slate-700 flex items-center justify-center hover:bg-slate-50"><span class="material-symbols-rounded text-[18px]">remove</span></button>
+            <button class="w-8 h-8 bg-white rounded shadow text-slate-700 flex items-center justify-center hover:bg-slate-50 mt-4"><span class="material-symbols-rounded text-[18px]">my_location</span></button>
+            <button class="w-8 h-8 bg-white rounded shadow text-slate-700 flex items-center justify-center hover:bg-slate-50"><span class="material-symbols-rounded text-[18px]">layers</span></button>
+          </div>
+          
+          <!-- Scale Bar & Coords -->
+          <div class="absolute bottom-4 left-4 bg-black/60 px-2 py-1 rounded text-[10px] text-white font-mono">10 km</div>
+          <div class="absolute bottom-4 right-4 bg-black/60 px-2 py-1 rounded text-[10px] text-white font-mono">34.2345° N, 77.5612° E</div>
+        </div>
+      </div>
+      
+      <!-- Estimates -->
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+        <h3 class="font-semibold text-slate-800 mb-4 flex items-center gap-2">Estimated Processing <span class="material-symbols-rounded text-[16px] text-slate-400">info</span></h3>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded bg-slate-50 border border-slate-100 flex items-center justify-center text-brand-500"><span class="material-symbols-rounded">crop_square</span></div>
+            <div>
+              <div class="text-[10px] text-slate-500 uppercase tracking-wide">Estimated Area</div>
+              <div class="text-sm font-bold text-slate-800">12.64 km²</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded bg-slate-50 border border-slate-100 flex items-center justify-center text-teal-600"><span class="material-symbols-rounded">schedule</span></div>
+            <div>
+              <div class="text-[10px] text-slate-500 uppercase tracking-wide">Estimated Time</div>
+              <div class="text-sm font-bold text-slate-800">2h 18m</div>
+              <div class="text-[9px] text-slate-400">(Queue dependent)</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded bg-slate-50 border border-slate-100 flex items-center justify-center text-teal-600"><span class="material-symbols-rounded">database</span></div>
+            <div>
+              <div class="text-[10px] text-slate-500 uppercase tracking-wide">Estimated Storage</div>
+              <div class="text-sm font-bold text-slate-800">48.6 GB</div>
+              <div class="text-[9px] text-slate-400">(Output + Artifacts)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Right Config Area -->
+    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col">
+      <h2 class="font-semibold text-slate-800 mb-6">Job Configuration</h2>
+      
+      <div class="space-y-5 flex-1">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Project <span class="text-brand-500">*</span></label>
+            <input type="text" class="g-input" value="Ladakh Border Infrastructure" readonly/>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-600 mb-1">Job Name <span class="text-brand-500">*</span></label>
+            <input type="text" class="g-input" value="SR_v2_Ladakh_AOI_01"/>
+          </div>
+        </div>
+        
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-600 mb-1">Satellite Source <span class="text-brand-500">*</span></label>
+          <div class="grid grid-cols-2 gap-4">
+            <select class="g-input"><option>Sentinel-2</option><option>Landsat 8/9</option></select>
+            <div class="border border-slate-200 rounded-md p-2 flex items-center gap-3 bg-slate-50">
+              <span class="material-symbols-rounded text-slate-400">satellite_alt</span>
+              <div>
+                <div class="text-xs font-semibold text-slate-700 leading-none">Sentinel-2 MSI</div>
+                <div class="text-[9px] text-slate-500 mt-0.5">10m, 20m, 60m Native Resolution</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-600 mb-2">Model Selector <span class="text-brand-500">*</span></label>
+          <div class="grid grid-cols-2 gap-3">
+            <!-- GAN Selected -->
+            <div class="border-2 border-brand-500 rounded-lg p-3 bg-brand-50 relative cursor-pointer">
+              <span class="absolute top-2 right-2 w-3 h-3 rounded-full border-4 border-brand-500 bg-white"></span>
+              <span class="material-symbols-rounded text-brand-600 mb-1 text-[24px]">view_in_ar</span>
+              <div class="text-sm font-bold text-slate-800">GAN</div>
+              <div class="text-[10px] text-slate-500 leading-tight mt-1">Generative Adversarial Networks for sharp detail reconstruction</div>
+            </div>
+            <!-- Diffusion -->
+            <div class="border border-slate-200 rounded-lg p-3 bg-white relative cursor-pointer hover:border-slate-300">
+              <span class="absolute top-2 right-2 w-3 h-3 rounded-full border border-slate-300 bg-white"></span>
+              <span class="material-symbols-rounded text-teal-500 mb-1 text-[24px]">blur_on</span>
+              <div class="text-sm font-bold text-slate-800">Diffusion</div>
+              <div class="text-[10px] text-slate-500 leading-tight mt-1">Diffusion models for high fidelity and texture generation</div>
+            </div>
+            <!-- Transformer -->
+            <div class="border border-slate-200 rounded-lg p-3 bg-white relative cursor-pointer hover:border-slate-300">
+              <span class="absolute top-2 right-2 w-3 h-3 rounded-full border border-slate-300 bg-white"></span>
+              <span class="material-symbols-rounded text-blue-500 mb-1 text-[24px]">account_tree</span>
+              <div class="text-sm font-bold text-slate-800">Transformer</div>
+              <div class="text-[10px] text-slate-500 leading-tight mt-1">Vision Transformers for global context understanding</div>
+            </div>
+            <!-- CNN -->
+            <div class="border border-slate-200 rounded-lg p-3 bg-white relative cursor-pointer hover:border-slate-300">
+              <span class="absolute top-2 right-2 w-3 h-3 rounded-full border border-slate-300 bg-white"></span>
+              <span class="material-symbols-rounded text-indigo-500 mb-1 text-[24px]">layers</span>
+              <div class="text-sm font-bold text-slate-800">CNN</div>
+              <div class="text-[10px] text-slate-500 leading-tight mt-1">Convolutional Neural Networks for fast super-resolution</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-600 mb-3">Target Resolution</label>
+          <div class="relative w-full h-2 bg-slate-200 rounded-full">
+            <!-- slider mock -->
+            <div class="absolute left-0 top-0 h-full bg-brand-500 rounded-full w-3/4"></div>
+            <div class="absolute left-0 top-1/2 -mt-2 w-4 h-4 bg-brand-600 rounded-full shadow cursor-pointer border-2 border-white"></div>
+            <div class="absolute left-3/4 top-1/2 -mt-2 -ml-2 w-4 h-4 bg-brand-600 rounded-full shadow cursor-pointer border-2 border-white"></div>
+          </div>
+          <div class="flex justify-between items-center mt-2 text-[11px]">
+            <span class="text-slate-500">10m (Native)</span>
+            <span class="text-brand-600 font-bold">2.5m</span>
+            <span class="text-slate-400">0.5m</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-semibold text-slate-600 mb-2">Band Selection <span class="text-brand-500">*</span></label>
+          <div class="flex items-center gap-4 text-xs">
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="checkbox" checked class="accent-brand-500 w-3.5 h-3.5"/> RGB (B2, B3, B4)
+            </label>
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="checkbox" checked class="accent-brand-500 w-3.5 h-3.5"/> NIR (B8)
+            </label>
+            <label class="flex items-center gap-1.5 cursor-pointer text-slate-500">
+              <input type="checkbox" class="accent-brand-500 w-3.5 h-3.5"/> SWIR (B11, B12)
+            </label>
+          </div>
+          <p class="text-[10px] text-slate-400 mt-2">Selected bands will be used for model training and inference.</p>
+        </div>
+      </div>
+      
+      <div class="pt-5 border-t border-slate-100 flex justify-end gap-3 mt-4">
+        <button class="g-btn g-btn-outline" onclick="showToast('Draft saved')">Cancel</button>
+        <button class="g-btn g-btn-primary shadow-lg" onclick="document.querySelector('[data-target=\'processing-queue\']').click(); showToast('Job SR_v2_Ladakh_AOI_01 Submitted successfully!')">
+          <span class="material-symbols-rounded text-[18px]">send</span> Submit Job
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+<div id="screen-processing-queue" class="screen p-6 space-y-6">
+  
+  <!-- Top Stats -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+      <div class="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center text-amber-500"><span class="material-symbols-rounded">schedule</span></div>
+      <div>
+        <div class="text-[11px] text-slate-500 uppercase tracking-wide font-medium">Queued</div>
+        <div class="text-2xl font-bold text-slate-800">8</div>
+        <div class="text-[10px] text-slate-400 mt-0.5">Jobs waiting</div>
+      </div>
+    </div>
+    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-teal-50 flex items-center justify-center text-teal-600"><span class="material-symbols-rounded">cached</span></div>
+        <div>
+          <div class="text-[11px] text-slate-500 uppercase tracking-wide font-medium">Processing</div>
+          <div class="text-2xl font-bold text-slate-800">6</div>
+          <div class="text-[10px] text-slate-400 mt-0.5">Active jobs</div>
+        </div>
+      </div>
+      <!-- Progress circular mock -->
+      <div class="relative w-12 h-12 flex items-center justify-center">
+        <svg class="w-12 h-12 transform -rotate-90" viewBox="0 0 36 36">
+          <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#f1f5f9" stroke-width="3" />
+          <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#0d9488" stroke-width="3" stroke-dasharray="68, 100" />
+        </svg>
+        <span class="absolute text-[10px] font-bold text-teal-700">68%</span>
+      </div>
+    </div>
+    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+      <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-600"><span class="material-symbols-rounded">check_circle</span></div>
+      <div>
+        <div class="text-[11px] text-slate-500 uppercase tracking-wide font-medium">Completed Today</div>
+        <div class="text-2xl font-bold text-slate-800">28</div>
+        <div class="text-[10px] text-slate-400 mt-0.5">Jobs completed</div>
+      </div>
+    </div>
+    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+      <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center text-red-500"><span class="material-symbols-rounded">error</span></div>
+      <div>
+        <div class="text-[11px] text-slate-500 uppercase tracking-wide font-medium">Failed</div>
+        <div class="text-2xl font-bold text-slate-800">2</div>
+        <div class="text-[10px] text-slate-400 mt-0.5">Jobs failed</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <!-- Main Queue List -->
+    <div class="lg:col-span-3 space-y-4">
+      
+      <!-- Filters -->
+      <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+        <div class="relative flex-1">
+          <span class="material-symbols-rounded absolute left-3 top-2 text-slate-400 text-[18px]">search</span>
+          <input type="text" class="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-md text-sm outline-none focus:border-brand-500 bg-slate-50" placeholder="Search by Job ID or Project"/>
+        </div>
+        <div class="flex items-center gap-2">
+          <select class="border border-slate-200 rounded-md px-3 py-2 text-sm text-slate-600 outline-none"><option>Status: All</option><option>Processing</option><option>Completed</option></select>
+          <select class="border border-slate-200 rounded-md px-3 py-2 text-sm text-slate-600 outline-none"><option>Project: All Projects</option></select>
+          <button class="border border-slate-200 rounded-md px-3 py-2 text-sm text-slate-600 flex items-center gap-2 hover:bg-slate-50"><span class="material-symbols-rounded text-[16px]">calendar_today</span> May 18 - May 21</button>
+          <button class="border border-slate-200 rounded-md p-2 text-slate-600 hover:bg-slate-50 flex items-center justify-center" onclick="showToast('Refreshing list...')"><span class="material-symbols-rounded text-[18px]">refresh</span></button>
+        </div>
+      </div>
+
+      <!-- Table Header -->
+      <div class="px-4 py-2 grid grid-cols-12 gap-4 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+        <div class="col-span-3">Job ID</div>
+        <div class="col-span-2">Project</div>
+        <div class="col-span-1 text-center">Preview</div>
+        <div class="col-span-2">Status</div>
+        <div class="col-span-2">Compute Node</div>
+        <div class="col-span-2 text-right">Started / ETA</div>
+      </div>
+
+      <!-- Job Row (Expanded Active) -->
+      <div class="bg-white rounded-xl border-2 border-brand-200 shadow-sm overflow-hidden">
+        <div class="p-4 flex items-center grid grid-cols-12 gap-4 bg-brand-50">
+          <div class="col-span-3 font-semibold text-slate-800 text-sm">SR_v2_20240521_0900</div>
+          <div class="col-span-2 text-sm text-slate-600 truncate">Ladakh Border Infra</div>
+          <div class="col-span-1 flex items-center justify-center gap-1">
+            <div class="w-6 h-6 rounded bg-slate-300"></div><span class="text-[10px] text-slate-400">→</span><div class="w-6 h-6 rounded bg-slate-400"></div>
+          </div>
+          <div class="col-span-2">
+            <div class="inline-flex items-center gap-1.5 bg-teal-50 text-teal-700 px-2 py-1 rounded border border-teal-100 text-xs font-semibold">
+              <span class="material-symbols-rounded text-[14px] animate-spin">sync</span> Processing
+            </div>
+            <div class="text-[10px] text-slate-500 mt-1 font-mono">64%</div>
+          </div>
+          <div class="col-span-2">
+            <div class="text-xs font-semibold text-slate-700">GPU-Node-03</div>
+            <div class="text-[10px] text-slate-500">A100 40GB</div>
+          </div>
+          <div class="col-span-2 text-right text-xs text-slate-600">
+            <div>21 May 09:00 AM</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">ETA: 11:15 AM</div>
+          </div>
+        </div>
+        
+        <!-- Expanded Details -->
+        <div class="p-6 border-t border-brand-100 bg-white grid grid-cols-3 gap-6">
+          <div class="col-span-2 relative">
+            <!-- Pipeline progress -->
+            <div class="absolute top-4 left-6 right-6 h-1 bg-slate-200 rounded-full"></div>
+            <div class="absolute top-4 left-6 w-1/2 h-1 bg-brand-500 rounded-full"></div>
+            
+            <div class="flex justify-between relative z-10">
+              <div class="flex flex-col items-center">
+                <div class="w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center shadow"><span class="material-symbols-rounded text-[16px]">check</span></div>
+                <div class="text-xs font-semibold text-slate-800 mt-2">Pre-processing</div>
+                <div class="text-[10px] text-slate-400">Completed</div>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="w-8 h-8 rounded-full bg-brand-500 text-white flex items-center justify-center shadow border-2 border-white"><span class="material-symbols-rounded text-[16px]">more_horiz</span></div>
+                <div class="text-xs font-bold text-brand-600 mt-2">Model Inference</div>
+                <div class="text-[10px] text-brand-500">In Progress (64%)</div>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="w-8 h-8 rounded-full bg-white border-2 border-slate-200 text-slate-300 flex items-center justify-center"></div>
+                <div class="text-xs font-semibold text-slate-500 mt-2">Post-processing</div>
+                <div class="text-[10px] text-slate-400">Pending</div>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="w-8 h-8 rounded-full bg-white border-2 border-slate-200 text-slate-300 flex items-center justify-center"></div>
+                <div class="text-xs font-semibold text-slate-500 mt-2">Validation</div>
+                <div class="text-[10px] text-slate-400">Pending</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-span-1 border-l border-slate-100 pl-6 space-y-3">
+            <div class="flex justify-between text-xs"><span class="text-slate-500">Tiles Processed</span><span class="font-mono font-semibold">1,248 / 1,952</span></div>
+            <div class="flex justify-between text-xs"><span class="text-slate-500">Data Throughput</span><span class="font-mono font-semibold">312 MB/s</span></div>
+            <div class="flex justify-between text-xs"><span class="text-slate-500">ETA</span><span class="font-semibold text-slate-800">21 May 11:15 AM</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job Row 2 -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm hover:bg-slate-50 transition cursor-pointer">
+        <div class="p-4 flex items-center grid grid-cols-12 gap-4">
+          <div class="col-span-3 font-semibold text-slate-800 text-sm">SR_v2_20240521_0845</div>
+          <div class="col-span-2 text-sm text-slate-600 truncate">Ladakh Border Infra</div>
+          <div class="col-span-1 flex items-center justify-center gap-1">
+            <div class="w-6 h-6 rounded bg-slate-300"></div><span class="text-[10px] text-slate-400">→</span><div class="w-6 h-6 rounded bg-slate-400"></div>
+          </div>
+          <div class="col-span-2">
+            <div class="inline-flex items-center gap-1.5 bg-teal-50 text-teal-700 px-2 py-1 rounded border border-teal-100 text-xs font-semibold">
+              <span class="material-symbols-rounded text-[14px] animate-spin">sync</span> Processing
+            </div>
+            <div class="text-[10px] text-slate-500 mt-1 font-mono">32%</div>
+          </div>
+          <div class="col-span-2">
+            <div class="text-xs font-semibold text-slate-700">GPU-Node-02</div>
+            <div class="text-[10px] text-slate-500">A100 40GB</div>
+          </div>
+          <div class="col-span-2 flex items-center justify-end gap-3 text-right text-xs text-slate-600">
+            <div>
+              <div>08:45 AM</div><div class="text-[10px] text-slate-400">11:30 AM</div>
+            </div>
+            <button class="p-1 text-slate-400 hover:text-slate-800"><span class="material-symbols-rounded text-[20px]">more_horiz</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Job Row 3 Completed -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm hover:bg-slate-50 transition cursor-pointer" onclick="document.querySelector('[data-target=\'comparison-viewer\']').click()">
+        <div class="p-4 flex items-center grid grid-cols-12 gap-4">
+          <div class="col-span-3 font-semibold text-slate-800 text-sm">SR_v2_20240521_0745</div>
+          <div class="col-span-2 text-sm text-slate-600 truncate">Arunachal Outposts</div>
+          <div class="col-span-1 flex items-center justify-center gap-1">
+            <div class="w-6 h-6 rounded bg-slate-700"></div><span class="text-[10px] text-slate-400">→</span><div class="w-6 h-6 rounded bg-slate-800"></div>
+          </div>
+          <div class="col-span-2">
+            <div class="inline-flex items-center gap-1.5 bg-green-50 text-green-700 px-2 py-1 rounded border border-green-100 text-xs font-semibold">
+              <span class="material-symbols-rounded text-[14px]">check_circle</span> Completed
+            </div>
+          </div>
+          <div class="col-span-2">
+            <div class="text-xs font-semibold text-slate-700">GPU-Node-01</div>
+            <div class="text-[10px] text-slate-500">A100 40GB</div>
+          </div>
+          <div class="col-span-2 flex items-center justify-end gap-3 text-right text-xs text-slate-600">
+            <div>
+              <div>07:45 AM</div><div class="text-[10px] text-slate-400">09:20 AM</div>
+            </div>
+            <button class="p-1 text-brand-600 bg-brand-50 rounded hover:bg-brand-100"><span class="material-symbols-rounded text-[18px]">download</span></button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Pagination -->
+      <div class="flex items-center justify-between text-xs text-slate-500 pt-2">
+        <span>Showing 1 to 6 of 16 jobs</span>
+        <div class="flex items-center gap-1">
+          <button class="w-7 h-7 rounded border border-slate-200 flex items-center justify-center hover:bg-slate-50"><span class="material-symbols-rounded text-[16px]">chevron_left</span></button>
+          <button class="w-7 h-7 rounded bg-brand-600 text-white flex items-center justify-center font-semibold">1</button>
+          <button class="w-7 h-7 rounded border border-slate-200 flex items-center justify-center hover:bg-slate-50">2</button>
+          <button class="w-7 h-7 rounded border border-slate-200 flex items-center justify-center hover:bg-slate-50">3</button>
+          <button class="w-7 h-7 rounded border border-slate-200 flex items-center justify-center hover:bg-slate-50"><span class="material-symbols-rounded text-[16px]">chevron_right</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right GPU Status -->
+    <div class="space-y-6">
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-semibold text-slate-800 flex items-center gap-1">GPU Cluster Load <span class="material-symbols-rounded text-[14px] text-slate-400">info</span></h2>
+          <span class="text-[10px] font-bold text-teal-600 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-teal-500"></span> Healthy</span>
+        </div>
+        
+        <div>
+          <div class="text-[11px] text-slate-500 uppercase tracking-wide">Overall Utilization</div>
+          <div class="text-3xl font-bold text-slate-800 mt-1">68%</div>
+          <div class="text-[10px] text-slate-400">Average</div>
+          
+          <!-- Mock Chart -->
+          <div class="mt-4 h-24 relative border-b border-slate-100 flex items-end">
+            <svg class="w-full h-16" viewBox="0 0 100 40" preserveAspectRatio="none">
+              <path d="M0 30 C 5 10, 10 5, 20 20 C 30 35, 40 40, 50 15 C 60 -10, 70 30, 80 40 C 90 20, 100 0" fill="none" stroke="#0d9488" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="flex justify-between text-[9px] text-slate-400 mt-1">
+            <span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span>
+          </div>
+        </div>
+
+        <div class="mt-6 space-y-4">
+          <div class="text-[11px] font-semibold text-slate-600 mb-2">Node Utilization</div>
+          
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-slate-600 font-mono">GPU-Node-01</span>
+              <span class="font-bold text-slate-800">75%</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-100 rounded-full"><div class="h-full bg-teal-600 rounded-full" style="width: 75%"></div></div>
+          </div>
+          
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-slate-600 font-mono">GPU-Node-02</span>
+              <span class="font-bold text-slate-800">82%</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-100 rounded-full"><div class="h-full bg-teal-600 rounded-full" style="width: 82%"></div></div>
+          </div>
+          
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-slate-600 font-mono">GPU-Node-03</span>
+              <span class="font-bold text-slate-800">65%</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-100 rounded-full"><div class="h-full bg-teal-600 rounded-full" style="width: 65%"></div></div>
+          </div>
+          
+          <div>
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-slate-600 font-mono">GPU-Node-04</span>
+              <span class="font-bold text-slate-800">48%</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-100 rounded-full"><div class="h-full bg-brand-500 rounded-full" style="width: 48%"></div></div>
+          </div>
+        </div>
+        
+        <button class="w-full mt-6 text-[11px] font-bold text-brand-600 hover:bg-brand-50 py-2 rounded transition" onclick="showToast('Cluster details loading')">View Cluster Details →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+<div id="screen-comparison-viewer" class="screen p-6 flex flex-col gap-4" style="height: calc(100vh - 64px);">
+  
+  <!-- Top Controls -->
+  <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+    <div class="flex items-center gap-6">
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-bold text-slate-500 uppercase">Job ID</label>
+        <select class="border border-slate-200 rounded px-2 py-1 text-sm outline-none font-semibold text-slate-700 bg-slate-50"><option>SR_v2_20240520_1030</option></select>
+      </div>
+      
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-bold text-slate-500 uppercase">View Mode</label>
+        <div class="flex p-0.5 bg-slate-100 rounded-lg">
+          <button class="px-3 py-1 text-xs font-semibold rounded-md bg-white text-brand-600 shadow-sm flex items-center gap-1.5 border border-slate-200"><span class="material-symbols-rounded text-[14px]">tune</span> Slider</button>
+          <button class="px-3 py-1 text-xs font-medium rounded-md text-slate-600 hover:bg-slate-200 flex items-center gap-1.5" onclick="showToast('Side-by-side mode on')"><span class="material-symbols-rounded text-[14px]">splitscreen</span> Side-by-Side</button>
+          <button class="px-3 py-1 text-xs font-medium rounded-md text-slate-600 hover:bg-slate-200 flex items-center gap-1.5" onclick="showToast('Overlay mode on')"><span class="material-symbols-rounded text-[14px]">layers</span> Overlay</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="flex items-center gap-6">
+      <div class="flex items-center gap-3 bg-slate-50 p-1.5 rounded-lg border border-slate-200">
+        <span class="text-[10px] font-bold text-slate-500 uppercase pl-2">Zoom</span>
+        <button class="px-2 py-1 text-xs rounded text-slate-600 hover:bg-white border border-transparent">25%</button>
+        <button class="px-2 py-1 text-xs rounded text-brand-600 bg-white border border-slate-200 shadow-sm font-bold">100%</button>
+        <button class="px-2 py-1 text-xs rounded text-slate-600 hover:bg-white border border-transparent">200%</button>
+      </div>
+      
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-semibold text-slate-600">Sync Pan & Zoom</span>
+        <div class="w-10 h-6 bg-brand-500 rounded-full relative cursor-pointer shadow-inner">
+          <div class="absolute top-1 left-5 w-4 h-4 bg-white rounded-full shadow"></div>
+        </div>
+      </div>
+      
+      <button class="g-btn g-btn-outline text-brand-600 border-brand-200 hover:bg-brand-50 font-bold" onclick="showToast('Exporting snapshot to PDF...')">
+        <span class="material-symbols-rounded text-[18px]">download</span> Export Snapshot
+      </button>
+    </div>
+  </div>
+
+  <div class="flex-1 flex gap-4 min-h-0">
+    <!-- Main Viewer Area -->
+    <div class="flex-1 flex flex-col gap-4 min-h-0">
+      
+      <!-- Split View Interactive Mock -->
+      <div class="flex-1 relative rounded-xl border border-slate-200 shadow-sm overflow-hidden bg-slate-800">
+        <!-- Left Image (LR) -->
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center filter blur-[2px]"></div>
+        
+        <!-- Right Image (SR - Clipped) -->
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center" style="clip-path: inset(0 0 0 50%);"></div>
+        
+        <!-- Divider Line -->
+        <div class="absolute top-0 bottom-0 left-1/2 w-0.5 bg-white shadow-[0_0_8px_rgba(0,0,0,0.5)] z-10 transform -translate-x-1/2 flex items-center justify-center cursor-ew-resize">
+          <div class="w-8 h-8 rounded-full bg-brand-500 text-white border-2 border-white flex items-center justify-center shadow-lg">
+            <span class="material-symbols-rounded text-[16px]">swap_horiz</span>
+          </div>
+        </div>
+
+        <!-- Overlays -->
+        <div class="absolute top-4 left-4 bg-black/70 backdrop-blur text-white px-3 py-1.5 rounded-lg border border-white/20">
+          <div class="text-xs font-bold">Low Resolution (Sentinel-2)</div>
+          <div class="text-[10px] text-slate-300 font-mono">10 m / pixel</div>
+        </div>
+        
+        <div class="absolute top-4 right-4 bg-black/70 backdrop-blur text-white px-3 py-1.5 rounded-lg border border-white/20 text-right">
+          <div class="text-xs font-bold">Super-Resolved (भू DRISTI)</div>
+          <div class="text-[10px] text-slate-300 font-mono">2.5 m / pixel</div>
+        </div>
+        
+        <div class="absolute bottom-4 left-4 bg-black/60 px-2 py-1 rounded text-[10px] text-white font-mono border border-white/10">250 m</div>
+        <div class="absolute bottom-4 right-4 bg-black/60 px-2 py-1 rounded text-[10px] text-white font-mono border border-white/10">34.2345° N, 77.5612° E</div>
+      </div>
+      
+      <!-- Metrics & Thumbnails Row -->
+      <div class="grid grid-cols-3 gap-4 h-48 shrink-0">
+        <!-- Thumbnails -->
+        <div class="col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm p-4 flex flex-col">
+          <h3 class="text-xs font-bold text-slate-700 mb-3">Quick Views / Cropped Areas</h3>
+          <div class="flex-1 flex items-center gap-3 overflow-x-auto">
+            <button class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-slate-50 shrink-0"><span class="material-symbols-rounded text-[18px]">chevron_left</span></button>
+            
+            <div class="w-32 h-full border-2 border-brand-500 rounded-lg p-1 relative cursor-pointer">
+              <div class="w-full h-16 bg-slate-200 rounded object-cover bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=200')] bg-center"></div>
+              <div class="text-[10px] font-bold text-slate-800 mt-1">Building Cluster</div>
+              <div class="text-[9px] text-slate-500">Area 01</div>
+            </div>
+            
+            <div class="w-32 h-full border border-slate-200 rounded-lg p-1 relative cursor-pointer hover:border-slate-400">
+              <div class="w-full h-16 bg-slate-200 rounded object-cover bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=200')] bg-center opacity-80"></div>
+              <div class="text-[10px] font-bold text-slate-800 mt-1">Road Network</div>
+              <div class="text-[9px] text-slate-500">Area 02</div>
+            </div>
+            
+            <div class="w-32 h-full border border-slate-200 rounded-lg p-1 relative cursor-pointer hover:border-slate-400">
+              <div class="w-full h-16 bg-slate-200 rounded object-cover bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=200')] bg-center opacity-80"></div>
+              <div class="text-[10px] font-bold text-slate-800 mt-1">Field Boundary</div>
+              <div class="text-[9px] text-slate-500">Area 03</div>
+            </div>
+            
+            <button class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-slate-50 shrink-0"><span class="material-symbols-rounded text-[18px]">chevron_right</span></button>
+          </div>
+        </div>
+        
+        <!-- Metrics -->
+        <div class="col-span-1 bg-white rounded-xl border border-slate-200 shadow-sm p-4 flex flex-col">
+          <h3 class="text-xs font-bold text-slate-700 mb-3 flex items-center gap-1">Quality Metrics <span class="material-symbols-rounded text-[14px] text-slate-400">info</span></h3>
+          <div class="grid grid-cols-2 gap-3 flex-1">
+            <div class="border border-slate-100 rounded-lg bg-slate-50 p-2 flex flex-col justify-center relative">
+              <span class="material-symbols-rounded text-green-500 text-[14px] absolute top-2 right-2">check_circle</span>
+              <div class="text-[10px] text-slate-500 font-semibold">PSNR</div>
+              <div class="text-lg font-bold text-slate-800">34.58 dB</div>
+            </div>
+            <div class="border border-slate-100 rounded-lg bg-slate-50 p-2 flex flex-col justify-center relative">
+              <span class="material-symbols-rounded text-green-500 text-[14px] absolute top-2 right-2">check_circle</span>
+              <div class="text-[10px] text-slate-500 font-semibold">SSIM</div>
+              <div class="text-lg font-bold text-slate-800">0.912</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Tools Sidebar -->
+    <div class="w-64 shrink-0 flex flex-col gap-4 min-h-0">
+      
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-bold text-slate-800 text-sm">Layer Controls</h3>
+          <span class="material-symbols-rounded text-slate-400 text-[18px]">expand_less</span>
+        </div>
+        
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-600 flex items-center gap-1">Uncertainty Overlay <span class="material-symbols-rounded text-[12px] text-slate-400">info</span></span>
+            <div class="w-8 h-4 bg-slate-200 rounded-full relative cursor-pointer"><div class="absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full shadow"></div></div>
+          </div>
+          
+          <div>
+            <div class="text-[10px] text-slate-500 font-bold uppercase mb-2">Opacity</div>
+            <div class="w-full h-1.5 bg-slate-200 rounded-full relative">
+              <div class="absolute left-0 top-0 h-full bg-brand-500 rounded-full w-3/5"></div>
+              <div class="absolute left-3/5 top-1/2 -mt-1.5 -ml-1.5 w-3 h-3 bg-brand-600 rounded-full shadow border border-white cursor-pointer"></div>
+            </div>
+            <div class="flex justify-between text-[9px] text-slate-400 mt-1"><span>0%</span><span class="font-bold text-slate-600">60%</span><span>100%</span></div>
+          </div>
+          
+          <hr class="border-slate-100">
+          
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-600">Grid / Coordinates</span>
+            <div class="w-8 h-4 bg-brand-500 rounded-full relative cursor-pointer"><div class="absolute top-0.5 right-0.5 w-3 h-3 bg-white rounded-full shadow"></div></div>
+          </div>
+          
+          <div>
+            <span class="text-xs font-semibold text-slate-600 flex items-center gap-1 mb-2">Band Combination <span class="material-symbols-rounded text-[12px] text-slate-400">info</span></span>
+            <select class="w-full border border-slate-200 rounded px-2 py-1.5 text-xs text-slate-700 outline-none"><option>Natural Color (RGB)</option><option>False Color (NIR)</option></select>
+            <div class="text-[9px] text-slate-400 mt-1">Bands: B4, B3, B2</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 flex-1 flex flex-col min-h-0">
+        <div class="flex items-center justify-between mb-4 shrink-0">
+          <h3 class="font-bold text-slate-800 text-sm flex items-center gap-1">Pixel Inspector <span class="material-symbols-rounded text-[14px] text-slate-400">info</span></h3>
+          <span class="material-symbols-rounded text-slate-400 text-[18px]">expand_less</span>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto pr-1">
+          <div class="flex justify-between text-[10px] mb-3">
+            <span class="text-slate-500">Coordinate</span>
+            <span class="font-mono text-slate-800 font-bold flex items-center gap-1">34.2345° N, 77.5612° E <span class="material-symbols-rounded text-[12px] text-slate-400 cursor-pointer">content_copy</span></span>
+          </div>
+          
+          <div class="text-[10px] text-slate-400 mb-2 font-semibold">Pixel (Super-Resolved)</div>
+          
+          <table class="w-full text-xs text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200"><th class="py-1 font-semibold text-slate-500">Band</th><th class="py-1 font-semibold text-slate-500 text-right">Reflectance</th></tr>
+            </thead>
+            <tbody class="font-mono text-[11px]">
+              <tr class="border-b border-slate-100"><td class="py-1.5 text-slate-600">B2 (Blue)</td><td class="py-1.5 text-right font-bold text-slate-800">0.124</td></tr>
+              <tr class="border-b border-slate-100"><td class="py-1.5 text-slate-600">B3 (Green)</td><td class="py-1.5 text-right font-bold text-slate-800">0.186</td></tr>
+              <tr class="border-b border-slate-100"><td class="py-1.5 text-slate-600">B4 (Red)</td><td class="py-1.5 text-right font-bold text-slate-800">0.203</td></tr>
+              <tr class="border-b border-slate-100"><td class="py-1.5 text-brand-600 font-bold">B8 (NIR)</td><td class="py-1.5 text-right font-bold text-brand-600">0.362</td></tr>
+              <tr class="border-b border-slate-100"><td class="py-1.5 text-slate-600">B11 (SWIR 1)</td><td class="py-1.5 text-right font-bold text-slate-800">0.274</td></tr>
+              <tr><td class="py-1.5 text-slate-600">B12 (SWIR 2)</td><td class="py-1.5 text-right font-bold text-slate-800">0.198</td></tr>
+            </tbody>
+          </table>
+          
+          <div class="mt-4 pt-3 border-t border-slate-200 flex justify-between text-[10px]">
+            <span class="text-slate-500">Valid Data</span>
+            <span class="font-bold text-teal-600 flex items-center gap-1"><span class="w-1.5 h-1.5 bg-teal-500 rounded-full"></span> Yes</span>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+  </main>
+  
+  <div id="toast-container"></div>
+
+  <script>
+    // Navigation Logic
+    const navItems = document.querySelectorAll('.nav-item[data-target]');
+    const screens = document.querySelectorAll('.screen');
+    const headerTitle = document.getElementById('header-title');
+
+    function switchScreen(targetId, title) {
+      // Update active nav
+      navItems.forEach(n => n.classList.remove('active'));
+      const activeNav = document.querySelector(`.nav-item[data-target="${targetId}"]`);
+      if (activeNav) activeNav.classList.add('active');
+      
+      // Update title
+      if (title) headerTitle.textContent = title;
+
+      // Show screen
+      screens.forEach(s => s.classList.remove('active'));
+      const activeScreen = document.getElementById(`screen-${targetId}`);
+      if (activeScreen) activeScreen.classList.add('active');
+    }
+
+    // Listen to hash changes
+    function handleHash() {
+      let hash = window.location.hash.replace('#', '');
+      if (!hash) hash = 'dashboard';
+      
+      const navItem = document.querySelector(`.nav-item[data-target="${hash}"]`);
+      if (navItem) {
+        switchScreen(hash, navItem.querySelector('span:not(.material-symbols-rounded)').textContent);
+      }
+    }
+    
+    window.addEventListener('hashchange', handleHash);
+    
+    // Toast functionality
+    function showToast(msg) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<span class="material-symbols-rounded text-brand-500">info</span> <span>${msg}</span>`;
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.animation = 'fadeOut 0.3s forwards';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // Init
+    handleHash();
+  </script>
+</body>
+</html>
